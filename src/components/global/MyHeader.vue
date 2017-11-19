@@ -6,7 +6,20 @@
       <!-- <div class="intro">{{ administrator.intro }}</div> -->
       <div class="intro">回归自然 回归慢生活</div> 
     </div>
-    <nav class="container nav">
+    
+    <div class="tabbar">
+        <div class="tab">
+            <ul>
+              <li v-for="(item,index) in links" :key="index" v-on:mouseenter="showa(1)">
+                <router-link :to="item.path">{{ item.name }}</router-link>
+              </li>
+            </ul>
+            <div class="search">
+              <input type="search" name="search" placeholder="search" v-model="searchInfo" autofocus @keyup.enter="search"/>
+            </div>
+        </div>
+    </div>
+    <!-- <nav class="container nav">
       <ul>
         <li v-for="(item,index) in links" :key="index">
           <router-link :to="item.path">{{ item.name }}</router-link>
@@ -15,7 +28,10 @@
       <div class="search">
         <input type="search" name="search" placeholder="search" v-model="searchInfo" autofocus @keyup.enter="search"/>
       </div>
-    </nav>
+    </nav> -->
+    <div class="pic">
+
+    </div>
   </header>
 </template>
 <script>
@@ -52,6 +68,9 @@ export default {
     },
     goIndex () {
       this.$router.push({name: 'index'})
+    },
+    showa(val){
+      alert(val)
     }
   }
 }

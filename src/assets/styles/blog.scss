@@ -94,10 +94,10 @@ button {
 
 .header {
   // height: 240px;
-  background-color: $BlackPrimary;
+  // background-color: $BlackPrimary;
   .info {
     margin: 0 auto;
-    color: #FFF;
+    color: $BlackPrimary;
     height: 85px;
     .nickname {
       font-size: 25px;
@@ -111,6 +111,41 @@ button {
       padding: 0 0 10px 230px;
       text-align: center;
     }
+  }
+  .tabbar{
+    background-color: $BlackPrimary;
+    border-top:1px #fff solid;
+    border-bottom:1px #fff solid;
+    .tab{
+      color: #fff;
+      display: flex;
+      max-width: 1120px;
+      margin: 0 auto;
+      align-items: center;
+      justify-content: space-between;
+      ul {
+        display: flex;
+        a {
+          padding: 10px 18px;
+          color: #C8C9CA;
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+      input[type="search"] {
+        width: 280px;
+        margin-right: 18px;
+        border: none;
+        background-color: #404448;
+        color: #C8C9CA;
+      }
+    }
+  }
+  .pic{
+    margin-top: 10px;
+     height: 200px;
+     background: #000;
   }
   .nav {
     display: flex;
