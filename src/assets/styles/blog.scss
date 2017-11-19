@@ -93,21 +93,23 @@ button {
 /* golbal header */
 
 .header {
-  height: 240px;
+  // height: 240px;
   background-color: $BlackPrimary;
   .info {
     margin: 0 auto;
     color: #FFF;
-    height: 184px;
+    height: 85px;
     .nickname {
-      font-size: 35px;
+      font-size: 25px;
       font-weight: bold;
-      padding: 50px 0 30px 18px;
+      padding: 20px 0 10px 0px;
       cursor: pointer;
+      text-align: center;
     }
     .intro {
-      font-size: 20px;
-      padding: 0 0 30px 150px;
+      font-size: 18px;
+      padding: 0 0 10px 230px;
+      text-align: center;
     }
   }
   .nav {

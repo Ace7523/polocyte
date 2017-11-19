@@ -1,8 +1,10 @@
 <template>
   <header class="header">
     <div class="container info">
-      <div class="nickname" @click="goIndex">{{ administrator.nickname }}</div>
-      <div class="intro">{{ administrator.intro }}</div>
+      <!-- <div class="nickname" @click="goIndex">{{ administrator.nickname }}</div> -->
+      <div class="nickname" @click="goIndex">保罗赛特</div>
+      <!-- <div class="intro">{{ administrator.intro }}</div> -->
+      <div class="intro">回归自然 回归慢生活</div> 
     </div>
     <nav class="container nav">
       <ul>
@@ -11,7 +13,7 @@
         </li>
       </ul>
       <div class="search">
-        <input type="search" name="search" placeholder="search" v-model="searchInfo" autofocus @keyup.enter="search">
+        <input type="search" name="search" placeholder="search" v-model="searchInfo" autofocus @keyup.enter="search"/>
       </div>
     </nav>
   </header>
