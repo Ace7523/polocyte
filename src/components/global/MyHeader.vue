@@ -10,7 +10,7 @@
     <div class="tabbar">
         <div class="tab">
             <ul>
-              <li v-for="(item,index) in links" :key="index" v-on:mouseenter="showa(1)">
+              <li v-for="(item,index) in links" :key="index" v-on:mouseenter="showSubtab(index)">
                 <router-link :to="item.path">{{ item.name }}</router-link>
               </li>
             </ul>
@@ -19,6 +19,45 @@
             </div>
         </div>
     </div>
+    <div class="subtab" v-show="showSubtabIndex == 0">
+          <ul>
+              <li>
+                1
+              </li>
+              <li>
+                2
+              </li>
+              <li>
+                3
+              </li>
+            </ul>
+        </div>
+        <div class="subtab" v-show="showSubtabIndex == 1">
+          <ul>
+              <li>
+                4
+              </li>
+              <li>
+                5
+              </li>
+              <li>
+                6
+              </li>
+            </ul>
+        </div>
+        <div class="subtab" v-show="showSubtabIndex == 2">
+          <ul>
+              <li>
+                7
+              </li>
+              <li>
+                8
+              </li>
+              <li>
+                9
+              </li>
+            </ul>
+        </div>
     <!-- <nav class="container nav">
       <ul>
         <li v-for="(item,index) in links" :key="index">
@@ -49,7 +88,8 @@ export default {
         name: '管理',
         path: '/admin'
       }],
-      searchInfo: ''
+      searchInfo: '',
+      showSubtabIndex:-1
     }
   },
   computed: {
@@ -69,8 +109,8 @@ export default {
     goIndex () {
       this.$router.push({name: 'index'})
     },
-    showa(val){
-      alert(val)
+    showSubtab(val){
+     this.showSubtabIndex = val;
     }
   }
 }
