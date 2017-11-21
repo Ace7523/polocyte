@@ -87,6 +87,9 @@ export default {
       }, {
         name: '管理',
         path: '/admin'
+      },{
+        name: '新增目录',
+        path: '/'
       }],
       searchInfo: '',
       showSubtabIndex:-1
