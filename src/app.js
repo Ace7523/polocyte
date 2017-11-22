@@ -14,6 +14,10 @@ import TopToast from 'top-toast'
 Vue.use(TopEditor)
 Vue.use(TopToast)
 
+import wcSwiper from 'wc-swiper'
+import 'wc-swiper/style.css'
+Vue.use(wcSwiper);
+
 Vue.prototype.axios = axios
 Vue.mixin(titleMixin)
 
