@@ -69,20 +69,23 @@
       </div>
     </nav> -->
     <div class="pic">
-       <wc-swiper class="swiper" v-if="list.length" @transitionend="transitionend" ref="swiper"
-      :defaultSlide="0" :interval="1500" :pagination="true">
+      <wc-swiper class="swiper" 
+                  v-if="list.length" 
+                  @transitionend="transitionend" 
+                  ref="swiper"
+                  :defaultSlide="0" 
+                  :interval="1500" 
+                  :pagination="true">
+        <!-- <div slot="pagination"></div> -->
         <wc-slide v-for="(v, k) in list" :key="k" :class="map[k]">
           {{v}}
         </wc-slide>
-    </wc-swiper>  
+      </wc-swiper>  
 
-    <div class="text">当前是第{{currentSlide}}个slide</div>  
-
-    <div class="btn" @click="previous">上一个</div>
-    <div class="btn" @click="next">下一个</div>
-
-
-    <div class="btn" @click="slideTo">滚动到索引=3的</div>
+      <div class="text">当前是第{{currentSlide}}个slide</div>  
+      <div class="btn" @click="previous">上一个</div>
+      <div class="btn" @click="next">下一个</div>
+      <div class="btn" @click="slideTo">滚动到索引=3的</div>
     </div>
   </header>
 </template>
