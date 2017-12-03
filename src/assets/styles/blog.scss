@@ -162,7 +162,7 @@ button {
   }
   .pic{
     // margin-top: 10px;
-     height: 500px;
+     height: 600px;
      background: rgb(185, 48, 48);
   }
   .nav {
@@ -556,4 +556,48 @@ button {
 // 编辑器
 .v-note-wrapper {
   min-height: 400px !important;
+}
+
+//图片列表
+.photolist-container{
+  margin: 20px 0;
+  background: #f0f0f0;
+  height:300px;
+  border-bottom: 1px solid #8e8e8e;
+  border-top: 1px solid #8e8e8e;
+
+  .content{
+    // background: #FF2D2D;
+    max-width:1122px;
+    margin: 0 auto; 
+    height: 100%;
+    display: flex;
+    .item{
+      box-sizing:border-box;
+      background: #404448;
+      color:blue;
+      text-align: center;
+      flex: 1;
+      border: 10px solid #fff;
+      border-radius: 20px;
+      .photoitem1{
+        height: 100%;
+        background-size: 100%;
+        //todo 为什么这样写就加载不出来？？？
+        // background: url(./public/photoList/01.jpg);
+      }
+      .photoitem2{
+        height: 100%;
+        background-size: 100%;
+      }
+      .photoitem3{
+        height: 100%;
+        background-size: 100%;
+      }
+    }
+    .for-center{
+      flex: 0.2;
+    }
+
+  }
 }

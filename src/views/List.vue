@@ -1,6 +1,9 @@
 <template>
   <div class="list">
     <my-header></my-header>
+    <div class="photolist">
+      <photo-list></photo-list>
+    </div>
     <div class="container wrap">
       <article-list></article-list>
       <my-aside></my-aside>
@@ -11,6 +14,7 @@
 <script>
 import MyHeader from '../components/global/MyHeader.vue'
 import MyAside from '../components/global/MyAside.vue'
+import PhotoList from '../components/global/PhotoList.vue'
 import ArticleList from '../components/global/ArticleList.vue'
 import MyFooter from '../components/global/MyFooter.vue'
 export default {
@@ -18,6 +22,7 @@ export default {
   components: {
     MyHeader,
     MyAside,
+    PhotoList,
     ArticleList,
     MyFooter
   }

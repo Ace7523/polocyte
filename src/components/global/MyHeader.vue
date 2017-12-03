@@ -78,14 +78,16 @@
                   :pagination="true">
         <!-- <div slot="pagination"></div> -->
         <wc-slide v-for="(v, k) in list" :key="k" :class="map[k]">
-          {{v}}
+          <!-- {{v}} -->
+          <div :class="{ns:imageFlag}">{{imageFlag}}</div>
+
         </wc-slide>
       </wc-swiper>  
 
-      <div class="text">当前是第{{currentSlide}}个slide</div>  
+      <!-- <div class="text">当前是第{{currentSlide}}个slide</div>  
       <div class="btn" @click="previous">上一个</div>
       <div class="btn" @click="next">下一个</div>
-      <div class="btn" @click="slideTo">滚动到索引=3的</div>
+      <div class="btn" @click="slideTo">滚动到索引=3的</div> -->
     </div>
   </header>
 </template>
@@ -109,6 +111,8 @@ export default {
       }],
       searchInfo: '',
       showSubtabIndex:-1,
+      imageFlag:0,
+      transitionendFlag:0,
       list: [],
       map: {
         0: 'slide a',
@@ -146,22 +150,30 @@ export default {
     },
     fetchList () {
         this.list = [0,1,2,3,4,5];
-      },
-      transitionend (current) {
-        // console.log('')
-        // console.log(current,'dangqin')
-        this.currentSlide = current;
-        document.querySelector('.text').innerHTML = '当前是第' + current + '个 slide';
-      },
-      previous () {
-        this.$refs.swiper.previous();
-      },
-      next () {
-        this.$refs.swiper.next();
-      },
-      slideTo () {
-        this.$refs.swiper.slideTo(3);
-      }
+    },
+    transitionend (current) {
+      this.imageFlag = current;
+      // this.transitionendFlag += 1;
+      // if(this.transitionendFlag % 2){
+      //   this.imageFlag = 1
+      // }else{
+      //   this.imageFlag = 0;
+      // }
+       
+      // console.log('')
+      // console.log(current,'dangqin')
+      // this.currentSlide = current;
+      // document.querySelector('.text').innerHTML = '当前是第' + current + '个 slide';
+    },
+    previous () {
+      this.$refs.swiper.previous();
+    },
+    next () {
+      this.$refs.swiper.next();
+    },
+    slideTo () {
+      this.$refs.swiper.slideTo(3);
+    }
   }
 }
 </script>
@@ -195,7 +207,12 @@ export default {
   }
   .swiper {
     width: 100%;
-    height: 300px;
+    height: 600px;
+  }
+  .swiper .ns{
+    width: 100px;
+    height: 100px;
+    background: green;
   }
   .a {
     background: #123456;
