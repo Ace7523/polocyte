@@ -3,6 +3,11 @@ $BlackSecondary: #33363B;
 $Border:#E4E4E4;
 $DisabledLink:#666;
 $Link:#337AB7;
+$ThemeColor:#BB3D00;
+$LogoColor:#3F301B;
+$BigFontColor:#575757;
+$FontColr:#666;
+$BorderColor:#e6e6e6;
 
 html,
 body,
@@ -14,7 +19,8 @@ body {
   font-family: "Microsoft Yahei", "Hiragino Sans GB", "Helvetica Neue", Helvetica, tahoma, arial, Verdana, sans-serif, "WenQuanYi Micro Hei", "\5B8B\4F53";
   font-size: 15px;
   color: #333;
-  background-color: #F1F1F1;
+  // background-color: #F1F1F1;
+  background-color: #FFFFFF;
 }
 
 ul,
@@ -89,6 +95,20 @@ button {
   border: 1px solid transparent;
 }
 
+.common-border{
+	content:"";
+	display:inline-block;
+	width:200%;
+	height:1px;
+	background:#dcdcdc;
+	position:absolute;
+	left:0;
+	right:0;
+	transform:scale(.5);
+	-webkit-transform:scale(.5);
+	transform-origin:0 100%;
+	-webkit-transform-origin:0 100%;
+}
 
 /* golbal header */
 
@@ -96,26 +116,42 @@ button {
   // height: 240px;
   // background-color: $BlackPrimary;
   .info {
+    
     margin: 0 auto;
-    color: $BlackPrimary;
-    height: 90px;
-    .nickname {
-      font-size: 25px;
-      font-weight: bold;
-      padding: 20px 0 10px 0px;
-      cursor: pointer;
-      text-align: center;
-    }
-    .intro {
-      font-size: 18px;
-      padding: 0 0 10px 230px;
-      text-align: center;
-    }
+    padding: 20px 0 10px 0;
+    
+    // .nickname {
+    //   font-size: 25px;
+    //   font-weight: bold;
+    //   padding: 20px 0 10px 0px;
+    //   cursor: pointer;
+    //   text-align: center;
+    // }
+    // .intro {
+    //   font-size: 18px;
+    //   padding: 0 0 10px 230px;
+    //   text-align: center;
+    // }
   }
   .tabbar{
-    background-color: $BlackPrimary;
-    border-top:1px #fff solid;
+    // @extend .common-border;
+    // border-top:1px $ThemeColor solid ;
     // border-bottom:1px #fff solid;
+    margin-bottom:15px; 
+    &.tabbar:before{
+      content:"";
+      display:inline-block;
+      width:200%;
+      height:1px;
+      background:$BorderColor;
+      position:absolute;
+      left:0;
+      right:0;
+      transform:scale(.5);
+      -webkit-transform:scale(.5);
+      transform-origin:0 100%;
+      -webkit-transform-origin:0 100%;
+    }
     .tab{
       color: #fff;
       display: flex;
@@ -127,7 +163,7 @@ button {
         display: flex;
         a {
           padding: 10px 18px;
-          color: #C8C9CA;
+          color:$FontColr;
           &:hover {
             text-decoration: none;
           }
@@ -161,9 +197,16 @@ button {
     }
   }
   .pic{
-    // margin-top: 10px;
-     height: 600px;
-     background: rgb(185, 48, 48);
+    
+    //  height: 600px;
+     .for-banner{
+       width: 100%;
+      .swiper{
+        width: 100%;
+        height: 500px;
+      }
+     }
+     
   }
   .nav {
     display: flex;
@@ -313,15 +356,47 @@ button {
 
 .footer {
   border-top: 1px solid $Border;
-  color: #C8C9CA;
+  padding-top: 10px;
+  color: $FontColr;
   margin: auto;
-  .copy {
-    height: 70px;
+  .container{
+    margin: 0 auto;
+  }
+  .foot-des{
+    // height: 150px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-size: 12px;
     padding: 0 18px;
+    div{
+      p{
+        line-height: 20px;
+        height: 20px;
+      }
+    } 
+  }
+  .copy {
+    height: 70px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 0 18px;
+  }
+  .for-copyright{
+    height: 100px;
+    text-align: center;
+    font-size: 11px;
+    .banquansuoyou{
+      line-height: 40px;
+      height: 40px;
+    }
+    .beianhao{
+      line-height: 40px;
+      height: 40px;
+    }
   }
 }
 
@@ -561,38 +636,49 @@ button {
 //图片列表
 .photolist-container{
   margin: 20px 0;
-  background: #f0f0f0;
+  // background: #f0f0f0;
   height:300px;
-  border-bottom: 1px solid #8e8e8e;
-  border-top: 1px solid #8e8e8e;
+  // border-top: 1px solid $Border;
+  // border-bottom: 1px solid #8e8e8e;
+  // border-top: 1px solid #8e8e8e;
 
   .content{
     // background: #FF2D2D;
     max-width:1122px;
+    border-top: 1px solid $Border;
+    padding-top: 10px;
     margin: 0 auto; 
     height: 100%;
     display: flex;
     .item{
       box-sizing:border-box;
-      background: #404448;
+      // background: #404448;
       color:blue;
       text-align: center;
       flex: 1;
-      border: 10px solid #fff;
-      border-radius: 20px;
+      border: 1px solid rgb(80, 13, 13);
+      border-radius: 5px;
+      padding: 8px;
+      .item-title{
+        color: $BigFontColor;
+        font-size:16px;
+        text-align:left;
+        margin-bottom:10px;
+      }
+      .item-content{
+        color: $FontColr;
+        font-size: 14px;
+        text-align:left;
+      }
       .photoitem1{
-        height: 100%;
-        background-size: 100%;
         //todo 为什么这样写就加载不出来？？？
         // background: url(./public/photoList/01.jpg);
       }
       .photoitem2{
-        height: 100%;
-        background-size: 100%;
+       
       }
       .photoitem3{
-        height: 100%;
-        background-size: 100%;
+        
       }
     }
     .for-center{

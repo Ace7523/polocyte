@@ -2,9 +2,10 @@
   <header class="header">
     <div class="container info">
       <!-- <div class="nickname" @click="goIndex">{{ administrator.nickname }}</div> -->
-      <div class="nickname" @click="goIndex">保罗赛特</div>
+      <!-- <div class="nickname" @click="goIndex">保罗赛特</div> -->
       <!-- <div class="intro">{{ administrator.intro }}</div> -->
-      <div class="intro">回归自然 回归慢生活</div> 
+      <!-- <div class="intro">回归自然 回归慢生活</div>  -->
+      <div class="for-logo"></div>
     </div>
     
     <div class="tabbar">
@@ -14,9 +15,9 @@
                 <router-link :to="item.path">{{ item.name }}</router-link>
               </li>
             </ul>
-            <div class="search">
+            <!-- <div class="search">
               <input type="search" name="search" placeholder="search" v-model="searchInfo" autofocus @keyup.enter="search"/>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="subtab" v-show="showSubtabIndex == 0">
@@ -69,7 +70,8 @@
       </div>
     </nav> -->
     <div class="pic">
-      <wc-swiper class="swiper" 
+      <div class="for-banner">
+        <wc-swiper class="swiper" 
                   v-if="list.length" 
                   @transitionend="transitionend" 
                   ref="swiper"
@@ -79,8 +81,6 @@
         <!-- <div slot="pagination"></div> -->
         <wc-slide v-for="(v, k) in list" :key="k" :class="map[k]">
           <!-- {{v}} -->
-          <div :class="{ns:imageFlag}">{{imageFlag}}</div>
-
         </wc-slide>
       </wc-swiper>  
 
@@ -88,6 +88,8 @@
       <div class="btn" @click="previous">上一个</div>
       <div class="btn" @click="next">下一个</div>
       <div class="btn" @click="slideTo">滚动到索引=3的</div> -->
+
+      </div>
     </div>
   </header>
 </template>
@@ -97,6 +99,9 @@ export default {
   data () {
     return {
       links: [{
+        name: '全部商品',
+        path: '/'
+      },{
         name: '首页',
         path: '/'
       }, {
@@ -106,7 +111,16 @@ export default {
         name: '管理',
         path: '/admin'
       },{
-        name: '新增目录',
+        name: '客厅',
+        path: '/'
+      },{
+        name: '卧房',
+        path: '/'
+      },{
+        name: '餐厅',
+        path: '/'
+      },{
+        name: '特别推荐',
         path: '/'
       }],
       searchInfo: '',
@@ -145,14 +159,15 @@ export default {
     goIndex () {
       this.$router.push({name: 'index'})
     },
-    showSubtab(val){
-     this.showSubtabIndex = val;
-    },
+    // showSubtab(val){
+    //  this.showSubtabIndex = val;
+    // },
     fetchList () {
-        this.list = [0,1,2,3,4,5];
+        // this.list = [0,1,2,3,4,5];
+        this.list = [0,1,2,3,4];
     },
     transitionend (current) {
-      this.imageFlag = current;
+      // this.imageFlag = current;
       // this.transitionendFlag += 1;
       // if(this.transitionendFlag % 2){
       //   this.imageFlag = 1
@@ -206,8 +221,6 @@ export default {
     margin: 10px auto; 
   }
   .swiper {
-    width: 100%;
-    height: 600px;
   }
   .swiper .ns{
     width: 100px;
@@ -215,16 +228,20 @@ export default {
     background: green;
   }
   .a {
-    background: #123456;
+     background: url(../../../public/indexPicture/08.jpg) no-repeat;
+     background-size: 100%;
   }
   .b {
-    background: #674567;
+     background: url(../../../public/indexPicture/12.jpg) no-repeat;
+     background-size: 100%;
   }
   .c {
-    background: #445678;
+     background: url(../../../public/indexPicture/25.jpg) no-repeat;
+     background-size: 100%;
   }
   .d {
-    background: #689989;
+     background: url(../../../public/indexPicture/28.jpg) no-repeat;
+     background-size: 100%;
   }
   .e {
     background: #333391;
@@ -240,5 +257,12 @@ export default {
   }
   .text {
     margin: 10px;
+  }
+  .for-logo{
+    width: 200px;
+    height: 40px;
+    margin: 0 auto;
+    background: url(../../../public/indexPicture/indexLogo.jpg) no-repeat;
+    background-size: 100%;
   }
 </style>
