@@ -1,6 +1,9 @@
 <template>
   <div class="list">
     <my-header></my-header>
+    <div class="banner">
+      
+    </div>
     <div class="photolist">
       <photo-list></photo-list>
     </div>
