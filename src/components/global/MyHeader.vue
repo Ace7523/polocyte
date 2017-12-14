@@ -76,7 +76,7 @@
                   @transitionend="transitionend" 
                   ref="swiper"
                   :defaultSlide="0" 
-                  :interval="1500" 
+                  :interval="15000" 
                   :pagination="true">
         <!-- <div slot="pagination"></div> -->
         <wc-slide v-for="(v, k) in list" :key="k" :class="map[k]">
@@ -228,23 +228,24 @@ export default {
     background: green;
   }
   .a {
-     background: url(../../../public/indexPicture/08.jpg) no-repeat;
+     background: url(../../../public/indexPicture/01.jpg) no-repeat;
      background-size: 100%;
   }
   .b {
-     background: url(../../../public/indexPicture/12.jpg) no-repeat;
+     background: url(../../../public/indexPicture/02.jpg) no-repeat;
      background-size: 100%;
   }
   .c {
-     background: url(../../../public/indexPicture/25.jpg) no-repeat;
+     background: url(../../../public/indexPicture/03.jpg) no-repeat;
      background-size: 100%;
   }
   .d {
-     background: url(../../../public/indexPicture/28.jpg) no-repeat;
+     background: url(../../../public/indexPicture/04.jpg) no-repeat;
      background-size: 100%;
   }
   .e {
-    background: #333391;
+     background: url(../../../public/indexPicture/05.jpg) no-repeat;
+     background-size: 100%;
   }
   .f {
     background: red;
