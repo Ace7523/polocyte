@@ -31,7 +31,7 @@ export default {
         break
       case 'category':
         let tag = state.route.params.change
-        let reg = new RegExp('[\u4E00-\u9FFF]+', 'g')
+        let reg = new RegExp('[\u4E00-\u9FFF]+', 'g') //汉字字符  + 意思是至少有一个
         if (reg.test(tag)) {
           tag = encodeURI(tag)
         }

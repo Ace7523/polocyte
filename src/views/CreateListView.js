@@ -1,6 +1,8 @@
 import article from '../views/Article.vue'
 import list from '../views/List.vue'
+import search from '../views/Search.vue'
 import admin from '../views/admin/Admin.vue'
+
 export function Article (type) {
   return {
     name: `${type}-stories-view`,

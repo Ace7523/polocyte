@@ -82,7 +82,7 @@ exports.getArticle = function(req, res, next) {
         "result": []
       })
     }
-
+    
     return res.json({
       "code": 200,
       "message": "数据获取成功",

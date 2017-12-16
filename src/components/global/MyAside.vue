@@ -32,6 +32,15 @@ export default {
     archives () {
       return this.$store.state.archives
     }
+  },
+  mounted() {
+    this.conso()
+  },
+  methods: {
+    conso () {
+      // console.log("tags",this.tags)
+      // console.log("archives",this.archives)
+    }
   }
 }
 </script>

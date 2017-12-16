@@ -9,7 +9,6 @@
     <div class="photolist">
       <photo-list></photo-list>
     </div>
-
     <div class="container wrap">
       <article-list></article-list>
       <my-aside></my-aside>
