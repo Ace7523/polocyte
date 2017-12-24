@@ -687,3 +687,82 @@ button {
     }
   }
 }
+.today-recommend{
+  max-width: 1122px;
+  margin: 0 auto;
+  .today-recommend-content{
+    // background-color: #f5f5f5;
+    background-color:#A19A8F;
+    color: #fff;
+    .title{
+      padding-top:20px;
+      padding-bottom: 20px; 
+      background-color: #f5f5f5;
+      text-align: center ;
+      color: $LogoColor;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .content-top{
+      display: flex;
+      height: 200px;
+      >div{
+        flex: 1
+      }
+      .left{
+
+      }
+      .middle{
+        padding: 5px;
+        background-color:#A19A8F;
+        color:#fff;
+        h3{
+          text-align: center;
+          margin-bottom: 10px;
+        }
+        p{
+          font-size: 15px;
+          text-indent: 30px;
+        }
+      }
+      .right{
+
+      }
+
+    }
+    .content-middle{
+      display: flex;
+      height: 300px;
+      .left{
+        flex: 1 ;
+        padding: 5px;
+        h3{
+          text-align: center;
+          margin-bottom: 10px;
+        }
+        p{
+          font-size: 15px;
+          text-indent: 30px;
+        }
+      }
+      .right{
+        flex: 2;
+
+      }
+    }
+    .content-bottom{
+      padding: 5px;
+      h3{
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      p{
+        font-size: 15px;
+        text-indent: 30px;
+      }
+      .bottom{
+        height: 300px;
+      }
+    }
+  }
+}

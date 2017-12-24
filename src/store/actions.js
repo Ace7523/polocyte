@@ -4,11 +4,21 @@ export default {
   DETAIL_PAGE ({ commit, state }, id) {
     return api.detailPage(id)
       .then(axios.spread(function (article, administrator, tags, archives) {
+        console.log("article",article)
         commit('DETAIL_PAGE', {
           article: article,
           administrator: administrator,
           tags: tags,
           archives: archives
+        })
+      }))
+  },
+
+  NS_TEST ({ commit, state }, id) {
+    return api.nstestAsync(id)
+      .then(axios.spread(function (nstest) {
+        commit('NS_TEST', {
+          nstest: nstest
         })
       }))
   },

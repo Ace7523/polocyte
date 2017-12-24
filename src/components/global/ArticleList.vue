@@ -3,6 +3,8 @@
     <ul class="items">
       <li v-for="(item,index) in data" class="item" :key="index">
         <router-link class="title" :to="{name:'article',params:{id:item.date}}">{{item.title}}</router-link>
+        <router-link class="title" :to="{name:'classify', params:{id:item.date}}">--（测试分类汇总页入口）{{item.title}}</router-link>
+        <router-link class="title" :to="{name:'nstest', params:{id:item.date}}">--（nstest）{{item.title}}</router-link>
         <article class="content">{{item.content | markdownParse | cutString(200)}}</article>
       </li>
     </ul>

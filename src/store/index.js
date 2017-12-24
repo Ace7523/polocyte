@@ -14,7 +14,8 @@ export function createStore () {
       tags: [],
       archives: [],
       articles: {},
-      cookies: {}
+      cookies: {},
+      nstest:''
     },
     actions,
     mutations

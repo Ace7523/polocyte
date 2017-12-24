@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { Article, List, Admin } from '../views/CreateListView'
+import { Article, List, Admin , Classify,Nstest} from '../views/CreateListView'
 const Login = () =>
   import('../views/Login.vue')
 
@@ -12,6 +12,9 @@ const UpdateAdminInfo = () =>
 
 const UpdateAdminPassword = () =>
   import('../views/admin/UpdateAdminPassword.vue')
+
+const UpTodayRecommend = () =>
+  import('../views/admin/UpTodayRecommend.vue')
 Vue.use(Router)
 export function createRouter () {
   return new Router({
@@ -22,11 +25,13 @@ export function createRouter () {
       path: '/login',
       name: 'login',
       component: Login
-    }, {
+    }, 
+    {
       path: '/category/:change?/:page?',
       name: 'category',
       component: List('category')
-    }, {
+    },
+    {
       path: '/search/:change?/:page?',
       name: 'search',
       component: List('search')
@@ -38,7 +43,15 @@ export function createRouter () {
       path: '/article/:id',
       name: 'article',
       component: Article('article')
+    },{
+      path: '/classify/:id',
+      name: 'classify',
+      component: Classify('article')
     }, {
+      path: '/nstest/:id',
+      name: 'nstest',
+      component: Nstest('nstest')
+    },{
       path: '/admin/:page?',
       name: 'admin',
       meta: {
@@ -66,6 +79,13 @@ export function createRouter () {
         Auth: true
       },
       component: UpdateAdminPassword
+    }, {
+      path: '/upTodayRecommend',
+      name: 'upTodayRecommend',
+      meta: {
+        Auth: true
+      },
+      component: UpTodayRecommend
     }, {
       path: '/:page?',
       name: 'index',

@@ -1,6 +1,7 @@
 import article from '../views/Article.vue'
 import list from '../views/List.vue'
-import search from '../views/Search.vue'
+import classify from '../views/Classify.vue'
+import nstest from '../views/Nstest.vue'
 import admin from '../views/admin/Admin.vue'
 
 export function Article (type) {
@@ -11,6 +12,30 @@ export function Article (type) {
     },
     render (h) {
       return h(article)
+    }
+  }
+}
+
+export function Classify (type) {
+  return {
+    name: `${type}-stories-view`,
+    asyncData ({ store, route }) {
+      return store.dispatch('DETAIL_PAGE', route.params.id)
+    },
+    render (h) {
+      return h(classify)
+    }
+  }
+}
+
+export function Nstest (type) {
+  return {
+    name: `${type}-stories-view`,
+    asyncData ({ store, route }) {
+      return store.dispatch('NS_TEST', route.params.id)
+    },
+    render (h) {
+      return h(nstest)
     }
   }
 }

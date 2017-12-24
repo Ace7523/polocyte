@@ -44,6 +44,14 @@ function article (id) {
   return axios.get(`/article?id=${id}`)
 }
 
+function nstest (id) {
+  return axios.get(`/nstest?id=${id}`)
+}
+
+function nstestAsync (id) {
+  return axios.all([nstest(id)])
+}
+
 /* ============================= */
 
 // 首页 
@@ -71,4 +79,4 @@ function articlesByArchive (date, id) {
   return axios.all([archive(date, id), administrator(), tags(), archives()])
 }
 
-export default { indexPage, detailPage, articlesByTag, articlesBySearch, articlesByArchive, articles, tags, administrator }
+export default { indexPage, detailPage, articlesByTag, articlesBySearch, articlesByArchive, articles, tags, administrator , nstestAsync}

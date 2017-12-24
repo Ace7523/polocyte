@@ -15,6 +15,10 @@ export default {
     state.archives = data.archives.data.result
   },
 
+  NS_TEST (state, data) {
+    state.nstest = data.nstest.data
+  },
+
   ARTICLES_BY_TAG (state, data) {
     state.articleList = data.articlesByTag.data.result
     state.total = data.articlesByTag.data.total

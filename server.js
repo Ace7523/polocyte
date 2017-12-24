@@ -167,6 +167,10 @@ app.get('/api/administrator', router.admin)
 // article detail content http://localhost:8080/api/article?id=1496841740682
 app.get('/api/article', router.getArticle)
 
+app.get('/api/uploadimagedesc', router.getUploadimagedesc)
+
+app.get('/api/nstest', router.getNstest)
+
 // tags infomation
 app.get('/api/tags', router.tags)
 
@@ -201,6 +205,10 @@ app.put('/api/administrator', hasToken, router.updateAdminInfo)
 app.post('/api/avatar', hasToken, router.avatar)
 
 app.post('/api/upload', hasToken, router.upload)
+
+app.post('/api/uploadimage', hasToken, router.uploadimage)
+
+app.post('/api/uploadimagedesc', hasToken, router.uploadimagedesc)
 
 // update administrator password
 app.put('/api/password', hasToken, router.updateAdminPassword)
