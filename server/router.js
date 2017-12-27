@@ -708,9 +708,7 @@ exports.upload = function(req, res, next) {
 exports.uploadimage = function(req, res, next) {
   let username = req.cookies.username
   let form = new formidable.IncomingForm()
-  console.log(req)
   if(req.query && req.query && req.query.index == '1'){
-    console.log(req)
     form.parse(req, function(err, fields, files) {
       if (err) {
         console.log(err)
@@ -966,6 +964,112 @@ exports.uploadimage = function(req, res, next) {
     })
   }
   
+}
+
+exports.uploaditemimage = function(req, res, next) {
+  let username = req.cookies.username
+  let form = new formidable.IncomingForm()
+  if(req.query && req.query && req.query.index == '1'){
+    form.parse(req, function(err, fields, files) {
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 401,
+          "message": "表单解析错误"
+        })
+      }
+  
+      // 获取对象的最后一项
+      let lastItem = files[Object.keys(files)[Object.keys(files).length - 1]]
+  
+      // 获取后缀名
+      // let extname = Date.now() + path.extname(lastItem.name)
+      let time = new Date();
+      let day = time.getDate();
+      let extname = day+"_"+Date.now() + path.extname(lastItem.name)
+      let oldUrl = lastItem.path
+      let newUrl = './public/itemimages/' + extname
+      let imgUrl = req.protocol + '://' + req.headers.host + '/public/itemimages/' + extname
+  
+      let paramData = {
+        imageTitle:"图片",
+        imageDesc:"图片描述",
+        imageUrl:imgUrl,
+        imageClass:req.query.index
+      }
+  
+      // 更改名字和路径,实现上传
+      let readStream = fs.createReadStream(oldUrl)
+      let writeStream = fs.createWriteStream(newUrl)
+      readStream.pipe(writeStream)
+      readStream.on('end', function() {
+        // 插入到数据库
+        db.insertOne('poloitems', paramData, function(err, result) {
+          if (err) {
+            console.log(err)
+            return res.json({
+              "code": 401,
+              "message": "文章发布失败"
+            })
+          }
+          console.log("图片上传成功")
+          return res.send(imgUrl);
+        })
+        
+      })
+    }) 
+  }  
+  else{
+    form.parse(req, function(err, fields, files) {
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 401,
+          "message": "表单解析错误"
+        })
+      }
+  
+      // 获取对象的最后一项
+      let lastItem = files[Object.keys(files)[Object.keys(files).length - 1]]
+  
+      // 获取后缀名
+      // let extname = Date.now() + path.extname(lastItem.name)
+      let time = new Date();
+      let day = time.getDate();
+      let extname = day+"_"+Date.now() + path.extname(lastItem.name)
+      console.log(extname)
+      let oldUrl = lastItem.path
+      let newUrl = './public/uploadimage/' + extname
+      let imgUrl = req.protocol + '://' + req.headers.host + '/public/uploadimage/' + extname
+  
+      let paramData = {
+        imageTitle:"图片",
+        imageDesc:"图片描述",
+        imageUrl:imgUrl,
+        imageClass:"图片类别1"
+      }
+  
+      // 更改名字和路径,实现上传
+      let readStream = fs.createReadStream(oldUrl)
+      let writeStream = fs.createWriteStream(newUrl)
+      readStream.pipe(writeStream)
+      readStream.on('end', function() {
+        // 插入到数据库
+        db.insertOne('images', paramData, function(err, result) {
+          if (err) {
+            console.log(err)
+            return res.json({
+              "code": 401,
+              "message": "文章发布失败"
+            })
+          }
+          console.log("图片上传成功")
+          return res.send(imgUrl);
+        })
+        
+      })
+    })
+  }
 }
 
 exports.updateAdminPassword = function(req, res, next) {

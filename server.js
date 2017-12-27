@@ -208,6 +208,8 @@ app.post('/api/upload', hasToken, router.upload)
 
 app.post('/api/uploadimage', hasToken, router.uploadimage)
 
+app.post('/api/uploaditemimage', hasToken, router.uploaditemimage)
+
 app.post('/api/uploadimagedesc', hasToken, router.uploadimagedesc)
 
 // update administrator password

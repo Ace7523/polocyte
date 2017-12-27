@@ -15,6 +15,9 @@ const UpdateAdminPassword = () =>
 
 const UpTodayRecommend = () =>
   import('../views/admin/UpTodayRecommend.vue')
+
+const UpItems = () =>
+  import('../views/admin/UpItems.vue')  
 Vue.use(Router)
 export function createRouter () {
   return new Router({
@@ -87,6 +90,13 @@ export function createRouter () {
       },
       component: UpTodayRecommend
     }, {
+      path: '/upItems',
+      name: 'upItems',
+      meta: {
+        Auth: true
+      },
+      component: UpItems
+    },{
       path: '/:page?',
       name: 'index',
       component: List('index')

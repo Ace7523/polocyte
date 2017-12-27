@@ -49,7 +49,10 @@ router.onReady(() => {
     }
 
     bar.start()
-    Promise.all(asyncDataHooks.map(hook => hook({ store, route: to })))
+    // Promise.all(asyncDataHooks.map(hook => hook({ store, route: to })))
+    Promise.all(asyncDataHooks.map(function(hook){
+      return hook({ store, route: to })
+    }))
       .then(() => {
         bar.finish()
         next()

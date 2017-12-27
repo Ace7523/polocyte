@@ -65,34 +65,6 @@ export default {
         let result = data.data.result[0]
         this.title = result.title
         this.content = result.content
-        console.log("文章内容",this.content)
-        let index = -1 ;
-        let urlList = [];
-        let urlEndList = [];
-        do {
-          index = this.content.indexOf("![](", index + 1); //使用第二个参数index+1，控制每一次查找都是从上一次查找到字符a的下一个索引位置开始
-          if (index != -1) { //可以找到字符i
-          urlList.push(index);
-          console.log(index); //输出a的位置
-          }
-        } while (index != -1);
-        do {
-          index = this.content.indexOf(")", index + 1); //使用第二个参数index+1，控制每一次查找都是从上一次查找到字符a的下一个索引位置开始
-          if (index != -1) { //可以找到字符i
-          urlEndList.push(index)
-          console.log(index); //输出a的位置
-          }
-        } while (index != -1);
-
-        console.log(urlList)
-        console.log(urlEndList)
-
-        for(let i =0 ; i<urlList.length; i++){
-          // console.log(this.content.substring(urlList[i]+4,urlEndList[i]))
-          this.imageList.push(this.content.substring(urlList[i]+4,urlEndList[i]))
-          console.log(this.imageList);
-        }
-
         let tag = result.tag
         this.tag = tag.join(',') + ','
         this.date = result.date
