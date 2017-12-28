@@ -991,30 +991,31 @@ exports.uploaditemimage = function(req, res, next) {
       let newUrl = './public/itemimages/' + extname
       let imgUrl = req.protocol + '://' + req.headers.host + '/public/itemimages/' + extname
   
-      let paramData = {
-        imageTitle:"图片",
-        imageDesc:"图片描述",
-        imageUrl:imgUrl,
-        imageClass:req.query.index
-      }
+      // let paramData = {
+      //   imageTitle:"图片",
+      //   imageDesc:"图片描述",
+      //   imageUrl:imgUrl,
+      //   imageClass:req.query.index
+      // }
   
       // 更改名字和路径,实现上传
       let readStream = fs.createReadStream(oldUrl)
       let writeStream = fs.createWriteStream(newUrl)
       readStream.pipe(writeStream)
       readStream.on('end', function() {
-        // 插入到数据库
-        db.insertOne('poloitems', paramData, function(err, result) {
-          if (err) {
-            console.log(err)
-            return res.json({
-              "code": 401,
-              "message": "文章发布失败"
-            })
-          }
-          console.log("图片上传成功")
-          return res.send(imgUrl);
-        })
+        return res.send(imgUrl);
+        // // 插入到数据库
+        // db.insertOne('poloitems', paramData, function(err, result) {
+        //   if (err) {
+        //     console.log(err)
+        //     return res.json({
+        //       "code": 401,
+        //       "message": "文章发布失败"
+        //     })
+        //   }
+        //   console.log("图片上传成功")
+        //   // return res.send(imgUrl);
+        // })
         
       })
     }) 
@@ -1070,6 +1071,61 @@ exports.uploaditemimage = function(req, res, next) {
       })
     })
   }
+}
+
+exports.upPoloItem = function(req, res, next) {
+  // 获取内容
+  let form = new formidable.IncomingForm()
+  form.parse(req, function(err, fields, files) {
+
+    let state = fields.state;
+    let klass = fields.klass;
+    let specific = fields.specific;
+    let imageList = fields.imageList;
+    let date = fields.date;
+
+    let newData = {
+      "state": state,
+      "klass": klass,
+      "specific": specific,
+      "imageList": imageList,
+      "date": date
+    };
+    // 插入到数据库
+    db.insertOne('poloitems', newData, function(err, result) {
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 401,
+          "message": "文章发布失败"
+        })
+      }
+      return res.json({
+        "code": 200,
+        "message": "文章发布成功"
+      })
+    })
+  })
+}
+
+exports.getPoloItem = function(req, res, next) {
+  
+  db.find('poloitems', { "query": {} }, function(err, result) {
+    if (err) {
+      console.log(err)
+      return res.json({
+        "code": 404,
+        "message": "数据获取失败",
+        "result": []
+      })
+    }
+    
+    return res.json({
+      "code": 200,
+      "message": "数据获取成功",
+      "result": result
+    })
+  })
 }
 
 exports.updateAdminPassword = function(req, res, next) {

@@ -101,6 +101,9 @@ export default {
       },{
         name: '特别推荐',
         path: '/'
+      },{
+        name: 'nstest',
+        path: '/nstest/1514338959144'
       }],
       searchInfo: '',
       showSubtabIndex:-1

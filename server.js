@@ -212,6 +212,10 @@ app.post('/api/uploaditemimage', hasToken, router.uploaditemimage)
 
 app.post('/api/uploadimagedesc', hasToken, router.uploadimagedesc)
 
+app.post('/api/upPoloItem', hasToken, router.upPoloItem)
+
+app.get('/api/getPoloItem', router.getPoloItem)  // todo 这个hastoken 怎么玩
+
 // update administrator password
 app.put('/api/password', hasToken, router.updateAdminPassword)
 

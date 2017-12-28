@@ -71,21 +71,16 @@ export default {
     }
   },
   methods: {
-    upimagedesc(){
-      this.axios.post('/uploadimagedesc', {
-        'title1':this.title1,
-        'title2':this.title2,
-        'title3':this.title3,
-        'desc1':this.desc1,
-        'desc2':this.desc2,
-        'desc3':this.desc3,
+    upitems(){
+      this.axios.post('/upPoloItem', {
+        'state':this.state,
+        'klass':this.klass,
+        'specific':this.specific,
+        'imageList':this.imageList,
         'date': Number(this.date) || Date.now()
       }).then((result) => {
         alert("上传成功")
       })
-    },
-    upitems(){
-
     },
     imgUrlsToArr(){
         let that = this;
