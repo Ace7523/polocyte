@@ -14,11 +14,12 @@ export default {
       }))
   },
 
-  NS_TEST ({ commit, state }, id) {
-    return api.nstestAsync(id)
-      .then(axios.spread(function (nstest) {
+  NS_TEST ({ commit, state }) {
+    return api.nstestAsync()
+      .then(axios.spread(function (nstest,allstates) {
         commit('NS_TEST', {
-          nstest: nstest
+          nstest: nstest,
+          allstates:allstates
         })
       }))
   },

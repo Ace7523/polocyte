@@ -51,7 +51,7 @@ export function createRouter () {
       name: 'classify',
       component: Classify('article')
     }, {
-      path: '/nstest/:id',
+      path: '/nstest',
       name: 'nstest',
       component: Nstest('nstest')
     },{

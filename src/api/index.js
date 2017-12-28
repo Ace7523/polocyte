@@ -49,12 +49,16 @@ function article (id) {
 //   return axios.get(`/nstest?id=${id}`)
 // }
 
-function nstest (id) {
-  return axios.get(`/getPoloItem?id=${id}`)
+function nstest () {
+  return axios.get(`/getPoloItem`)
 }
 
-function nstestAsync (id) {
-  return axios.all([nstest(id)])
+function getAllStates () {
+  return axios.get(`/getAllStates`)
+}
+
+function nstestAsync () {
+  return axios.all([nstest(),getAllStates()])
 }
 
 /* ============================= */

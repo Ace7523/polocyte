@@ -92,14 +92,7 @@ exports.getArticle = function(req, res, next) {
 }
 
 exports.getNstest = function(req, res, next) {
-  let articleID = Number(req.query.id) || false;
-  let query = { "date": articleID };
-  for (let key in query) {
-    if (!query[key]) {
-      delete query[key]
-    }
-  }
-
+ 
   db.find('images', { "query": {} }, function(err, result) {
     if (err) {
       console.log(err)
@@ -1124,6 +1117,73 @@ exports.getPoloItem = function(req, res, next) {
       "code": 200,
       "message": "数据获取成功",
       "result": result
+    })
+  })
+}
+
+exports.getAllStates = function(req, res, next) {
+  db.find('poloitems', { "query": {} }, function(err, result) {
+    if (err) {
+      console.log(err)
+      return res.json({
+        "code": 404,
+        "message": "数据获取失败",
+        "result": []
+      })
+    }
+    
+    let arr1 = []
+    let arr2 = []
+    let arr3 = []
+    let arr4 = [] 
+    let arrRestlt = {}
+    if(result.length > 0){
+      for(let i = 0 ; i< result.length ; i++){
+        arr1.push(result[i].state)
+        arr3.push(result[i].klass)
+      }
+    }
+    arr1.sort();
+    for (let i = 0; i < arr1.length;) {
+      let count = 0;
+      for (let j = i; j < arr1.length; j++) {
+        if (arr1[i] === arr1[j]) {
+          count++;
+        }
+      }
+      arr2.push({
+        tag: arr1[i],
+        count: count
+      })
+      i += count;
+    }
+
+    arr3.sort()
+    for (let i = 0; i < arr3.length;) {
+      let count = 0;
+      for (let j = i; j < arr3.length; j++) {
+        if (arr3[i] === arr3[j]) {
+          count++;
+        }
+      }
+      arr4.push({
+        tag: arr3[i],
+        count: count
+      })
+      i += count;
+    }
+
+
+    arr2.reverse()
+    arr4.reverse()
+    
+    arrRestlt.states = arr2;
+    arrRestlt.klasses = arr4;
+
+    return res.json({
+      "code": 200,
+      "message": "数据获取成功",
+      "result": arrRestlt
     })
   })
 }

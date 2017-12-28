@@ -216,6 +216,8 @@ app.post('/api/upPoloItem', hasToken, router.upPoloItem)
 
 app.get('/api/getPoloItem', router.getPoloItem)  // todo 这个hastoken 怎么玩
 
+app.get('/api/getAllStates', router.getAllStates)
+
 // update administrator password
 app.put('/api/password', hasToken, router.updateAdminPassword)
 

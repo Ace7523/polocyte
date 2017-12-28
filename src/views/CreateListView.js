@@ -32,7 +32,7 @@ export function Nstest (type) {
   return {
     name: `${type}-stories-view`,
     asyncData ({ store, route }) {
-      return store.dispatch('NS_TEST', route.params.id)
+      return store.dispatch('NS_TEST')
     },
     render (h) {
       return h(nstest)

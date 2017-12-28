@@ -103,7 +103,7 @@ export default {
         path: '/'
       },{
         name: 'nstest',
-        path: '/nstest/1514338959144'
+        path: '/nstest'
       }],
       searchInfo: '',
       showSubtabIndex:-1
