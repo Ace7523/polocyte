@@ -54,6 +54,10 @@ export function createRouter () {
       path: '/nstest',
       name: 'nstest',
       component: Nstest('nstest')
+    }, {
+      path: '/brouter/:querydata',
+      name: 'brouter',
+      component: Nstest('brouter')
     },{
       path: '/admin/:page?',
       name: 'admin',

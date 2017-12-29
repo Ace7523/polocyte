@@ -35,7 +35,7 @@ export function Nstest (type) {
       return store.dispatch('NS_TEST')
     },
     render (h) {
-      return h(nstest)
+      return h(nstest,{ props: { type } })
     }
   }
 }

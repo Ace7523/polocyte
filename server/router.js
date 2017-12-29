@@ -1121,6 +1121,30 @@ exports.getPoloItem = function(req, res, next) {
   })
 }
 
+exports.getPoloItems = function(req, res, next) {
+  let querydata = ''
+  if(req.query && req.query.querydata){
+    querydata = req.query.querydata
+  }
+  db.find('poloitems', { "query": {'state':querydata} }, function(err, result) {
+    if (err) {
+      console.log(err)
+      return res.json({
+        "code": 404,
+        "message": "数据获取失败",
+        "result": []
+      })
+    }
+    
+    return res.json({
+      "code": 200,
+      "message": "数据获取成功",
+      "result": result
+    })
+  })
+}
+
+
 exports.getAllStates = function(req, res, next) {
   db.find('poloitems', { "query": {} }, function(err, result) {
     if (err) {

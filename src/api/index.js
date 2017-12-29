@@ -61,6 +61,14 @@ function nstestAsync () {
   return axios.all([nstest(),getAllStates()])
 }
 
+function getPoloItems(querydata){
+  return axios.get(`/getPoloItems?querydata=${querydata}`)
+}
+
+function getItemsByQuerydata(querydata){
+  return axios.all([getPoloItems(querydata),getAllStates()])
+}
+
 /* ============================= */
 
 // 首页 
@@ -88,4 +96,4 @@ function articlesByArchive (date, id) {
   return axios.all([archive(date, id), administrator(), tags(), archives()])
 }
 
-export default { indexPage, detailPage, articlesByTag, articlesBySearch, articlesByArchive, articles, tags, administrator , nstestAsync}
+export default { indexPage, detailPage, articlesByTag, articlesBySearch, articlesByArchive, articles, tags, administrator , nstestAsync,getItemsByQuerydata}

@@ -1,45 +1,64 @@
 <template>
-  <div class="article">
-    
-    <div class="" style="margin-top:40px">
-      <h4>这是nstest页</h4>
-      <div>{{nstest}}</div>
-      <div>---------------------------------------------------------------------------------------------------</div>
-      <div>allstates</div>
-      <div>{{allstates}}</div>
-      <div>---------------------------------------------------------------------------------------------------</div>
-      <div v-for="(resultItem,index) in nstest.result" :key="index">
-        <p>{{resultItem.state}}</p>
-        <p>{{resultItem.klass}}</p>
-        <div v-for="(item,index2) in resultItem.imageList" :key="index2">
-          <img :src="item" alt="" style="width:350px">
-        </div>
-      </div>
-      <div>---------------------------------------------------------------------------------------------------</div>
-      <div>
-        <h3>所有state</h3>
-        <div v-for="(item,index) in allstates.states" :key="index">
-          <router-link :to="{name:'nstest',params:{change:item.tag}}">{{item.tag}} ({{item.count}})</router-link>
-        </div>
-        <h3>所有klass</h3>
-        <div v-for="(item,index) in allstates.klasses" :key="index">
-          {{item.tag}}
-        </div>
-      </div>
-    </div>
+  <div>
+    <my-header></my-header>
+    <div class="polo-all-items-wrap">
+      <div class="polo-all-items-content">
+        <div class="all-items">
+          <!-- 左侧导航分类 -->
+          <div class="polo-category">
+            <div class="content-stytle">
+              <div class="title">所有分类</div> 
+              <div v-for="(item,index) in allstates.states" :key="index">
+                <router-link :to="{name:'brouter',params:{querydata:item.tag}}">{{item.tag}} ({{item.count}})</router-link>
+              </div>
+              <div class="title">所有klass</div>
+              <div v-for="(item,index) in allstates.klasses" :key="index">
+                {{item.tag}}
+              </div>
+            </div>
+          </div>
+          <!-- 右侧具体内容 -->
+          <div class="polo-items">
+            <div class="content-stytle2">
+              <!-- 遍历接口，展示具体信息 -->
+              <div v-for="(resultItem,index) in nstest.result" :key="index" class="each-item">
+                <p>{{resultItem.state}}</p>
+                <p>{{resultItem.klass}}</p>
+                <div v-for="(item,index2) in resultItem.imageList" :key="index2">
+                  <img :src="item" alt="" style="width:350px">
+                </div>
+              </div>
 
-  </div>  
+              <div>{{nstest}}</div>
+            </div>
+            
+          </div>
+
+        </div>
+      </div>
+    </div>  
+  
+    <my-footer></my-footer>
+  </div>
+  
 </template>
 <script>
-
+import MyHeader from '../components/global/MyHeader.vue'
+import MyFooter from '../components/global/MyFooter.vue'
 export default {
   name: 'nstest',
   components: {
-    
+    MyHeader,
+    MyFooter
   },
   data(){
     return{
       
+    }
+  },
+   beforeMount () {
+    if (this.$root._isMounted) {
+      this.listPage()
     }
   },
   computed: {
@@ -50,11 +69,20 @@ export default {
       return this.$store.state.allstates
     }
   },
+  watch: {
+    $route (to, from) {
+      this.listPage()
+    }
+  },
   methods: {
-    
-    del () {
-     
-    },
-  }
+      // todo 这里其实不是很懂
+      // 点击分页后，重新获取数据   
+      listPage () {
+        this.$bar.start()
+        this.$store.dispatch('NS_TEST').then(() => {
+          this.$bar.finish()
+        })
+      }
+    }
 }
 </script>

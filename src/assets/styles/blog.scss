@@ -137,7 +137,7 @@ button {
     // @extend .common-border;
     // border-top:1px $ThemeColor solid ;
     // border-bottom:1px #fff solid;
-    margin-bottom:15px; 
+    margin-bottom:15px;  
     &.tabbar:before{
       content:"";
       display:inline-block;
@@ -762,6 +762,48 @@ button {
       }
       .bottom{
         height: 300px;
+      }
+    }
+  }
+}
+
+//polo-all-items
+.polo-all-items-wrap{
+  border-top: 1px solid $Border;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  .polo-all-items-content{
+    max-width: 1122px;
+    margin: 0 auto ;
+    .all-items{
+      display: flex;
+      .polo-category{
+        flex: 1;
+        box-sizing: content-box;
+        .content-stytle{
+          border: 2px solid $Border;
+          border-radius:5px;
+          padding-left: 15px;
+          height: 100%;
+  
+          div{
+            height: 20px;
+            line-height: 20px;
+          }
+          .title{
+            font-weight: bold;
+          }
+        }
+      }
+      .polo-items{
+        flex: 5;
+        .content-stytle2{
+          padding-left: 15px;
+          .each-item{
+            width:50%;
+            display: inline-block;
+          }
+        }
       }
     }
   }

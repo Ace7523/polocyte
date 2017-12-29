@@ -177,6 +177,8 @@ app.get('/api/tags', router.tags)
 // get articles by tag http://localhost:8080/api/tag?tag=javascript
 app.get('/api/tag', router.tag)
 
+app.get('/api/getPoloItems', router.getPoloItems)
+
 // search articles http://localhost:8080/api/search?q=js
 app.get('/api/search', router.search)
 
