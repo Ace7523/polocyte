@@ -6,6 +6,7 @@
       <!-- <div class="intro">{{ administrator.intro }}</div> -->
       <!-- <div class="intro">回归自然 回归慢生活</div>  -->
       <div class="for-logo"></div>
+      <div class="intro">回归自然 回归慢生活</div>
     </div>
     
     <div class="tabbar">
@@ -137,5 +138,16 @@ export default {
     margin: 0 auto;
     background: url(../../../public/indexPicture/indexLogo.jpg) no-repeat;
     background-size: 100%;
+  }
+  .intro{
+    text-align: center;
+    position: relative;
+    left: 86px;
+    top: 2px;
+    line-height: 20px;
+    font-family: 16px;
+    color: #3F301B;
+    font-weight: bold;
+    font-family: "楷体","楷体_GB2312";
   }
 </style>
