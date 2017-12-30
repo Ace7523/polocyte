@@ -169,6 +169,8 @@ app.get('/api/article', router.getArticle)
 
 app.get('/api/uploadimagedesc', router.getUploadimagedesc)
 
+app.get('/api/uploadimagedesc2', router.getUploadimagedesc2)
+
 app.get('/api/nstest', router.getNstest)
 
 // tags infomation
@@ -213,6 +215,8 @@ app.post('/api/uploadimage', hasToken, router.uploadimage)
 app.post('/api/uploaditemimage', hasToken, router.uploaditemimage)
 
 app.post('/api/uploadimagedesc', hasToken, router.uploadimagedesc)
+
+app.post('/api/uploadimagedesc2', hasToken, router.uploadimagedesc2)
 
 app.post('/api/upPoloItem', hasToken, router.upPoloItem)
 

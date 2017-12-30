@@ -16,6 +16,9 @@ const UpdateAdminPassword = () =>
 const UpTodayRecommend = () =>
   import('../views/admin/UpTodayRecommend.vue')
 
+const UpNewProdtct = () =>
+  import('../views/admin/UpNewProduct.vue')
+
 const UpItems = () =>
   import('../views/admin/UpItems.vue')  
 Vue.use(Router)
@@ -93,6 +96,13 @@ export function createRouter () {
         Auth: true
       },
       component: UpTodayRecommend
+    },  {
+      path: '/UpNewProdtct',
+      name: 'UpNewProdtct',
+      meta: {
+        Auth: true
+      },
+      component: UpNewProdtct
     }, {
       path: '/upItems',
       name: 'upItems',

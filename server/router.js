@@ -517,6 +517,94 @@ exports.uploadimagedesc = function(req, res, next) {
     })
 }
 
+exports.uploadimagedesc2 = function(req, res, next) {
+  // 获取内容
+  let form = new formidable.IncomingForm()
+  form.parse(req, function(err, fields, files) {
+
+    let title1 = fields.title1;
+    let title2 = fields.title2;
+   
+    let desc1 = fields.desc1;
+    let desc2 = fields.desc2;
+   
+    let date = fields.date;
+   
+
+    let newData = {
+      "title1": title1,
+      "title2": title2,
+      
+      "desc1": desc1,
+      "desc2": desc2,
+      
+      "date": date
+    };
+    // 插入到数据库
+    db.insertOne('imagedesc2', newData, function(err, result) {
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 401,
+          "message": "文章发布失败"
+        })
+      }
+      return res.json({
+        "code": 200,
+        "message": "文章发布成功"
+      })
+    })
+    // db.find('infos', { "query": { "date": date } }, function(err, result) {
+    //   if (err) {
+    //     console.log(err)
+    //     return res.json({
+    //       "code": 500,
+    //       "message": "内部服务器错误"
+    //     })
+    //   }
+
+    //   if (result.length === 1) {
+    //     db.updateMany('infos', { "date": date }, newData, function(err, result2) {
+    //       if (err) {
+    //         console.log(err)
+    //         return res.json({
+    //           "code": 401,
+    //           "message": "文章更新失败"
+    //         })
+    //       }
+
+    //       return res.json({
+    //         "code": 200,
+    //         "message": "文章更新成功"
+    //       })
+    //     })
+    //   } else {
+    //     // 插入到数据库
+    //     db.insertOne('infos', newData, function(err, result3) {
+    //       if (err) {
+    //         console.log(err)
+    //         return res.json({
+    //           "code": 401,
+    //           "message": "文章发布失败"
+    //         })
+    //       }
+
+    //       if (state === 'draft') {
+    //         return res.json({
+    //           "code": 200,
+    //           "message": "草稿保存草稿"
+    //         })
+    //       }
+    //       return res.json({
+    //         "code": 200,
+    //         "message": "文章发布成功"
+    //       })
+    //     })
+    //   }
+    // })
+  })
+}
+
 exports.getUploadimagedesc = function(req, res, next) {
 
   db.find('imagedesc', { "query": {} }, function(err, result) {
@@ -536,6 +624,26 @@ exports.getUploadimagedesc = function(req, res, next) {
     })
   })
 }
+
+exports.getUploadimagedesc2 = function(req, res, next) {
+  
+    db.find('imagedesc2', { "query": {} }, function(err, result) {
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 404,
+          "message": "数据获取失败",
+          "result": []
+        })
+      }
+      
+      return res.json({
+        "code": 200,
+        "message": "数据获取成功",
+        "result": result
+      })
+    })
+  }
 
 exports.login = function(req, res, next) {
   let form = new formidable.IncomingForm()
@@ -873,6 +981,159 @@ exports.uploadimage = function(req, res, next) {
       let day = time.getDate();
       // let extname = day+"_"+Date.now() + path.extname(lastItem.name)
       let extname = '04.jpg'
+      let oldUrl = lastItem.path
+      let newUrl = './public/photoList/' + extname
+      let imgUrl = req.protocol + '://' + req.headers.host + '/public/photoList/' + extname
+  
+      let paramData = {
+        imageTitle:"图片",
+        imageDesc:"图片描述",
+        imageUrl:imgUrl,
+        imageClass:"图片类别1"
+      }
+  
+      // 更改名字和路径,实现上传
+      let readStream = fs.createReadStream(oldUrl)
+      let writeStream = fs.createWriteStream(newUrl)
+      readStream.pipe(writeStream)
+      readStream.on('end', function() {
+        // 插入到数据库
+        db.insertOne('images', paramData, function(err, result) {
+          if (err) {
+            console.log(err)
+            return res.json({
+              "code": 401,
+              "message": "文章发布失败"
+            })
+          }
+          console.log("图片上传成功")
+          return res.send(imgUrl);
+        })
+        
+      })
+    }) 
+  }else if(req.query && req.query && req.query.index == '5'){
+    console.log(req)
+    form.parse(req, function(err, fields, files) {
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 401,
+          "message": "表单解析错误"
+        })
+      }
+  
+      // 获取对象的最后一项
+      let lastItem = files[Object.keys(files)[Object.keys(files).length - 1]]
+  
+      // 获取后缀名
+      // let extname = Date.now() + path.extname(lastItem.name)
+      let time = new Date();
+      let day = time.getDate();
+      // let extname = day+"_"+Date.now() + path.extname(lastItem.name)
+      let extname = '05.jpg'
+      let oldUrl = lastItem.path
+      let newUrl = './public/photoList/' + extname
+      let imgUrl = req.protocol + '://' + req.headers.host + '/public/photoList/' + extname
+  
+      let paramData = {
+        imageTitle:"图片",
+        imageDesc:"图片描述",
+        imageUrl:imgUrl,
+        imageClass:"图片类别1"
+      }
+  
+      // 更改名字和路径,实现上传
+      let readStream = fs.createReadStream(oldUrl)
+      let writeStream = fs.createWriteStream(newUrl)
+      readStream.pipe(writeStream)
+      readStream.on('end', function() {
+        // 插入到数据库
+        db.insertOne('images', paramData, function(err, result) {
+          if (err) {
+            console.log(err)
+            return res.json({
+              "code": 401,
+              "message": "文章发布失败"
+            })
+          }
+          console.log("图片上传成功")
+          return res.send(imgUrl);
+        })
+        
+      })
+    }) 
+  }else if(req.query && req.query && req.query.index == '6'){
+    console.log(req)
+    form.parse(req, function(err, fields, files) {
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 401,
+          "message": "表单解析错误"
+        })
+      }
+  
+      // 获取对象的最后一项
+      let lastItem = files[Object.keys(files)[Object.keys(files).length - 1]]
+  
+      // 获取后缀名
+      // let extname = Date.now() + path.extname(lastItem.name)
+      let time = new Date();
+      let day = time.getDate();
+      // let extname = day+"_"+Date.now() + path.extname(lastItem.name)
+      let extname = '06.jpg'
+      let oldUrl = lastItem.path
+      let newUrl = './public/photoList/' + extname
+      let imgUrl = req.protocol + '://' + req.headers.host + '/public/photoList/' + extname
+  
+      let paramData = {
+        imageTitle:"图片",
+        imageDesc:"图片描述",
+        imageUrl:imgUrl,
+        imageClass:"图片类别1"
+      }
+  
+      // 更改名字和路径,实现上传
+      let readStream = fs.createReadStream(oldUrl)
+      let writeStream = fs.createWriteStream(newUrl)
+      readStream.pipe(writeStream)
+      readStream.on('end', function() {
+        // 插入到数据库
+        db.insertOne('images', paramData, function(err, result) {
+          if (err) {
+            console.log(err)
+            return res.json({
+              "code": 401,
+              "message": "文章发布失败"
+            })
+          }
+          console.log("图片上传成功")
+          return res.send(imgUrl);
+        })
+        
+      })
+    }) 
+  }else if(req.query && req.query && req.query.index == '7'){
+    console.log(req)
+    form.parse(req, function(err, fields, files) {
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 401,
+          "message": "表单解析错误"
+        })
+      }
+  
+      // 获取对象的最后一项
+      let lastItem = files[Object.keys(files)[Object.keys(files).length - 1]]
+  
+      // 获取后缀名
+      // let extname = Date.now() + path.extname(lastItem.name)
+      let time = new Date();
+      let day = time.getDate();
+      // let extname = day+"_"+Date.now() + path.extname(lastItem.name)
+      let extname = '07.jpg'
       let oldUrl = lastItem.path
       let newUrl = './public/photoList/' + extname
       let imgUrl = req.protocol + '://' + req.headers.host + '/public/photoList/' + extname

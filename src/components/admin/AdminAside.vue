@@ -31,6 +31,10 @@ export default {
       }, {
         name: '上传-今日推荐',
         path: '/upTodayRecommend'
+      },
+      {
+        name: '上传-新品推荐',
+        path: '/UpNewProdtct'
       }, {
         name: '上传-items',
         path: '/upItems'

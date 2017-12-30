@@ -2,18 +2,17 @@
   <div class="list">
     <my-header></my-header>
 
-    <!-- <div class="my-banner">
+    <div class="my-banner">
       <my-banner></my-banner>
     </div>
     <div class="today-recommend-wrap">
       <today-recommend></today-recommend>
-    </div> -->
-    <!-- <div class="new-product-wrap">
-      新品介绍
+    </div>
+    <div class="new-product-wrap">
       <new-products></new-products>
-    </div> -->
+    </div>
     
-    <!-- <div class="photolist">
+     <!--<div class="photolist">
       <photo-list></photo-list>
     </div> -->
 
@@ -22,7 +21,7 @@
       <my-aside></my-aside>
     </div> -->
     
-    <!-- <my-footer></my-footer> -->
+    <my-footer></my-footer>
   </div>
 </template>
 <script>

@@ -4,31 +4,40 @@
         <div class="title">
           <p><span style="color:#555">|</span>&nbsp;&nbsp;今日推荐&nbsp;&nbsp;<span style="color:#555">|</span></p>
         </div>
+        <!-- 今日推荐顶部 -->
         <div class="content-top">
           <div class="left">
 
           </div>
           <div class="middle">
-            <h3>{{title1}}</h3>
-            <p>{{desc1}}</p>
+            <div class="content">
+              <h3>{{title1}}</h3>
+              <p>{{desc1}}</p>
+            </div>
           </div>
           <div class="right">
 
           </div>
         </div>
+        <!-- 今日推荐中间 -->
         <div class="content-middle">
           <div class="left">
-            <h3>{{title2}}</h3>
-            <p>{{desc2}}</p>
+            <div class="content">
+               <h3>{{title2}}</h3>
+               <p>{{desc2}}</p>
+            </div>
           </div>
           <div class="right">
 
           </div>
         </div>
+        <!-- 今日推荐底部 -->
         <div class="content-bottom">
           <div class="middle">
-            <h3>{{title3}}</h3>
-            <p>{{desc3}}</p>
+            <div class="content">
+              <h3>{{title3}}</h3>
+              <p>{{desc3}}</p>
+            </div>
           </div>
           <div class="bottom">
 
@@ -69,25 +78,25 @@ export default {
 </script>
 <style>
 /* 左上角的图片 */
-.content-top .left{
+.today-recommend .content-top .left{
   height: 100%;
   background: url(../../../public/photoList/01.jpg) no-repeat;
   background-size: 100% 100%;
 }
 /* 右上角图片 */
-.content-top .right{
+.today-recommend .content-top .right{
   height: 100%;
   background: url(../../../public/photoList/02.jpg) no-repeat;
   background-size: 100% 100%;
 }
 /* 中间右侧图片 */
-.content-middle .right{
+.today-recommend .content-middle .right{
   height: 100%;
   background: url(../../../public/photoList/03.jpg) no-repeat;
   background-size: 100% 100%;
 }
 /* 下边的大图 */
-.content-bottom .bottom{
+.today-recommend .content-bottom .bottom{
   height: 100%;
   background: url(../../../public/photoList/04.jpg) no-repeat;
   background-size: 100% 100%;

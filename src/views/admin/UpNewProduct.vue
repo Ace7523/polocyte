@@ -4,41 +4,30 @@
     <div class="admin-content">
       <div class="essay">
         <div class="form">
-          <!-- 首屏今日推荐部分 -->
           <div class="title">
-            <input type="text" v-model="title1" placeholder="今日推荐顶标题" autofocus>
+            <input type="text" v-model="title1" placeholder="新品推荐顶标题" autofocus>
           </div>
           <div class="title">
-            <input type="text" v-model="desc1" placeholder="今日推荐顶描述" autofocus>
+            <input type="text" v-model="desc1" placeholder="新品推荐顶描述" autofocus>
           </div>
           <div class="title">
-            <input type="text" v-model="title2" placeholder="今日推荐中部标题" autofocus>
+            <input type="text" v-model="title2" placeholder="新品推荐中部标题" autofocus>
           </div>
           <div class="title">
-            <input type="text" v-model="desc2" placeholder="今日推荐中部描述" autofocus>
-          </div>
-          <div class="title">
-            <input type="text" v-model="title3" placeholder="今日推荐底部标题" autofocus>
-          </div>
-          <div class="title">
-            <input type="text" v-model="desc3" placeholder="今日推荐底部描述" autofocus>
+            <input type="text" v-model="desc2" placeholder="新品推荐中部描述" autofocus>
           </div>
 
           <div class="content">
-            <top-editor v-model="content" :upload="uploadimage" :options="options"></top-editor>
+            <top-editor v-model="content" :upload="uploadimage5" :options="options"></top-editor>
           </div>
            <div class="content">
-            <top-editor v-model="content" :upload="uploadimage2" :options="options"></top-editor>
+            <top-editor v-model="content" :upload="uploadimage6" :options="options"></top-editor>
           </div>
            <div class="content">
-            <top-editor v-model="content" :upload="uploadimage3" :options="options"></top-editor>
-          </div>
-           <div class="content">
-            <top-editor v-model="content" :upload="uploadimage4" :options="options"></top-editor>
+            <top-editor v-model="content" :upload="uploadimage7" :options="options"></top-editor>
           </div>
 
           <button type="button" @click="upimagedesc">上传图片的描述</button>
-          <!-- 首屏今日推荐部分 结束 -->
         </div>
       </div>
     </div>
@@ -55,21 +44,18 @@ export default {
       date: '',
       title1:'',
       title2:'',
-      title3:'',
+     
       desc1:'',
       desc2:'',
-      desc3:'',
-      uploadimage: {
-        url: 'http://localhost:8080/api/uploadimage?index=1'
+     
+      uploadimage5: {
+        url: 'http://localhost:8080/api/uploadimage?index=5'
       },
-       uploadimage2: {
-        url: 'http://localhost:8080/api/uploadimage?index=2'
+       uploadimage6: {
+        url: 'http://localhost:8080/api/uploadimage?index=6'
       },
-       uploadimage3: {
-        url: 'http://localhost:8080/api/uploadimage?index=3'
-      },
-       uploadimage4: {
-        url: 'http://localhost:8080/api/uploadimage?index=4'
+       uploadimage7: {
+        url: 'http://localhost:8080/api/uploadimage?index=7'
       },
       options: {
         linkify: true,
@@ -91,16 +77,16 @@ export default {
   },
   methods: {
     upimagedesc(){
-      this.axios.post('/uploadimagedesc', {
+      this.axios.post('/uploadimagedesc2', {
         'title1':this.title1,
         'title2':this.title2,
-        'title3':this.title3,
+        
         'desc1':this.desc1,
         'desc2':this.desc2,
-        'desc3':this.desc3,
+        
         'date': Number(this.date) || Date.now()
       }).then((result) => {
-       if(result && result.data.code == 200){
+        if(result && result.data.code == 200){
           alert("上传成功")
           history.go(0) 
         }else{
