@@ -8,7 +8,7 @@
           <div class="polo-category">
             <div class="content-stytle">
               <div class="title">所有分类</div> 
-              <div v-for="(item,index) in allstates.states" :key="index">
+              <div v-for="(item,index) in allstates.statuses" :key="index">
                 <router-link :to="{name:'brouter',params:{querydata:item.tag}}">{{item.tag}} ({{item.count}})</router-link>
               </div>
               <div class="title">所有klass</div>
@@ -22,14 +22,22 @@
             <div class="content-stytle2">
               <!-- 遍历接口，展示具体信息 -->
               <div v-for="(resultItem,index) in nstest.result" :key="index" class="each-item">
-                <p>{{resultItem.state}}</p>
-                <p>{{resultItem.klass}}</p>
-                <div v-for="(item,index2) in resultItem.imageList" :key="index2">
-                  <img :src="item" alt="" style="width:350px">
+               
+                <div v-for="(item,index2) in resultItem.imageList" :key="index2" class="each-image">
+
+                  <img :src="item" alt="">
+                  <!-- <div class="for-image" style="background: url(item)"> -->
+
+                  </div>
                 </div>
+                
+                <p>{{resultItem.status}}</p>
+                <p>{{resultItem.klass}}</p>
+                <p>{{resultItem.featuredesc}}</p>
               </div>
 
               <div>{{nstest}}</div>
+              <div>{{allstates}}</div>
             </div>
             
           </div>

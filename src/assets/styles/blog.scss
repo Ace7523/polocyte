@@ -935,10 +935,23 @@ button {
       .polo-items{
         flex: 5;
         .content-stytle2{
-          padding-left: 15px;
+          padding-left: 5px;
           .each-item{
-            width:50%;
+            width:32%;
             display: inline-block;
+            padding-left:10px;
+            .each-image{
+              img{
+                width: 100%;
+                height: 210px;
+              }
+              .for-image{
+                width: 100%;
+                height: 210px;
+                background-size: 100% 100%;
+                background: url()
+              }
+            } 
           }
         }
       }

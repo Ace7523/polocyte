@@ -3,17 +3,41 @@
     <admin-aside></admin-aside>
     <div class="admin-content">
       <div class="essay">
-        <div>{{imaUrlArr}}</div>
         <div class="form">
           <div class="title">
-            <input type="text" v-model="state" placeholder="请输入类别,如客厅、卧室、书房等" autofocus>
+            <input type="text" v-model="brand" placeholder="请输入品牌" autofocus>
           </div>
           <div class="title">
-            <input type="text" v-model="klass" placeholder="请输入分类" autofocus>
+            <input type="text" v-model="series" placeholder="请输入系列,如莱茵、新泽西等" autofocus>
           </div>
           <div class="title">
-            <input type="text" v-model="specific" placeholder="请输入具体" autofocus>
+            <input type="text" v-model="status" placeholder="请输入类别,如客厅、卧室、书房等" autofocus>
           </div>
+          <div class="title">
+            <input type="text" v-model="klass" placeholder="请输入分类,如沙发、床、柜等" autofocus>
+          </div>
+          <div class="title">
+            <input type="text" v-model="specific" placeholder="请输入具体,如双人沙发、单人床等" autofocus>
+          </div>
+          <div class="title">
+            <input type="text" v-model="material" placeholder="请输入材质" autofocus>
+         </div>
+          <div class="title">
+            <input type="text" v-model="features" placeholder="请输入特点,多个特点以英文 ',' 逗号分隔 " autofocus>
+          </div>
+           <div class="title">
+            <input type="text" v-model="featuredesc" placeholder="请输入特点描述段落" autofocus>
+          </div>
+           <div class="title">
+            <input type="text" v-model="standard" placeholder="请输入规格" autofocus>
+          </div>
+           <div class="title">
+            <input type="text" v-model="itemNo" placeholder="请输入货号" autofocus>
+          </div>
+           <div class="title">
+            <input type="text" v-model="itemPrice" placeholder="请输入价格,保留字段,可不输入" autofocus>
+          </div>
+          
 
           <div class="content">
             <top-editor v-model="imgUrls" :upload="upItemImgUrl" :options="options"></top-editor>
@@ -32,9 +56,17 @@ export default {
   name: 'Publish',
   data () {
     return {
-      state:'',
+      brand:'',
+      series:'',
+      status:'',
       klass:'',
       specific:'',
+      material:'',
+      features:'',
+      featuredesc:'',
+      standard:'',
+      itemNo:'',
+      itemPrice:'',
       imgUrls:'',
       date: '',
       imageList:[],
@@ -68,19 +100,35 @@ export default {
         } else {
             
         }
+    },
+    featuresToArr(newVal, oldVal){
+      this.featuresArr();
     }
   },
   methods: {
     upitems(){
       this.axios.post('/upPoloItem', {
-        'state':this.state,
+        'brand':this.brand,
+        'series':this.series,
+        'status':this.status,
         'klass':this.klass,
         'specific':this.specific,
+        'material':this.material,
+        'features':this.features,
+        'featuredesc':this.featuredesc,
+        'standard':this.standard,
+        'itemNo':this.itemNo,
+        'itemPrice':this.itemPrice,
         'imageList':this.imageList,
         'date': Number(this.date) || Date.now()
       }).then((result) => {
         alert("上传成功")
       })
+    },
+    featuresArr(){
+      if(this.features.indexOf(',')>-1){
+        this.features = this.features.split(',')
+      }
     },
     imgUrlsToArr(){
         let that = this;
@@ -121,6 +169,9 @@ export default {
      imaUrlArr () {
       return this.imgUrls
     },
+    featuresToArr(){
+      return this.features
+    }
   },
 }
 </script>

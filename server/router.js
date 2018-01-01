@@ -1332,16 +1332,32 @@ exports.upPoloItem = function(req, res, next) {
   let form = new formidable.IncomingForm()
   form.parse(req, function(err, fields, files) {
 
-    let state = fields.state;
+    let brand = fields.brand;
+    let series = fields.series;
+    let status = fields.status;
     let klass = fields.klass;
     let specific = fields.specific;
+    let material = fields.material;
+    let features = fields.features;
+    let featuredesc = fields.featuredesc;
+    let standard = fields.standard;
+    let itemNo = fields.itemNo;
+    let itemPrice = fields.itemPrice;
     let imageList = fields.imageList;
     let date = fields.date;
 
     let newData = {
-      "state": state,
+      "brand": brand,
+      "series": series,
+      "status": status,
       "klass": klass,
       "specific": specific,
+      "material": material,
+      "features": features,
+      "featuredesc": featuredesc,
+      "standard": standard,
+      "itemNo": itemNo,
+      "itemPrice": itemPrice,
       "imageList": imageList,
       "date": date
     };
@@ -1387,7 +1403,7 @@ exports.getPoloItems = function(req, res, next) {
   if(req.query && req.query.querydata){
     querydata = req.query.querydata
   }
-  db.find('poloitems', { "query": {'state':querydata} }, function(err, result) {
+  db.find('poloitems', { "query": {'status':querydata} }, function(err, result) {
     if (err) {
       console.log(err)
       return res.json({
@@ -1424,7 +1440,7 @@ exports.getAllStates = function(req, res, next) {
     let arrRestlt = {}
     if(result.length > 0){
       for(let i = 0 ; i< result.length ; i++){
-        arr1.push(result[i].state)
+        arr1.push(result[i].status)
         arr3.push(result[i].klass)
       }
     }
@@ -1462,7 +1478,7 @@ exports.getAllStates = function(req, res, next) {
     arr2.reverse()
     arr4.reverse()
     
-    arrRestlt.states = arr2;
+    arrRestlt.statuses = arr2;
     arrRestlt.klasses = arr4;
 
     return res.json({
