@@ -78,30 +78,40 @@ export default {
   name: 'MyHeader',
   data () {
     return {
+      // links: [{
+      //   name: '全部商品',
+      //   path: '/'
+      // },{
+      //   name: '首页',
+      //   path: '/'
+      // }, {
+      //   name: '新随笔',
+      //   path: '/publish'
+      // }, {
+      //   name: '管理',
+      //   path: '/admin'
+      // },{
+      //   name: '客厅',
+      //   path: '/'
+      // },{
+      //   name: '卧房',
+      //   path: '/'
+      // },{
+      //   name: '餐厅',
+      //   path: '/'
+      // },{
+      //   name: '特别推荐',
+      //   path: '/'
+      // },{
+      //   name: 'nstest',
+      //   path: '/nstest'
+      // }],
       links: [{
-        name: '全部商品',
-        path: '/'
-      },{
         name: '首页',
         path: '/'
-      }, {
-        name: '新随笔',
-        path: '/publish'
-      }, {
+      },  {
         name: '管理',
         path: '/admin'
-      },{
-        name: '客厅',
-        path: '/'
-      },{
-        name: '卧房',
-        path: '/'
-      },{
-        name: '餐厅',
-        path: '/'
-      },{
-        name: '特别推荐',
-        path: '/'
       },{
         name: 'nstest',
         path: '/nstest'
@@ -126,7 +136,8 @@ export default {
       })
     },
     showSubtab(val){
-     this.showSubtabIndex = val;
+    //  this.showSubtabIndex = val;
+    console.log(val)
     }, 
   }
 }

@@ -24,16 +24,13 @@
               <div v-for="(resultItem,index) in nstest.result" :key="index" class="each-item">
                
                 <div v-for="(item,index2) in resultItem.imageList" :key="index2" class="each-image">
-
                   <img :src="item" alt="">
                   <!-- <div class="for-image" style="background: url(item)"> -->
-
-                  </div>
                 </div>
-                
-                <p>{{resultItem.status}}</p>
-                <p>{{resultItem.klass}}</p>
-                <p>{{resultItem.featuredesc}}</p>
+                  <p>{{resultItem.status}}</p>
+                  <p>{{resultItem.klass}}</p>
+                  <p>{{resultItem.featuredesc}}</p>
+                </div>
               </div>
 
               <div>{{nstest}}</div>
