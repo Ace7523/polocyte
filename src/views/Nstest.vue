@@ -46,7 +46,7 @@
       </div>
     </div>  
   
-    <my-footer></my-footer>
+    <!-- <my-footer></my-footer> -->
   </div>
   
 </template>
