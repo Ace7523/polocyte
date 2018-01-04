@@ -25,7 +25,7 @@ export default {
       }).then((result) => {
         if (result.data.code === 200) {
           this.$router.push({
-            name: 'index'
+            name: 'publish'
           })
         } else {
           this.$toast(result.data.message)
