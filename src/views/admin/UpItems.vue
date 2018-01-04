@@ -71,7 +71,7 @@ export default {
       date: '',
       imageList:[],
       upItemImgUrl: {
-        url: 'http://39.104.64.247:8080/api/uploaditemimage?index=1'
+        url: 'http://localhost:8080/api/uploaditemimage?index=1'
       },
       options: {
         linkify: true,
