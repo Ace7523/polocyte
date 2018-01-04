@@ -46,6 +46,7 @@
 </template>
 <script>
 import AdminAside from '../../components/admin/AdminAside.vue'
+import { getApi } from '../../api/apiconfig.js'
 import hljs from 'highlight.js'
 export default {
   name: 'Publish',
@@ -60,16 +61,20 @@ export default {
       desc2:'',
       desc3:'',
       uploadimage: {
-        url: 'http://localhost:8080/api/uploadimage?index=1'
+        // url: 'http://localhost:8080/api/uploadimage?index=1'
+        url: getApi().baseURL+"/uploadimage?index=1"
       },
        uploadimage2: {
-        url: 'http://localhost:8080/api/uploadimage?index=2'
+        // url: 'http://localhost:8080/api/uploadimage?index=2'
+        url: getApi().baseURL+"/uploadimage?index=2"
       },
        uploadimage3: {
-        url: 'http://localhost:8080/api/uploadimage?index=3'
+        // url: 'http://localhost:8080/api/uploadimage?index=3'
+         url: getApi().baseURL+"/uploadimage?index=3"
       },
        uploadimage4: {
-        url: 'http://localhost:8080/api/uploadimage?index=4'
+        // url: 'http://localhost:8080/api/uploadimage?index=4'
+         url: getApi().baseURL+"/uploadimage?index=4"
       },
       options: {
         linkify: true,
@@ -87,7 +92,7 @@ export default {
   },
 
   mounted () {
-    
+  
   },
   methods: {
     upimagedesc(){

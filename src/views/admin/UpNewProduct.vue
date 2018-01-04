@@ -35,6 +35,7 @@
 </template>
 <script>
 import AdminAside from '../../components/admin/AdminAside.vue'
+import { getApi } from '../../api/apiconfig.js'
 import hljs from 'highlight.js'
 export default {
   name: 'Publish',
@@ -49,13 +50,16 @@ export default {
       desc2:'',
      
       uploadimage5: {
-        url: 'http://localhost:8080/api/uploadimage?index=5'
+        // url: 'http://localhost:8080/api/uploadimage?index=5'
+        url: getApi().baseURL+"/uploadimage?index=5"
       },
        uploadimage6: {
-        url: 'http://localhost:8080/api/uploadimage?index=6'
+        // url: 'http://localhost:8080/api/uploadimage?index=6'
+        url: getApi().baseURL+"/uploadimage?index=6"
       },
        uploadimage7: {
-        url: 'http://localhost:8080/api/uploadimage?index=7'
+        // url: 'http://localhost:8080/api/uploadimage?index=7'
+        url: getApi().baseURL+"/uploadimage?index=7"
       },
       options: {
         linkify: true,
