@@ -7,6 +7,7 @@ import titleMixin from './util/title'
 import * as filters from './util/filters'
 import axios from 'axios'
 import cookies from 'js-cookie'
+import { getApi } from './api/apiconfig.js'
 // https://github.com/vuetop/top-toast
 // https://github.com/vuetop/top-editor
 import TopEditor from 'top-editor'
@@ -31,7 +32,9 @@ const router = createRouter()
 sync(store, router)
 axios.defaults.timeout = 5000
 // console.log(`${location.protocol}//${location.host}/api` )
-const baseURL = 'http://localhost:8080/api'
+// const baseURL = 'http://localhost:8080/api'
+let apiconfig = getApi();
+const baseURL = apiconfig.baseURL;
 
 axios.defaults.baseURL = baseURL
 
