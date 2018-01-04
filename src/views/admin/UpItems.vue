@@ -51,6 +51,7 @@
 </template>
 <script>
 import AdminAside from '../../components/admin/AdminAside.vue'
+import { getApi } from '../../api/apiconfig.js'
 import hljs from 'highlight.js'
 export default {
   name: 'Publish',
@@ -71,7 +72,8 @@ export default {
       date: '',
       imageList:[],
       upItemImgUrl: {
-        url: 'http://localhost:8080/api/uploaditemimage?index=1'
+        // url: 'http://localhost:8080/api/uploaditemimage?index=1'
+        url: getApi().baseURL+"/uploaditemimage?index=1"
       },
       options: {
         linkify: true,
