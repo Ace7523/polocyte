@@ -31,7 +31,7 @@ const router = createRouter()
 sync(store, router)
 axios.defaults.timeout = 5000
 // console.log(`${location.protocol}//${location.host}/api` )
-const baseURL = 'http://localhost:8080/api'
+const baseURL = 'http://39.104.64.247:8080/api'
 
 axios.defaults.baseURL = baseURL
 
