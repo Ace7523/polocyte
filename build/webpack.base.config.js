@@ -48,10 +48,10 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          name: '[name].[hash:7].[ext]'
-        }
+        loader: 'url-loader?limit=10240',
+        // options: {
+        //   name: '[name].[hash:7].[ext]'
+        // }
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
