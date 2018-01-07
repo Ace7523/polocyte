@@ -2,7 +2,7 @@
   <div class="admin">
     <admin-aside></admin-aside>
     <div class="admin-content">
-      <div class="essay">
+      <div class="up-item">
         <div class="form">
           <div class="title">
             <input type="text" v-model="itemNo" placeholder="请输入货号" autofocus>
@@ -11,7 +11,7 @@
             <input type="text" v-model="itemName" placeholder="请输入名称" autofocus>
           </div>
           <div class="title">
-            <input type="text" v-model="brand" placeholder="请输入品牌" autofocus>
+            <input type="text" v-model="brand" placeholder="请输入品牌,默认为保罗赛特/POLOCYTE" autofocus>
           </div>
           <div class="title">
             <input type="text" v-model="series" placeholder="请输入系列,如莱茵、新泽西等" autofocus>
@@ -78,11 +78,12 @@
           </div>
           
 
-          <div class="content">
+          <div class="uppic-plug">
+            <span>&nbsp;&nbsp;提示：请使用插件上传图片,点击插件中的图片按钮</span>
             <top-editor v-model="imgUrls" :upload="upItemImgUrl" :options="options"></top-editor>
           </div>
           
-          <button type="button" @click="upitems">上传Item</button>
+          <button class="upbutton" type="button" @click="upitems">上传Item</button>
         </div>
       </div>
     </div>
@@ -98,7 +99,7 @@ export default {
     return {
       itemNo:'',//货号
       itemName:'',//名称
-      brand:'',//品牌
+      brand:'保罗赛特/POLOCYTE',//品牌
       series:'',//系列
       material:'',//材质
       standard:'', //规格
@@ -192,6 +193,7 @@ export default {
         'date': Number(this.date) || Date.now()
       }).then((result) => {
         alert("上传成功")
+        history.go(0)
       })
     },
     featuresArr(){

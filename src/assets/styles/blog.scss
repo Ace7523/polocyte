@@ -164,6 +164,7 @@ button {
         width: 100%;
         li{
           flex: 1;
+          text-align: center;
           a {
             padding: 10px 18px;
             // color:$FontColr;
@@ -172,6 +173,12 @@ button {
               text-decoration: none;
             }
           }
+        }
+        li:nth-child(1){
+          text-align: left;
+        }
+        li:nth-last-child(1){
+          text-align: right;
         }
       }
       input[type="search"] {
@@ -508,6 +515,40 @@ button {
       span:nth-child(1) {
         margin-left: 0;
       }
+    }
+  }
+}
+
+.up-item {
+  .form {
+    padding: 30px 15px;
+    .title {
+      display: inline-block;
+      width: 25%;
+      padding-right: 10px;
+      input[type="text"] {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 20px;
+        font-size: 13px;
+      }
+    }
+    .uppic-plug{
+      span{
+        display: inline-block;
+        height: 25px;
+        line-height: 25px;
+      }
+      .top-editor{
+        width: 550px;
+        height: 35vh !important;
+      } 
+    }
+    .upbutton{
+      background-color: #24292E;
+      margin-top: 20px;
+      margin-right: 20px;
+      color: #fff;
     }
   }
 }
@@ -941,6 +982,9 @@ button {
       }
       .polo-items{
         flex: 5;
+        .polo-category-right{
+          padding-left: 15px;
+        }
         .content-stytle2{
           padding-left: 5px;
           .each-item{

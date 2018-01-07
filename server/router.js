@@ -1112,11 +1112,14 @@ exports.getAllStates = function(req, res, next) {
     let arr2 = []
     let arr3 = []
     let arr4 = [] 
+    let arr5 = [] 
+    let arr6 = [] 
     let arrRestlt = {}
     if(result.length > 0){
       for(let i = 0 ; i< result.length ; i++){
         arr1.push(result[i].status)
         arr3.push(result[i].klass)
+        arr5.push(result[i].series)
       }
     }
     arr1.sort();
@@ -1149,12 +1152,29 @@ exports.getAllStates = function(req, res, next) {
       i += count;
     }
 
+    arr5.sort()
+    for (let i = 0; i < arr5.length;) {
+      let count = 0;
+      for (let j = i; j < arr5.length; j++) {
+        if (arr5[i] === arr5[j]) {
+          count++;
+        }
+      }
+      arr6.push({
+        tag: arr5[i],
+        count: count
+      })
+      i += count;
+    }
+
 
     arr2.reverse()
     arr4.reverse()
+    arr6.reverse()
     
     arrRestlt.statuses = arr2;
     arrRestlt.klasses = arr4;
+    arrRestlt.series = arr6;
 
     return res.json({
       "code": 200,

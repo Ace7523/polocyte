@@ -1,5 +1,6 @@
 <template>
   <div>
+     <div>
     <my-header></my-header>
     <div class="polo-all-items-wrap">
       <div class="polo-all-items-content">
@@ -9,7 +10,7 @@
             <div class="content-stytle">
               <div class="title">所有分类</div> 
               <div v-for="(item,index) in allstates.statuses" :key="index">
-                <router-link :to="{name:'brouter',params:{querydata:item.tag}}">{{item.tag}} ({{item.count}})</router-link>
+                <router-link :to="{name:'brouter',params:{querydata:item.tag,time:nowTime}}">{{item.tag}} ({{item.count}})</router-link>
               </div>
               <div class="title">所有klass</div>
               <div v-for="(item,index) in allstates.klasses" :key="index">
@@ -19,6 +20,14 @@
           </div>
           <!-- 右侧具体内容 -->
           <div class="polo-items">
+            <div class="polo-category-right">
+              <div>
+                {{routerParams}}
+                <div v-for="(item,index) in allseries" :key="index">
+                  <router-link :to="{name:'brouter',params:{querydata:item.tag}}">{{item.tag}} ({{item.count}})</router-link>
+                </div>
+              </div>
+            </div>
             <div class="content-stytle2">
               <!-- 遍历接口，展示具体信息 -->
               <div v-for="(resultItem,index) in nstest.result" :key="index" class="each-item">
@@ -33,8 +42,8 @@
                 </div>
               </div>
 
-              <div>{{nstest}}</div>
-              <div>{{allstates}}</div>
+              <!-- <div>{{nstest}}</div> -->
+              <div>{{allstates}}</div> 
             </div>
             
           </div>
@@ -43,9 +52,9 @@
       </div>
     </div>  
   
-    <!-- <my-footer></my-footer> -->
+    <my-footer></my-footer>
+    </div>
   </div>
-  
 </template>
 <script>
 import MyHeader from '../components/global/MyHeader.vue'
@@ -65,17 +74,35 @@ export default {
     if (this.$root._isMounted) {
       this.listPage()
     }
+    console.log(this.$route.params)
   },
   computed: {
+    nowTime(){
+      return Date.now()
+    },
     nstest () {
       return this.$store.state.nstest
     },
     allstates(){
       return this.$store.state.allstates
+    },
+    allseries(){
+      let tempSeries = this.$store.state.allstates.series ;
+      let tempArr = [];
+      tempSeries.forEach(function(element) {
+        if(element.tag!=""){
+          tempArr.push(element)
+        }
+      });
+      return tempArr;
+    },
+    routerParams(){
+      return this.$route.params
     }
   },
   watch: {
     $route (to, from) {
+      alert(1)
       this.listPage()
     }
   },
@@ -88,6 +115,12 @@ export default {
           this.$bar.finish()
         })
       }
-    }
+    },
+  //暂时还没用到  
+  filters: {  
+    filterFun: function (value) {  
+      return value  
+    }  
+  }   
 }
 </script>
