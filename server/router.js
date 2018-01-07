@@ -975,31 +975,63 @@ exports.upPoloItem = function(req, res, next) {
   let form = new formidable.IncomingForm()
   form.parse(req, function(err, fields, files) {
 
+    let itemNo = fields.itemNo;
+    let itemName = fields.itemName;
     let brand = fields.brand;
     let series = fields.series;
+    let material = fields.material;
+    let standard = fields.standard;
     let status = fields.status;
+    let functions = fields.functions;
+    let styles = fields.styles;
+    let color = fields.color;
+    let productLoc = fields.productLoc;
+    let shape = fields.shape;
     let klass = fields.klass;
     let specific = fields.specific;
-    let material = fields.material;
+    
+    let feature1 = fields.feature1;
+    let feature2 = fields.feature2;
+    let feature3 = fields.feature3;
     let features = fields.features;
+    let paint = fields.paint;
+    let isCanPersonal = fields.isCanPersonal;
     let featuredesc = fields.featuredesc;
-    let standard = fields.standard;
-    let itemNo = fields.itemNo;
+    let reserve1 = fields.reserve1;
+    let reserve2 = fields.reserve2;
     let itemPrice = fields.itemPrice;
     let imageList = fields.imageList;
     let date = fields.date;
 
     let newData = {
+
+      "itemNo": itemNo,
+      "itemName": itemName,
       "brand": brand,
       "series": series,
+      "material": material,
+      "standard": standard,
       "status": status,
+
+      "functions": functions,
+      "styles": styles,
+      "color": color,
+      "productLoc": productLoc,
+      "shape": shape,
+
       "klass": klass,
       "specific": specific,
-      "material": material,
+
+      "feature1": feature1,
+      "feature2": feature2,
+      "feature3": feature3,
       "features": features,
+      "paint": paint,
+
+      "isCanPersonal": isCanPersonal,
       "featuredesc": featuredesc,
-      "standard": standard,
-      "itemNo": itemNo,
+      "reserve1": reserve1,
+      "reserve2": reserve2,
       "itemPrice": itemPrice,
       "imageList": imageList,
       "date": date
@@ -1010,12 +1042,12 @@ exports.upPoloItem = function(req, res, next) {
         console.log(err)
         return res.json({
           "code": 401,
-          "message": "文章发布失败"
+          "message": "ietm实例存入数据库失败"
         })
       }
       return res.json({
         "code": 200,
-        "message": "文章发布成功"
+        "message": "ietm实例存入数据库成功"
       })
     })
   })

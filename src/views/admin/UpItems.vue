@@ -5,13 +5,25 @@
       <div class="essay">
         <div class="form">
           <div class="title">
+            <input type="text" v-model="itemNo" placeholder="请输入货号" autofocus>
+          </div>
+          <div class="title">
+            <input type="text" v-model="itemName" placeholder="请输入名称" autofocus>
+          </div>
+          <div class="title">
             <input type="text" v-model="brand" placeholder="请输入品牌" autofocus>
           </div>
           <div class="title">
             <input type="text" v-model="series" placeholder="请输入系列,如莱茵、新泽西等" autofocus>
           </div>
           <div class="title">
-            <input type="text" v-model="status" placeholder="请输入类别,如客厅、卧室、书房等" autofocus>
+            <input type="text" v-model="material" placeholder="请输入材质" autofocus>
+         </div>
+          <div class="title">
+            <input type="text" v-model="standard" placeholder="请输入规格" autofocus>
+          </div>
+          <div class="title">
+            <input type="text" v-model="status" placeholder="请输入适用空间,如客厅、卧室、书房等" autofocus>
           </div>
           <div class="title">
             <input type="text" v-model="klass" placeholder="请输入分类,如沙发、床、柜等" autofocus>
@@ -20,22 +32,49 @@
             <input type="text" v-model="specific" placeholder="请输入具体,如双人沙发、单人床等" autofocus>
           </div>
           <div class="title">
-            <input type="text" v-model="material" placeholder="请输入材质" autofocus>
-         </div>
+            <input type="text" v-model="functions" placeholder="请输入功能" autofocus>
+          </div>
+          <div class="title">
+            <input type="text" v-model="styles" placeholder="请输入风格" autofocus>
+          </div>
+          <div class="title">
+            <input type="text" v-model="color" placeholder="请输入颜色" autofocus>
+          </div>
+          <div class="title">
+            <input type="text" v-model="productLoc" placeholder="请输入产地" autofocus>
+          </div>
+          <div class="title">
+            <input type="text" v-model="shape" placeholder="请输入形状" autofocus>
+          </div>
+          <div class="title">
+            <input type="text" v-model="feature1" placeholder="请输入实木类型" autofocus>
+          </div>
+          <div class="title">
+            <input type="text" v-model="feature2" placeholder="请输入结构工艺" autofocus>
+          </div>
+          <div class="title">
+            <input type="text" v-model="feature3" placeholder="请输入甲醛释放量" autofocus>
+          </div>
+          <div class="title">
+            <input type="text" v-model="paint" placeholder="请输入油漆" autofocus>
+          </div>
+          <div class="title">
+            <input type="text" v-model="isCanPersonal" placeholder="请输入是否可定制" autofocus>
+          </div>
           <div class="title">
             <input type="text" v-model="features" placeholder="请输入特点,多个特点以英文 ',' 逗号分隔 " autofocus>
           </div>
            <div class="title">
-            <input type="text" v-model="featuredesc" placeholder="请输入特点描述段落" autofocus>
+            <input type="text" v-model="featuredesc" placeholder="请输入产品描述（文字）" autofocus>
           </div>
-           <div class="title">
-            <input type="text" v-model="standard" placeholder="请输入规格" autofocus>
-          </div>
-           <div class="title">
-            <input type="text" v-model="itemNo" placeholder="请输入货号" autofocus>
-          </div>
-           <div class="title">
+          <div class="title">
             <input type="text" v-model="itemPrice" placeholder="请输入价格,保留字段,可不输入" autofocus>
+          </div>
+          <div class="title">
+            <input type="text" v-model="reserve1" placeholder="预留字段1" autofocus>
+          </div>
+          <div class="title">
+            <input type="text" v-model="reserve2" placeholder="预留字段2" autofocus>
           </div>
           
 
@@ -57,19 +96,33 @@ export default {
   name: 'Publish',
   data () {
     return {
-      brand:'',
-      series:'',
-      status:'',
+      itemNo:'',//货号
+      itemName:'',//名称
+      brand:'',//品牌
+      series:'',//系列
+      material:'',//材质
+      standard:'', //规格
+      status:'',//适用空间
+      functions:'',//功能
+      styles:'',//风格
+      color:'',//颜色
+      productLoc:'',//产地
+      shape:'',//形状
       klass:'',
       specific:'',
-      material:'',
-      features:'',
-      featuredesc:'',
-      standard:'',
-      itemNo:'',
+      feature1:'',//实木类型
+      feature2:'',//结构工艺
+      feature3:'',//甲醛释放量
+      features:'',//特点
+      paint:'',//油漆
+      isCanPersonal:'',//是否可定制
+      featuredesc:'',//产品描述（文字）
+      reserve1:'',
+      reserve2:'',
       itemPrice:'',
-      imgUrls:'',
       date: '',
+
+      imgUrls:'',
       imageList:[],
       upItemImgUrl: {
         // url: 'http://localhost:8080/api/uploaditemimage?index=1'
@@ -110,16 +163,30 @@ export default {
   methods: {
     upitems(){
       this.axios.post('/upPoloItem', {
+        'itemNo':this.itemNo,
+        'itemName':this.itemName,
         'brand':this.brand,
         'series':this.series,
+        'material':this.material,
+        'standard':this.standard,
         'status':this.status,
+        'functions':this.functions,
+        'styles':this.styles,
+        'color':this.color,
+        'productLoc':this.productLoc,
+        'shape':this.shape,
         'klass':this.klass,
         'specific':this.specific,
-        'material':this.material,
+
+        'feature1':this.feature1,
+        'feature2':this.feature2,
+        'feature3':this.feature3,
         'features':this.features,
+        'paint':this.paint,
+        'isCanPersonal':this.isCanPersonal,
         'featuredesc':this.featuredesc,
-        'standard':this.standard,
-        'itemNo':this.itemNo,
+        'reserve1':this.reserve1,
+        'reserve2':this.reserve2,
         'itemPrice':this.itemPrice,
         'imageList':this.imageList,
         'date': Number(this.date) || Date.now()
