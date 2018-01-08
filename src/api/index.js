@@ -65,8 +65,20 @@ function getPoloItems(querydata){
   return axios.get(`/getPoloItems?querydata=${querydata}`)
 }
 
+function getPoloItemsByPost(routerParams){
+  return axios.post(`/getPoloItemsByPost`,{
+    'querydata':routerParams.querydata,
+    'queryarr':routerParams.queryarr,
+    'rp': routerParams.rp
+  })
+}
+
 function getItemsByQuerydata(querydata){
   return axios.all([getPoloItems(querydata),getAllStates()])
+}
+
+function getItemsByQueryArr(routerParams){
+  return axios.all([getPoloItemsByPost(routerParams),getAllStates()])
 }
 
 /* ============================= */
@@ -96,4 +108,16 @@ function articlesByArchive (date, id) {
   return axios.all([archive(date, id), administrator(), tags(), archives()])
 }
 
-export default { indexPage, detailPage, articlesByTag, articlesBySearch, articlesByArchive, articles, tags, administrator , nstestAsync,getItemsByQuerydata}
+export default { 
+   indexPage,
+   detailPage,
+   articlesByTag,
+   articlesBySearch,
+   articlesByArchive, 
+   articles, 
+   tags, 
+   administrator, 
+   nstestAsync,
+   getItemsByQuerydata,
+   getItemsByQueryArr
+  }

@@ -24,7 +24,7 @@
               <div>
                 {{routerParams}}
                 <div v-for="(item,index) in allseries" :key="index">
-                  <router-link :to="{name:'brouter',params:{querydata:item.tag}}">{{item.tag}} ({{item.count}})</router-link>
+                  <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'series':item.tag},time:nowTime }}">{{item.tag}} ({{item.count}})</router-link>
                 </div>
               </div>
             </div>
@@ -74,7 +74,7 @@ export default {
     if (this.$root._isMounted) {
       this.listPage()
     }
-    console.log(this.$route.params)
+    console.log(" beforeMount this.$route.params",this.$route.params)
   },
   computed: {
     nowTime(){
@@ -102,8 +102,11 @@ export default {
   },
   watch: {
     $route (to, from) {
-      alert(1)
+      // alert(1)
       this.listPage()
+      console.log(" watch this.$route.params",this.$route.params)
+      console.log(" watch this.$route",this.$route)
+
     }
   },
   methods: {

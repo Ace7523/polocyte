@@ -1096,6 +1096,35 @@ exports.getPoloItems = function(req, res, next) {
   })
 }
 
+exports.getPoloItemsByPost = function(req, res, next) {
+
+  let form = new formidable.IncomingForm()
+  form.parse(req, function(err, fields, files) {
+
+    let querydata = fields.querydata
+    let queryarr = fields.queryarr
+    let rp = fields.rp
+    console.log("rp",rp)
+    console.log("queryarr",queryarr)
+    db.find('poloitems', { "query": queryarr }, function(err, result) {
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 404,
+          "message": "数据获取失败",
+          "result": []
+        })
+      }
+      
+      return res.json({
+        "code": 200,
+        "message": "数据获取成功",
+        "result": result
+      })
+    })
+  })
+  
+}
 
 exports.getAllStates = function(req, res, next) {
   db.find('poloitems', { "query": {} }, function(err, result) {

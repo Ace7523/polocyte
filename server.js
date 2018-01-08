@@ -181,6 +181,8 @@ app.get('/api/tag', router.tag)
 
 app.get('/api/getPoloItems', router.getPoloItems)
 
+app.post('/api/getPoloItemsByPost', router.getPoloItemsByPost)
+
 // search articles http://localhost:8080/api/search?q=js
 app.get('/api/search', router.search)
 
