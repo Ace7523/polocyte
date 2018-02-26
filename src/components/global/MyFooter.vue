@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <div class="footer">
     <div class="container">
       <div class="foot-des">
         <div>
@@ -44,5 +44,5 @@
         <p class="beianhao">粤ICP 11079316号</p>
       </div>
     </div>
-  </footer>
+  </div>
 </template>

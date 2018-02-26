@@ -1,7 +1,8 @@
 <template>
   <div>
-     <div>
+    
     <my-header></my-header>
+
     <div class="polo-all-items-wrap">
       <div class="polo-all-items-content">
         <div class="all-items">
@@ -10,7 +11,7 @@
             <div class="content-stytle">
               <div class="title">所有分类</div> 
               <div v-for="(item,index) in allstates.statuses" :key="index">
-                <router-link :to="{name:'brouter',params:{querydata:item.tag,time:nowTime}}">{{item.tag}} ({{item.count}})</router-link>
+                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'status':item.tag},time:nowTime}}">{{item.tag}} ({{item.count}})</router-link>
               </div>
               <div class="title">所有klass</div>
               <div v-for="(item,index) in allstates.klasses" :key="index">
@@ -39,21 +40,20 @@
                   <p>{{resultItem.status}}</p>
                   <p>{{resultItem.klass}}</p>
                   <p>{{resultItem.featuredesc}}</p>
-                </div>
               </div>
+            </div>
 
               <!-- <div>{{nstest}}</div> -->
               <div>{{allstates}}</div> 
-            </div>
-            
           </div>
-
+            
         </div>
+
       </div>
-    </div>  
+    </div>
   
     <my-footer></my-footer>
-    </div>
+    
   </div>
 </template>
 <script>
@@ -74,7 +74,6 @@ export default {
     if (this.$root._isMounted) {
       this.listPage()
     }
-    console.log(" beforeMount this.$route.params",this.$route.params)
   },
   computed: {
     nowTime(){
@@ -102,11 +101,7 @@ export default {
   },
   watch: {
     $route (to, from) {
-      // alert(1)
       this.listPage()
-      console.log(" watch this.$route.params",this.$route.params)
-      console.log(" watch this.$route",this.$route)
-
     }
   },
   methods: {
@@ -118,12 +113,6 @@ export default {
           this.$bar.finish()
         })
       }
-    },
-  //暂时还没用到  
-  filters: {  
-    filterFun: function (value) {  
-      return value  
-    }  
-  }   
+  }
 }
 </script>

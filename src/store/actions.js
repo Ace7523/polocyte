@@ -18,16 +18,12 @@ export default {
     let routerName = state.route.name
     let routerParams = state.route.params
 
-    console.log("action NS_TEST routerName",routerName)
-    console.log("action NS_TEST routerParams",routerParams)
     if(routerName == 'brouter'){
-      // console.log("routerName == 'brouter'")
       let querydata = state.route.params.querydata
       let reg = new RegExp('[\u4E00-\u9FFF]+', 'g') //汉字字符  + 意思是至少有一个
       if (reg.test(querydata)) {
         querydata = encodeURI(querydata)
       }
-      // return api.getItemsByQuerydata(querydata)
       return api.getItemsByQueryArr(routerParams)
       .then(axios.spread(function (nstest,allstates) {
         commit('NS_TEST', {
@@ -36,7 +32,6 @@ export default {
         })
       }))
     }else{
-      // console.log(routerName)
       return api.nstestAsync()
       .then(axios.spread(function (nstest,allstates) {
         commit('NS_TEST', {
