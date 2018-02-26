@@ -46,11 +46,14 @@
               <!-- <div>{{nstest}}</div> -->
               <div>{{allstates}}</div> 
           </div>
+          <!-- polo-items -->
             
         </div>
-
+        <!-- all-items -->
       </div>
+      <!-- polo-all-items-content -->
     </div>
+    <!-- polo-all-items-wrap -->
   
     <my-footer></my-footer>
     
@@ -70,7 +73,8 @@ export default {
       
     }
   },
-   beforeMount () {
+   //todo 这里 换成 created 可以避免前后端渲染不一致的情况
+  beforeMount () {
     if (this.$root._isMounted) {
       this.listPage()
     }
