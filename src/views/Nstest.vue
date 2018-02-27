@@ -1,7 +1,7 @@
 <template>
   <div>
     
-    <my-header></my-header>
+    <!-- <my-header></my-header> -->
 
     <div class="polo-all-items-wrap">
       <div class="polo-all-items-content">
@@ -9,24 +9,53 @@
           <!-- 左侧导航分类 -->
           <div class="polo-category">
             <div class="content-stytle">
+
+              <div class="title">所有系列</div>
+              <div v-for="(item,index) in allseries" :key="index" @click="collectRightClickItem('series',item.tag)">
+                  <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'series':item.tag},time:nowTime }}">{{item.tag}} ({{item.count}})</router-link>
+              </div>
+
               <div class="title">所有分类</div> 
-              <div v-for="(item,index) in allstates.statuses" :key="index">
+              <div v-for="(item,index) in allstates.statuses" :key="index" @click="collectRightClickItem('status',item.tag)">
                 <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'status':item.tag},time:nowTime}}">{{item.tag}} ({{item.count}})</router-link>
               </div>
+
               <div class="title">所有klass</div>
-              <div v-for="(item,index) in allstates.klasses" :key="index">
-                {{item.tag}}
+              <div v-for="(item,index) in allstates.klasses" :key="index" @click="collectRightClickItem('klasses',item.tag)">
+                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'klasses':item.tag},time:nowTime}}">{{item.tag}} ({{item.count}})</router-link>
               </div>
+
             </div>
           </div>
           <!-- 右侧具体内容 -->
           <div class="polo-items">
             <div class="polo-category-right">
-              <div>
-                {{routerParams}}
-                <div v-for="(item,index) in allseries" :key="index">
-                  <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'series':item.tag},time:nowTime }}">{{item.tag}} ({{item.count}})</router-link>
+              <div class="filter-list">
+
+                <p>routerParams: {{routerParams}}</p>
+                <p>filterList: {{filterList}}</p>
+                <p>searchParams : {{searchParams}}</p>
+                
+
+                <div v-show="filterList && filterList.color">
+                    <label>颜色</label>
+                    <span v-for="(item,index) in filterList.color" 
+                  :key="index" @click="collectRightClickItem('color',item,$event)">{{item}}</span>
                 </div>
+
+                <div v-show="filterList && filterList.styles">
+                    <label>风格</label>
+                    <span v-for="(item,index) in filterList.styles" 
+                    :key="index" @click="collectRightClickItem('styles',item,$event)">{{item}}</span>
+                </div>
+
+                <div>测试搜索
+                    <router-link :to="{name:'brouter',params:{ querydata:{},queryarr:searchParams }}">搜索</router-link>
+                </div>
+
+                <div @click="deleteSearchParams()">删除搜索条件</div>  
+                
+
               </div>
             </div>
             <div class="content-stytle2">
@@ -55,7 +84,7 @@
     </div>
     <!-- polo-all-items-wrap -->
   
-    <my-footer></my-footer>
+    <!-- <my-footer></my-footer> -->
     
   </div>
 </template>
@@ -70,14 +99,17 @@ export default {
   },
   data(){
     return{
-      
+      searchParams:{},
+     
     }
   },
    //todo 这里 换成 created 可以避免前后端渲染不一致的情况
-  beforeMount () {
+  // beforeMount () {
+  created () {
     if (this.$root._isMounted) {
       this.listPage()
     }
+    this.initData(this.$store.state.nstest);
   },
   computed: {
     nowTime(){
@@ -116,7 +148,74 @@ export default {
         this.$store.dispatch('NS_TEST').then(() => {
           this.$bar.finish()
         })
-      }
+      },
+      initData(data) {
+        
+        let allData = data.result;
+        let tempFilterList = {};
+
+        allData.forEach(item => {
+          //筛选出全部颜色属性
+          if (item.color) {
+            if (!tempFilterList.color) {
+              tempFilterList.color = [];
+              tempFilterList.color.push(item.color);
+            } else {
+              tempFilterList.color.push(item.color);
+            }
+          }
+          //风格
+          if (item.styles) {
+            if (!tempFilterList.styles) {
+              tempFilterList.styles = [];
+              tempFilterList.styles.push(item.styles);
+            } else {
+              tempFilterList.styles.push(item.styles);
+            }
+          }
+        });
+
+        this.filterList = tempFilterList;
+      },
+      collectRightClickItem(type,content,e){
+
+        let that = this
+        
+        console.log(e)
+        if(type == 'klasses'|| type == 'status'|| type == 'series'){
+          delete this.searchParams.klasses;
+          delete this.searchParams.status;
+          delete this.searchParams.series;
+
+          this.$set(this.searchParams,type,content)
+        }
+      
+        switch (type){
+
+          case 'color':
+               this.$set(this.searchParams,'color',content)
+              // this.searchParams.color = content
+          break;
+          case 'styles':
+               this.$set(this.searchParams,'styles',content)
+              // this.searchParams.styles = content
+          break    
+          default:
+        }
+        
+        console.log(this.searchParams)
+        
+     },
+     deleteSearchParams(){
+       
+       for(let name in this.searchParams){
+         if(name!='klasses' && name!= 'status'&& name!= 'series'){
+            delete this.searchParams[name]
+         }
+       }
+       
+       this.$set(this.searchParams,this.searchParams)
+     }
   }
 }
 </script>
