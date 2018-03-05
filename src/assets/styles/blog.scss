@@ -986,22 +986,53 @@ button {
           padding-left: 15px;
           .filter-list{
             div {
-              height:30px;
+              // height:30px;
               line-height: 30px;
               font-size: 14px;
             }
             span{
               color:white;
-              background-color: #337AB7;
+              background-color: $ThemeColor;
+              border-radius: 5px;
               display: inline-block;
               padding: 0 5px;
-              margin: 0 5px;
+              margin: 2px 5px;
             }
             span:hover{
-              background-color: #BB3D00;
+              background-color: $Link;
             }
-            .active{
-              background-color: #BB3D00;
+            .search-buttons{
+              overflow: auto;
+              margin-top:5px;
+              margin-bottom: 5px; 
+              .left-button{
+                display: inline-block;
+                float:right;
+                background-color: $DisabledLink;
+                font-size: 15px;
+                color:white;
+                width: 100px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                border-radius: 5px;
+
+              }
+              .right-button{
+                display: inline-block;
+                float:right;
+                font-size: 15px;
+                width: 100px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                border-radius: 5px;
+                background-color: $Link;
+                margin-left: 15px;
+                a{
+                  color:white !important;
+                }
+              }
             }
           }
         }
@@ -1011,6 +1042,7 @@ button {
             width:32%;
             display: inline-block;
             padding-left:10px;
+            border: 1px solid $BorderColor;
             .each-image{
               img{
                 width: 100%;
@@ -1026,6 +1058,91 @@ button {
           }
         }
       }
+    }
+  }
+}
+
+//itemDetail
+.item-detail{
+  .item-detail-wrap{
+    border-top: 1px solid $Border;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    .top-wrap{
+      max-width: 1120px;
+      height: 600px;
+      margin: 0 auto;
+      display: flex;
+      .left-wrap{
+        width: 700px;
+        // background: #337AB7;
+        box-sizing: border-box;
+        border: 2px solid $BorderColor;
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+
+        img{
+          margin: 0 auto;
+          width: 530px;
+          height: 500px;
+
+        }
+      }
+      .right-wrap{
+        flex: 1;
+        border-top: 2px solid $BorderColor;
+        border-right: 2px solid $BorderColor;
+        border-bottom: 2px solid $BorderColor;
+        // background: #BB3D00;
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        .for-center{
+          width: 80%;
+          height: 80%;
+          color:$LogoColor;
+          // background: aqua;
+          // text-align: center;
+          padding-left: 40px;
+          p{
+            margin-bottom:8px; 
+          }
+        }
+      }
+    }
+    .main-content{
+      // background: chartreuse;
+      max-width: 1120px;
+      margin:0 auto;
+      margin-top: 10px;
+      border: 2px solid $BorderColor;
+      .main-content-wrap{
+        .desc{
+          max-width:800px;
+          margin: 10px auto;
+          // text-indent:25px;
+          line-height: 25px;
+          color:$LogoColor;
+          span{
+            background: $BorderColor;
+          }
+        }
+        .img-list{
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          margin-bottom: 20px;
+
+          img{
+            max-width:800px;
+            max-height: 900px; 
+          }
+        }
+      }
+
     }
   }
 }

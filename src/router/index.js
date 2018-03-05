@@ -21,6 +21,9 @@ const UpNewProdtct = () =>
 
 const UpItems = () =>
   import('../views/admin/UpItems.vue')  
+
+const ItemDeatil = () =>
+  import('../views/ItemDetail.vue')   
 Vue.use(Router)
 export function createRouter () {
   return new Router({
@@ -57,6 +60,10 @@ export function createRouter () {
       path: '/nstest',
       name: 'nstest',
       component: Nstest('nstest')
+    }, {
+      path: '/itemdetail',
+      name: 'itemdetail',
+      component: ItemDeatil
     }, {
       path: '/brouter/:querydata',
       name: 'brouter',

@@ -1,7 +1,7 @@
 <template>
   <div>
     
-    <!-- <my-header></my-header> -->
+    <my-header></my-header>
 
     <div class="polo-all-items-wrap">
       <div class="polo-all-items-content">
@@ -10,19 +10,19 @@
           <div class="polo-category">
             <div class="content-stytle">
 
-              <div class="title">所有系列</div>
+              <div class="title">系列</div>
               <div v-for="(item,index) in allseries" :key="index" @click="collectRightClickItem('series',item.tag)">
                   <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'series':item.tag},time:nowTime }}">{{item.tag}} ({{item.count}})</router-link>
               </div>
 
-              <div class="title">所有分类</div> 
+              <div class="title">适用空间</div> 
               <div v-for="(item,index) in allstates.statuses" :key="index" @click="collectRightClickItem('status',item.tag)">
                 <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'status':item.tag},time:nowTime}}">{{item.tag}} ({{item.count}})</router-link>
               </div>
 
-              <div class="title">所有klass</div>
+              <div class="title">分类</div>
               <div v-for="(item,index) in allstates.klasses" :key="index" @click="collectRightClickItem('klasses',item.tag)">
-                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'klasses':item.tag},time:nowTime}}">{{item.tag}} ({{item.count}})</router-link>
+                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'klass':item.tag},time:nowTime}}">{{item.tag}} ({{item.count}})</router-link>
               </div>
 
             </div>
@@ -32,10 +32,14 @@
             <div class="polo-category-right">
               <div class="filter-list">
 
-                <p>routerParams: {{routerParams}}</p>
+                <!-- <p>routerParams: {{routerParams}}</p>
                 <p>filterList: {{filterList}}</p>
                 <p>searchParams : {{searchParams}}</p>
+                <p>-------------------------------</p> -->
                 
+                <div class="right-now">
+                    <label>当前所在:{{rightNow}}</label>
+                </div>
 
                 <div v-show="filterList && filterList.color">
                     <label>颜色</label>
@@ -49,31 +53,45 @@
                     :key="index" @click="collectRightClickItem('styles',item,$event)">{{item}}</span>
                 </div>
 
-                <div>测试搜索
-                    <router-link :to="{name:'brouter',params:{ querydata:{},queryarr:searchParams }}">搜索</router-link>
+                <div v-show="filterList && filterList.material">
+                    <label>材质</label>
+                    <span v-for="(item,index) in filterList.material" 
+                    :key="index" @click="collectRightClickItem('material',item,$event)">{{item}}</span>
                 </div>
 
-                <div @click="deleteSearchParams()">删除搜索条件</div>  
-                
+                <div v-show="filterList && filterList.paint">
+                    <label>油漆类别</label>
+                    <span v-for="(item,index) in filterList.paint" 
+                    :key="index" @click="collectRightClickItem('paint',item,$event)">{{item}}</span>
+                </div>
+
+                <div class="search-buttons">
+                    
+                    <div class="right-button">
+                        <router-link :to="{name:'brouter',params:{ querydata:{},queryarr:searchParams }}">搜索</router-link>
+                    </div>
+                    <div @click="deleteSearchParams()" class="left-button">重置搜索条件</div>
+                </div>
 
               </div>
             </div>
             <div class="content-stytle2">
               <!-- 遍历接口，展示具体信息 -->
-              <div v-for="(resultItem,index) in nstest.result" :key="index" class="each-item">
+              <div v-for="(resultItem,index) in nstest.result" :key="index" class="each-item" @click="jumpItemDetail(resultItem)">
                
                 <div v-for="(item,index2) in resultItem.imageList" :key="index2" class="each-image">
                   <img :src="item" alt="">
                   <!-- <div class="for-image" style="background: url(item)"> -->
                 </div>
+                  <p>{{resultItem.itemName}}</p>
                   <p>{{resultItem.status}}</p>
                   <p>{{resultItem.klass}}</p>
-                  <p>{{resultItem.featuredesc}}</p>
+                  <!-- <p>{{resultItem.featuredesc}}</p> -->
               </div>
             </div>
 
               <!-- <div>{{nstest}}</div> -->
-              <div>{{allstates}}</div> 
+              <!-- <div>allstates:{{allstates}}</div>  -->
           </div>
           <!-- polo-items -->
             
@@ -84,7 +102,7 @@
     </div>
     <!-- polo-all-items-wrap -->
   
-    <!-- <my-footer></my-footer> -->
+    <my-footer></my-footer>
     
   </div>
 </template>
@@ -133,7 +151,27 @@ export default {
     },
     routerParams(){
       return this.$route.params
+    },
+    rightNow(){
+      let resultArr = [];
+      let str = "";
+      if(this.searchParams.status){
+        resultArr.push(this.searchParams.status)
+      }
+      
+      for(let name in this.searchParams){
+        if(name != 'status'){
+          resultArr.push(this.searchParams[name])
+        }
+      }
+      
+      if(resultArr.length>1){
+        str = resultArr.join('-->')
+      }
+      
+      return str;
     }
+    
   },
   watch: {
     $route (to, from) {
@@ -148,6 +186,27 @@ export default {
         this.$store.dispatch('NS_TEST').then(() => {
           this.$bar.finish()
         })
+      },
+      jumpItemDetail(data){
+         
+         let itemData = JSON.stringify(data)
+         localStorage.setItem('itemDetail',itemData)
+         this.$router.push({ name: 'itemdetail' })
+
+         console.log( 123,localStorage.getItem('itemDetail') )
+      },
+      deleteRepeat(arr){
+        
+        let tempObj = {};
+        let resultArr = [];
+        for(let i =0 ;i<arr.length;i++){
+          if(!tempObj[arr[i]]){
+              resultArr.push(arr[i])
+              tempObj[arr[i]]= 1
+          }
+        }
+        return resultArr
+
       },
       initData(data) {
         
@@ -173,8 +232,33 @@ export default {
               tempFilterList.styles.push(item.styles);
             }
           }
+          //材料
+          if (item.material) {
+            if (!tempFilterList.material) {
+              tempFilterList.material = [];
+              tempFilterList.material.push(item.material);
+            } else {
+              tempFilterList.material.push(item.material);
+            }
+          }
+          //油漆
+          if (item.paint) {
+            if (!tempFilterList.paint) {
+              tempFilterList.paint = [];
+              tempFilterList.paint.push(item.paint);
+            } else {
+              tempFilterList.paint.push(item.paint);
+            }
+          }
         });
 
+        //执行一下去重
+        tempFilterList.color = this.deleteRepeat(tempFilterList.color)
+        tempFilterList.styles = this.deleteRepeat(tempFilterList.styles)
+        tempFilterList.material = this.deleteRepeat(tempFilterList.material)
+        tempFilterList.paint = this.deleteRepeat(tempFilterList.paint)
+
+        //数组赋值
         this.filterList = tempFilterList;
       },
       collectRightClickItem(type,content,e){
@@ -199,7 +283,15 @@ export default {
           case 'styles':
                this.$set(this.searchParams,'styles',content)
               // this.searchParams.styles = content
-          break    
+          break 
+          case 'material':
+               this.$set(this.searchParams,'material',content)
+              // this.searchParams.styles = content
+          break 
+          case 'paint':
+               this.$set(this.searchParams,'paint',content)
+              // this.searchParams.styles = content
+          break   
           default:
         }
         
