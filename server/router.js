@@ -1106,7 +1106,8 @@ exports.getPoloItemsByPost = function(req, res, next) {
     let rp = fields.rp
     console.log("rp",rp)
     console.log("queryarr",queryarr)
-    db.find('poloitems', { "query": queryarr }, function(err, result) {
+    //todo 测试分页 
+    db.find('poloitems', { "query": queryarr ,"limit": 2,"page": 2,}, function(err, result) {
       if (err) {
         console.log(err)
         return res.json({
@@ -1115,7 +1116,7 @@ exports.getPoloItemsByPost = function(req, res, next) {
           "result": []
         })
       }
-      
+      console.log(result)
       return res.json({
         "code": 200,
         "message": "数据获取成功",
