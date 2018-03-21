@@ -11,17 +11,17 @@
             <div class="content-stytle">
 
               <div class="title">系列</div>
-              <div v-for="(item,index) in allseries" :key="index" @click="collectRightClickItem('series',item.tag)">
+              <div class="item" v-for="(item,index) in allseries" :key="index" @click="collectRightClickItem('series',item.tag)">
                   <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'series':item.tag},time:nowTime }}">{{item.tag}} ({{item.count}})</router-link>
               </div>
 
               <div class="title">适用空间</div> 
-              <div v-for="(item,index) in allstates.statuses" :key="index" @click="collectRightClickItem('status',item.tag)">
+              <div class="item" v-for="(item,index) in allstates.statuses" :key="index" @click="collectRightClickItem('status',item.tag)">
                 <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'status':item.tag},time:nowTime}}">{{item.tag}} ({{item.count}})</router-link>
               </div>
 
               <div class="title">分类</div>
-              <div v-for="(item,index) in allstates.klasses" :key="index" @click="collectRightClickItem('klasses',item.tag)">
+              <div class="item" v-for="(item,index) in allstates.klasses" :key="index" @click="collectRightClickItem('klasses',item.tag)">
                 <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'klass':item.tag},time:nowTime}}">{{item.tag}} ({{item.count}})</router-link>
               </div>
 
@@ -37,36 +37,35 @@
                 <p>searchParams : {{searchParams}}</p>
                 <p>-------------------------------</p> -->
                 
-                <div class="right-now">
-                    <label>当前所在:{{rightNow}}</label>
-                </div>
-
-                <div v-show="filterList && filterList.color">
-                    <label>颜色</label>
+                <div class="filter-row" v-show="filterList && filterList.color">
+                    <label>颜色 :</label>
                     <span v-for="(item,index) in filterList.color" 
                   :key="index" @click="collectRightClickItem('color',item,$event)">{{item}}</span>
                 </div>
 
-                <div v-show="filterList && filterList.styles">
-                    <label>风格</label>
+                <div class="filter-row" v-show="filterList && filterList.styles">
+                    <label>风格 :</label>
                     <span v-for="(item,index) in filterList.styles" 
                     :key="index" @click="collectRightClickItem('styles',item,$event)">{{item}}</span>
                 </div>
 
-                <div v-show="filterList && filterList.material">
-                    <label>材质</label>
+                <div class="filter-row" v-show="filterList && filterList.material">
+                    <label>材质 :</label>
                     <span v-for="(item,index) in filterList.material" 
                     :key="index" @click="collectRightClickItem('material',item,$event)">{{item}}</span>
                 </div>
 
-                <div v-show="filterList && filterList.paint">
-                    <label>油漆类别</label>
+                <div class="filter-row" v-show="filterList && filterList.paint">
+                    <label>油漆类别 :</label>
                     <span v-for="(item,index) in filterList.paint" 
                     :key="index" @click="collectRightClickItem('paint',item,$event)">{{item}}</span>
                 </div>
 
+                <div class="right-now">
+                    <p>当前所在 :{{rightNow}}</p>
+                </div>
+
                 <div class="search-buttons">
-                    
                     <div class="right-button">
                         <router-link :to="{name:'brouter',params:{ querydata:{},queryarr:searchParams }}">搜索</router-link>
                     </div>
@@ -83,10 +82,11 @@
                   <img :src="item" alt="">
                   <!-- <div class="for-image" style="background: url(item)"> -->
                 </div>
-                  <p>{{resultItem.itemName}}</p>
-                  <p>{{resultItem.status}}</p>
-                  <p>{{resultItem.klass}}</p>
-                  <!-- <p>{{resultItem.featuredesc}}</p> -->
+                <p class="item-status">【{{resultItem.status}}--{{resultItem.klass}}】</p>
+                <p class="item-name">{{resultItem.itemName}}</p>
+                
+                <!-- <p class="item-klass">{{resultItem.klass}}</p> -->
+                <!-- <p>{{resultItem.featuredesc}}</p> -->
               </div>
             </div>
 
