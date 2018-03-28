@@ -19,6 +19,7 @@ export default {
     let routerParams = state.route.params
 
     if(routerName == 'brouter'){
+      // debugger
       let querydata = state.route.params.querydata
       let reg = new RegExp('[\u4E00-\u9FFF]+', 'g') //汉字字符  + 意思是至少有一个
       if (reg.test(querydata)) {
@@ -32,6 +33,7 @@ export default {
         })
       }))
     }else{
+      // debugger
       return api.nstestAsync()
       .then(axios.spread(function (nstest,allstates) {
         commit('NS_TEST', {

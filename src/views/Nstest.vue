@@ -12,17 +12,17 @@
 
               <div class="title">系列</div>
               <div class="item" v-for="(item,index) in allseries" :key="index" @click="collectRightClickItem('series',item.tag)">
-                  <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'series':item.tag},time:nowTime }}">{{item.tag}} ({{item.count}})</router-link>
+                  <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'series':item.tag} }}">{{item.tag}} ({{item.count}})</router-link>
               </div>
 
               <div class="title">适用空间</div> 
               <div class="item" v-for="(item,index) in allstates.statuses" :key="index" @click="collectRightClickItem('status',item.tag)">
-                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'status':item.tag},time:nowTime}}">{{item.tag}} ({{item.count}})</router-link>
+                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'status':item.tag} }}">{{item.tag}} ({{item.count}})</router-link>
               </div>
 
               <div class="title">分类</div>
               <div class="item" v-for="(item,index) in allstates.klasses" :key="index" @click="collectRightClickItem('klasses',item.tag)">
-                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'klass':item.tag},time:nowTime}}">{{item.tag}} ({{item.count}})</router-link>
+                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'klass':item.tag} }}">{{item.tag}} ({{item.count}})</router-link>
               </div>
 
             </div>
@@ -62,14 +62,21 @@
                 </div>
 
                 <div class="right-now">
-                    <p>当前所在 :{{rightNow}}</p>
+                    <label>当前选择 :</label>
+                    <p>{{rightNow}}</p>
                 </div>
+                <!-- <div class="right-now">
+                    <label>searchParams :</label>
+                    <p>{{searchParams}}</p>
+                </div> -->
 
                 <div class="search-buttons">
-                    <div class="right-button">
-                        <router-link :to="{name:'brouter',params:{ querydata:{},queryarr:searchParams }}">搜索</router-link>
+                    <div class="right-button" @click="search">搜索
+                        <!-- <router-link :to="{name:'brouter',params:{ querydata:nowTime,queryarr:searchParams }}">搜索</router-link> -->
                     </div>
-                    <div @click="deleteSearchParams()" class="left-button">重置搜索条件</div>
+                    <div @click="deleteSearchParams()" class="left-button">
+                      重置搜索条件
+                    </div>
                 </div>
 
               </div>
@@ -82,8 +89,10 @@
                   <img :src="item" alt="">
                   <!-- <div class="for-image" style="background: url(item)"> -->
                 </div>
-                <p class="item-status">【{{resultItem.status}}--{{resultItem.klass}}】</p>
+                <p class="goods-intro">{{goodsIntro[index%6]}}</p>
                 <p class="item-name">{{resultItem.itemName}}</p>
+                <p class="item-status">【{{resultItem.status}}--{{resultItem.klass}}--{{resultItem.itemNo}}】</p>
+                
                 
                 <!-- <p class="item-klass">{{resultItem.klass}}</p> -->
                 <!-- <p>{{resultItem.featuredesc}}</p> -->
@@ -118,21 +127,31 @@ export default {
   data(){
     return{
       searchParams:{},
-     
+      goodsIntro:[
+        '设计师说：路尽隐香处，影摇月明间',
+        '设计师说：诗意不在远方，在身边',
+        '设计师说：内敛，大气，就像你！',
+        '设计师说：选它就对了，女神都在买',
+        '设计师说：总有一款，让你心仪',
+        '设计师说：一年四季，住进春天'
+      ]
     }
   },
    //todo 这里 换成 created 可以避免前后端渲染不一致的情况
   // beforeMount () {
   created () {
     if (this.$root._isMounted) {
+      // debugger
       this.listPage()
     }
     this.initData(this.$store.state.nstest);
+
+    if(localStorage['searchParams']){
+      let searchParamsLocal = JSON.parse(localStorage['searchParams']);
+      this.searchParams = searchParamsLocal;
+    }
   },
   computed: {
-    nowTime(){
-      return Date.now()
-    },
     nstest () {
       return this.$store.state.nstest
     },
@@ -166,148 +185,164 @@ export default {
       }
       
       if(resultArr.length>1){
-        str = resultArr.join('-->')
+        str = resultArr.join(' & ')
+        return str;
+      }else{
+        return resultArr[0];
       }
       
-      return str;
+      
     }
     
   },
   watch: {
     $route (to, from) {
+      // debugger
       this.listPage()
     }
   },
   methods: {
-      // todo 这里其实不是很懂
-      // 点击分页后，重新获取数据   
-      listPage () {
-        this.$bar.start()
-        this.$store.dispatch('NS_TEST').then(() => {
-          this.$bar.finish()
-        })
-      },
-      jumpItemDetail(data){
-         
-         let itemData = JSON.stringify(data)
-         localStorage.setItem('itemDetail',itemData)
-         this.$router.push({ name: 'itemdetail' })
-
-         console.log( 123,localStorage.getItem('itemDetail') )
-      },
-      deleteRepeat(arr){
+    // todo 这里其实不是很懂
+    // 点击分页后，重新获取数据   
+    listPage () {
+      this.$bar.start()
+      this.$store.dispatch('NS_TEST').then(() => {
+        this.$bar.finish()
+      })
+    },
+    search () {
+      let pp = this.searchParams
+      let tt = Date.now()
+      this.$router.push({
+        name:'brouter',
+        params:{ querydata:tt,queryarr:pp }
+      })
+    },
+    jumpItemDetail(data){
         
-        let tempObj = {};
-        let resultArr = [];
-        for(let i =0 ;i<arr.length;i++){
-          if(!tempObj[arr[i]]){
-              resultArr.push(arr[i])
-              tempObj[arr[i]]= 1
-          }
-        }
-        return resultArr
+        let itemData = JSON.stringify(data)
+        localStorage.setItem('itemDetail',itemData)
+        this.$router.push({ name: 'itemdetail' })
 
-      },
-      initData(data) {
-        
-        let allData = data.result;
-        let tempFilterList = {};
-
-        allData.forEach(item => {
-          //筛选出全部颜色属性
-          if (item.color) {
-            if (!tempFilterList.color) {
-              tempFilterList.color = [];
-              tempFilterList.color.push(item.color);
-            } else {
-              tempFilterList.color.push(item.color);
-            }
-          }
-          //风格
-          if (item.styles) {
-            if (!tempFilterList.styles) {
-              tempFilterList.styles = [];
-              tempFilterList.styles.push(item.styles);
-            } else {
-              tempFilterList.styles.push(item.styles);
-            }
-          }
-          //材料
-          if (item.material) {
-            if (!tempFilterList.material) {
-              tempFilterList.material = [];
-              tempFilterList.material.push(item.material);
-            } else {
-              tempFilterList.material.push(item.material);
-            }
-          }
-          //油漆
-          if (item.paint) {
-            if (!tempFilterList.paint) {
-              tempFilterList.paint = [];
-              tempFilterList.paint.push(item.paint);
-            } else {
-              tempFilterList.paint.push(item.paint);
-            }
-          }
-        });
-
-        //执行一下去重
-        tempFilterList.color = this.deleteRepeat(tempFilterList.color)
-        tempFilterList.styles = this.deleteRepeat(tempFilterList.styles)
-        tempFilterList.material = this.deleteRepeat(tempFilterList.material)
-        tempFilterList.paint = this.deleteRepeat(tempFilterList.paint)
-
-        //数组赋值
-        this.filterList = tempFilterList;
-      },
-      collectRightClickItem(type,content,e){
-
-        let that = this
-        
-        console.log(e)
-        if(type == 'klasses'|| type == 'status'|| type == 'series'){
-          delete this.searchParams.klasses;
-          delete this.searchParams.status;
-          delete this.searchParams.series;
-
-          this.$set(this.searchParams,type,content)
-        }
+        console.log( 123,localStorage.getItem('itemDetail') )
+    },
+    deleteRepeat(arr){
       
-        switch (type){
-
-          case 'color':
-               this.$set(this.searchParams,'color',content)
-              // this.searchParams.color = content
-          break;
-          case 'styles':
-               this.$set(this.searchParams,'styles',content)
-              // this.searchParams.styles = content
-          break 
-          case 'material':
-               this.$set(this.searchParams,'material',content)
-              // this.searchParams.styles = content
-          break 
-          case 'paint':
-               this.$set(this.searchParams,'paint',content)
-              // this.searchParams.styles = content
-          break   
-          default:
+      let tempObj = {};
+      let resultArr = [];
+      for(let i =0 ;i<arr.length;i++){
+        if(!tempObj[arr[i]]){
+            resultArr.push(arr[i])
+            tempObj[arr[i]]= 1
         }
-        
-        console.log(this.searchParams)
-        
-     },
-     deleteSearchParams(){
-       
-       for(let name in this.searchParams){
-         if(name!='klasses' && name!= 'status'&& name!= 'series'){
-            delete this.searchParams[name]
-         }
-       }
-       
-       this.$set(this.searchParams,this.searchParams)
-     }
+      }
+      return resultArr
+
+    },
+    initData(data) {
+      
+      let allData = data.result;
+      let tempFilterList = {};
+
+      allData.forEach(item => {
+        //筛选出全部颜色属性
+        if (item.color) {
+          if (!tempFilterList.color) {
+            tempFilterList.color = [];
+            tempFilterList.color.push(item.color);
+          } else {
+            tempFilterList.color.push(item.color);
+          }
+        }
+        //风格
+        if (item.styles) {
+          if (!tempFilterList.styles) {
+            tempFilterList.styles = [];
+            tempFilterList.styles.push(item.styles);
+          } else {
+            tempFilterList.styles.push(item.styles);
+          }
+        }
+        //材料
+        if (item.material) {
+          if (!tempFilterList.material) {
+            tempFilterList.material = [];
+            tempFilterList.material.push(item.material);
+          } else {
+            tempFilterList.material.push(item.material);
+          }
+        }
+        //油漆
+        if (item.paint) {
+          if (!tempFilterList.paint) {
+            tempFilterList.paint = [];
+            tempFilterList.paint.push(item.paint);
+          } else {
+            tempFilterList.paint.push(item.paint);
+          }
+        }
+      });
+
+      //执行一下去重
+      tempFilterList.color = this.deleteRepeat(tempFilterList.color)
+      tempFilterList.styles = this.deleteRepeat(tempFilterList.styles)
+      tempFilterList.material = this.deleteRepeat(tempFilterList.material)
+      tempFilterList.paint = this.deleteRepeat(tempFilterList.paint)
+
+      //数组赋值
+      this.filterList = tempFilterList;
+    },
+    collectRightClickItem(type,content,e){
+      // debugger
+      let that = this
+      
+      console.log(e)
+      // 点击右侧选项时，如果是系列 适用空间 类别 则，先会清空 searchParams 的这三项，再加具体值
+      if(type == 'klasses'|| type == 'status'|| type == 'series'){
+        delete this.searchParams.klasses;
+        delete this.searchParams.status;
+        delete this.searchParams.series;
+
+        this.searchParams = {}
+        this.$set(this.searchParams,type,content)
+      }
+    
+      switch (type){
+
+        case 'color':
+              this.$set(this.searchParams,'color',content)
+            // this.searchParams.color = content
+        break;
+        case 'styles':
+              this.$set(this.searchParams,'styles',content)
+            // this.searchParams.styles = content
+        break 
+        case 'material':
+              this.$set(this.searchParams,'material',content)
+            // this.searchParams.styles = content
+        break 
+        case 'paint':
+              this.$set(this.searchParams,'paint',content)
+            // this.searchParams.styles = content
+        break   
+        default:
+      }
+      
+      console.log(this.searchParams)
+      let sp = JSON.stringify(this.searchParams)
+      localStorage.setItem('searchParams',sp)
+      
+    },
+    deleteSearchParams(){
+      
+      for(let name in this.searchParams){
+        if(name!='klasses' && name!= 'status'&& name!= 'series'){
+          delete this.searchParams[name]
+        }
+      }
+      
+      this.$set(this.searchParams,this.searchParams)
+    }
   }
 }
 </script>

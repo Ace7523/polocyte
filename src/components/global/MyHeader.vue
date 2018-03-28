@@ -12,7 +12,7 @@
     <div class="tabbar">
         <div class="tab">
             <ul>
-              <li v-for="(item,index) in links" :key="index" v-on:mouseenter="showSubtab(index)">
+              <li v-for="(item,index) in links" :key="index" @click='clickRoute' v-on:mouseenter="showSubtab(index)">
                 <router-link :to="item.path">{{ item.name }}</router-link>
               </li>
             </ul>
@@ -134,6 +134,10 @@ export default {
           change: this.searchInfo
         }
       })
+    },
+    clickRoute () {
+      //todo 清空searchParams 的条件只在这里复位应该不全，应该是离开筛选页就清空
+      localStorage.setItem('searchParams','')
     },
     showSubtab(val){
     //  this.showSubtabIndex = val;

@@ -76,7 +76,7 @@ export default {
       this.itemData = data
 
       this.imgUrl = this.itemData.imageList[0]
-      alert(this.imgUrl)
+      // alert(this.imgUrl)
     }
   },
   components: {
