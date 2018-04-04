@@ -102,7 +102,6 @@ exports.getNstest = function(req, res, next) {
         "result": []
       })
     }
-    console.log("!!!!!!!!!!!!!",result)
     return res.json({
       "code": 200,
       "message": "数据获取成功",

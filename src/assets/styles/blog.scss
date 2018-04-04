@@ -115,6 +115,7 @@ button {
 .header {
   // height: 240px;
   // background-color: $BlackPrimary;
+  margin-bottom: 10px;
   .info {
     
     margin: 0 auto;
@@ -136,6 +137,7 @@ button {
   .tabbar{
     // @extend .common-border;
        border-top:1px #E4E4E4 solid ;
+       border-bottom:1px #E4E4E4 solid ;
     // border-bottom:1px #fff solid;
     // margin-bottom:15px;  
     // &.tabbar:before{
@@ -152,8 +154,9 @@ button {
     //   transform-origin:0 100%;
     //   -webkit-transform-origin:0 100%;
     // }
+    
     .tab{
-      color: #fff;
+      color: $LogoColor;
       display: flex;
       max-width: 1120px;
       margin: 0 auto;
@@ -165,6 +168,33 @@ button {
         li{
           flex: 1;
           text-align: center;
+          position: relative;
+          .box{
+            // background: rgba(0,0,0,0.1);
+            background: #fff;
+            border-radius: 10px;
+            position: absolute;
+            z-index: 9;
+            left: 30%;
+            top: 40px;
+            p{
+              border-radius: 10px;
+            }
+            p:hover{
+              background-color: #dcdcdc;
+            }
+          }
+          // 动效
+          .box{
+            opacity: 1;
+          }
+          .fold-enter-active, .fold-leave-active {
+            transition: all .7s;
+          }
+          .fold-enter, .fold-leave-active {
+            // transform: translate3d(50%, 0, 0);
+            opacity: 0;
+          }
           a {
             padding: 10px 18px;
             // color:$FontColr;
@@ -958,7 +988,7 @@ button {
 
 //polo-all-items
 .polo-all-items-wrap{
-  border-top: 1px solid $Border;
+  // border-top: 1px solid $Border;
   padding-top: 10px;
   padding-bottom: 10px;
   .polo-all-items-content{

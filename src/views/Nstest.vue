@@ -11,7 +11,7 @@
             <div class="content-stytle">
 
               <div class="title">系列</div>
-              <div class="item" v-for="(item,index) in allseries" :key="index" @click="collectRightClickItem('series',item.tag)">
+              <div class="item" v-for="(item,index) in allstates.series" :key="index" @click="collectRightClickItem('series',item.tag)">
                   <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'series':item.tag} }}">{{item.tag}} ({{item.count}})</router-link>
               </div>
 
@@ -99,8 +99,8 @@
               </div>
             </div>
 
-              <!-- <div>{{nstest}}</div> -->
-              <!-- <div>allstates:{{allstates}}</div>  -->
+              <!-- <div>nstest:{{nstest}}</div>
+              <div>allstates:{{allstates}}</div>  -->
           </div>
           <!-- polo-items -->
             
@@ -158,6 +158,7 @@ export default {
     allstates(){
       return this.$store.state.allstates
     },
+    //这里只是对 系列 做了一个去重 ，可以改在上传时候必填项不为空 
     allseries(){
       let tempSeries = this.$store.state.allstates.series ;
       let tempArr = [];
@@ -219,12 +220,11 @@ export default {
       })
     },
     jumpItemDetail(data){
-        
         let itemData = JSON.stringify(data)
         localStorage.setItem('itemDetail',itemData)
         this.$router.push({ name: 'itemdetail' })
-
-        console.log( 123,localStorage.getItem('itemDetail') )
+        //todo 清空searchParams 这里是第二处 的条件只在这里复位应该不全，应该是离开筛选页就清空
+        localStorage.setItem('searchParams','')
     },
     deleteRepeat(arr){
       

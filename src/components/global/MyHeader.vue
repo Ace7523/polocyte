@@ -10,56 +10,51 @@
     </div>
     
     <div class="tabbar">
-        <div class="tab">
-            <ul>
-              <li v-for="(item,index) in links" :key="index" @click='clickRoute' v-on:mouseenter="showSubtab(index)">
-                <router-link :to="item.path">{{ item.name }}</router-link>
-              </li>
-            </ul>
-            <!-- <div class="search">
-              <input type="search" name="search" placeholder="search" v-model="searchInfo" autofocus @keyup.enter="search"/>
-            </div> -->
-        </div>
+      <div class="tab" @click='clickRoute'>
+          <ul>
+            <li>
+              <router-link :to="`/index`">首页</router-link>
+            </li>
+            
+            <li v-on:mouseenter="showSubtab(2)">
+              <router-link :to="`1`">系列</router-link>
+              <transition name="fold">
+              <div class="box" v-show="showSubtabIndex == 2" v-on:mouseleave="showSubtab(-1)"> 
+                 <p class="item" v-for="(item,index) in allstates.series" :key="index">
+                    <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'series':item.tag} }}">{{item.tag}} ({{item.count}})</router-link>
+                </p>
+              </div>
+              </transition>
+            </li>
+
+            <li v-on:mouseenter="showSubtab(3)" v-on:mouseleave="showSubtab(-1)">
+              <router-link :to="`2`">适用空间</router-link>
+              <transition name="fold">
+              <div class="box" v-show="showSubtabIndex == 3"> 
+                 <p class="item" v-for="(item,index) in allstates.statuses" :key="index">
+                    <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'status':item.tag} }}">{{item.tag}} ({{item.count}})</router-link>
+                 </p>
+              </div>
+              </transition>
+            </li>
+
+            <li v-on:mouseenter="showSubtab(4)" v-on:mouseleave="showSubtab(-1)">
+              <router-link :to="`3`">分类</router-link>
+              <transition name="fold">
+              <div class="box" v-show="showSubtabIndex == 4"> 
+                  <p class="item" v-for="(item,index) in allstates.klasses" :key="index">
+                    <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'klass':item.tag} }}">{{item.tag}} ({{item.count}})</router-link>
+                  </p>
+              </div>
+              </transition>
+            </li>
+
+            <li>
+              <router-link :to="`/nstest`">全部商品</router-link>
+            </li>
+          </ul>
+      </div>
     </div>
-    <div class="subtab" v-show="showSubtabIndex == 0">
-          <ul>
-              <li>
-                1
-              </li>
-              <li>
-                2
-              </li>
-              <li>
-                3
-              </li>
-            </ul>
-        </div>
-        <div class="subtab" v-show="showSubtabIndex == 1">
-          <ul>
-              <li>
-                4
-              </li>
-              <li>
-                5
-              </li>
-              <li>
-                6
-              </li>
-            </ul>
-        </div>
-        <div class="subtab" v-show="showSubtabIndex == 2">
-          <ul>
-              <li>
-                7
-              </li>
-              <li>
-                8
-              </li>
-              <li>
-                9
-              </li>
-            </ul>
-        </div>
     <!-- <nav class="container nav">
       <ul>
         <li v-for="(item,index) in links" :key="index">
@@ -70,7 +65,6 @@
         <input type="search" name="search" placeholder="search" v-model="searchInfo" autofocus @keyup.enter="search"/>
       </div>
     </nav> -->
-    
   </header>
 </template>
 <script>
@@ -78,34 +72,6 @@ export default {
   name: 'MyHeader',
   data () {
     return {
-      // links: [{
-      //   name: '全部商品',
-      //   path: '/'
-      // },{
-      //   name: '首页',
-      //   path: '/'
-      // }, {
-      //   name: '新随笔',
-      //   path: '/publish'
-      // }, {
-      //   name: '管理',
-      //   path: '/admin'
-      // },{
-      //   name: '客厅',
-      //   path: '/'
-      // },{
-      //   name: '卧房',
-      //   path: '/'
-      // },{
-      //   name: '餐厅',
-      //   path: '/'
-      // },{
-      //   name: '特别推荐',
-      //   path: '/'
-      // },{
-      //   name: 'nstest',
-      //   path: '/nstest'
-      // }],
       links: [{
         name: '首页',
         path: '/'
@@ -117,16 +83,29 @@ export default {
         path: '/nstest'
       }],
       searchInfo: '',
-      showSubtabIndex:-1
+      showSubtabIndex:-1,
+      allstates:{}
     }
   },
   mounted () {
-      
+      this.getAllState();
   },
   computed: {
     
   },
   methods: {
+    getAllState () {
+      this.axios.get('/getAllStates', {
+       
+      }).then((result) => {
+        let that = this
+        if (result.data.code === 200) {
+          this.allstates = result.data.result
+        } else {
+          this.$toast(result.data.message)
+        }
+      })
+    },
     search () {
       this.$router.push({
         name: 'search',
@@ -140,8 +119,8 @@ export default {
       localStorage.setItem('searchParams','')
     },
     showSubtab(val){
-    //  this.showSubtabIndex = val;
-    console.log(val)
+      this.showSubtabIndex = val;
+      console.log(val)
     }, 
   }
 }
