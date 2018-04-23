@@ -38,6 +38,9 @@ export default {
       }, {
         name: '上传-items',
         path: '/upItems'
+      }, {
+        name: '所有-items',
+        path: '/allItems'
       }]
     }
   },

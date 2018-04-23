@@ -22,6 +22,12 @@ const UpNewProdtct = () =>
 const UpItems = () =>
   import('../views/admin/UpItems.vue')  
 
+const AllItems = () =>
+  import('../views/admin/AllItems.vue')   
+
+const OneItem = () =>
+  import('../views/admin/OneItem.vue')     
+
 const ItemDeatil = () =>
   import('../views/ItemDetail.vue')   
 Vue.use(Router)
@@ -117,6 +123,20 @@ export function createRouter () {
         Auth: true
       },
       component: UpItems
+    }, {
+      path: '/allItems',
+      name: 'allItems',
+      meta: {
+        Auth: true
+      },
+      component: AllItems
+    },{
+      path: '/oneItem/:dateid',
+      name: 'oneItem',
+      meta: {
+        Auth: true
+      },
+      component: OneItem
     },{
       path: '/:page?',
       name: 'index',

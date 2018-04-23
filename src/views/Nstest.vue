@@ -85,8 +85,9 @@
               <!-- 遍历接口，展示具体信息 -->
               <div v-for="(resultItem,index) in nstest.result" :key="index" class="each-item" @click="jumpItemDetail(resultItem)">
                
-                <div v-for="(item,index2) in resultItem.imageList" :key="index2" class="each-image">
-                  <img :src="item" alt="">
+                <!-- <div v-for="(item,index2) in resultItem.imageList" :key="index2" class="each-image"> -->
+                <div :key="index2" class="each-image">  
+                  <img :src="resultItem.imageList[0]" alt="">
                   <!-- <div class="for-image" style="background: url(item)"> -->
                 </div>
                 <p class="goods-intro">{{goodsIntro[index%6]}}</p>

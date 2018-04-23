@@ -1003,7 +1003,6 @@ exports.upPoloItem = function(req, res, next) {
     let date = fields.date;
 
     let newData = {
-
       "itemNo": itemNo,//货号
       "itemName": itemName,//名称
       "brand": brand,//品牌
@@ -1035,25 +1034,99 @@ exports.upPoloItem = function(req, res, next) {
       "imageList": imageList,//图片列表 
       "date": date
     };
-    // 插入到数据库
-    db.insertOne('poloitems', newData, function(err, result) {
+
+    db.find('poloitems', { "query": { "date": date } }, function(err, result) {
       if (err) {
         console.log(err)
         return res.json({
-          "code": 401,
-          "message": "ietm实例存入数据库失败"
+          "code": 500,
+          "message": "内部服务器错误"
         })
       }
-      return res.json({
-        "code": 200,
-        "message": "ietm实例存入数据库成功"
-      })
+
+      if (result.length === 1) {
+        db.updateMany('poloitems', { "date": date }, newData, function(err, result2) {
+          if (err) {
+            console.log(err)
+            return res.json({
+              "code": 401,
+              "message": "文章更新失败"
+            })
+          }
+          return res.json({
+            "code": 200,
+            "message": "文章更新成功"
+          })
+        })
+      } else {
+        // 插入到数据库
+        db.insertOne('poloitems', newData, function(err, result3) {
+          if (err) {
+            console.log(err)
+            return res.json({
+              "code": 401,
+              "message": "ietm实例存入数据库失败"
+            })
+          }
+          return res.json({
+            "code": 200,
+            "message": "ietm实例存入数据库成功"
+          })
+        })
+      }
     })
+
+        // let newData = {
+
+        //   "itemNo": itemNo,//货号
+        //   "itemName": itemName,//名称
+        //   "brand": brand,//品牌
+        //   "series": series,//系列
+        //   "material": material,//材质
+        //   "standard": standard,//规格
+        //   "status": status,//适用空间
+
+        //   "functions": functions,//功能
+        //   "styles": styles,//风格
+        //   "color": color,//颜色
+        //   "productLoc": productLoc,//产地
+        //   "shape": shape,//形状
+
+        //   "klass": klass,//如 床 柜子 衣架
+        //   "specific": specific,//如单人床  大衣柜 小衣柜 等具体分类
+
+        //   "feature1": feature1,//甲醛释放量
+        //   "feature2": feature2,//结构工艺
+        //   "feature3": feature3,
+        //   "features": features,
+        //   "paint": paint,//油漆
+
+        //   "isCanPersonal": isCanPersonal,//是否可定制
+        //   "featuredesc": featuredesc,//产品描述
+        //   "reserve1": reserve1,//预留字段1
+        //   "reserve2": reserve2,//预留字段2
+        //   "itemPrice": itemPrice,//价格
+        //   "imageList": imageList,//图片列表 
+        //   "date": date
+        // };
+        // 插入到数据库
+        // db.insertOne('poloitems', newData, function(err, result) {
+        //   if (err) {
+        //     console.log(err)
+        //     return res.json({
+        //       "code": 401,
+        //       "message": "ietm实例存入数据库失败"
+        //     })
+        //   }
+        //   return res.json({
+        //     "code": 200,
+        //     "message": "ietm实例存入数据库成功"
+        //   })
+        // })
   })
 }
-
+// 获取全部数据
 exports.getPoloItem = function(req, res, next) {
-  
   db.find('poloitems', { "query": {} }, function(err, result) {
     if (err) {
       console.log(err)
@@ -1063,7 +1136,6 @@ exports.getPoloItem = function(req, res, next) {
         "result": []
       })
     }
-    
     return res.json({
       "code": 200,
       "message": "数据获取成功",

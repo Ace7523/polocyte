@@ -41,13 +41,13 @@
             {{itemData.featuredesc}}
           </p>
 
-          <div class="img-list">
+          <div v-for="(item,index) in itemData.imageList" :key="index" class="img-list">
+            <img :src="item" alt="">
+          </div>
+          <div v-if="itemData.imageList.length == 1" class="img-list">
             <img :src="imgUrl" alt="">
           </div>
-          <div class="img-list">
-            <img :src="imgUrl" alt="">
-          </div>
-          <div class="img-list">
+          <div v-if="itemData.imageList.length == 1" class="img-list">
             <img :src="imgUrl" alt="">
           </div>
 
@@ -76,7 +76,6 @@ export default {
       this.itemData = data
 
       this.imgUrl = this.itemData.imageList[0]
-      // alert(this.imgUrl)
     }
   },
   components: {
