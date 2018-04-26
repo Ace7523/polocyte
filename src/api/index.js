@@ -44,37 +44,25 @@ function article (id) {
   return axios.get(`/article?id=${id}`)
 }
 
-//todo 要删除了
-// function nstest (id) {
-//   return axios.get(`/nstest?id=${id}`)
-// }
-
-function nstest () {
-  return axios.get(`/getPoloItem`)
+function nstest (id) {
+  return axios.get(`/getPoloItem?limit=9&page=${id}`)
 }
 
 function getAllStates () {
   return axios.get(`/getAllStates`)
 }
 
-function nstestAsync () {
-  return axios.all([nstest(),getAllStates()])
-}
-
-function getPoloItems(querydata){
-  return axios.get(`/getPoloItems?querydata=${querydata}`)
-}
-
 function getPoloItemsByPost(routerParams){
   return axios.post(`/getPoloItemsByPost`,{
     'querydata':routerParams.querydata,
     'queryarr':routerParams.queryarr,
-    'rp': routerParams.rp
+    'limit': routerParams.limit,
+    'page': routerParams.page
   })
 }
 
-function getItemsByQuerydata(querydata){
-  return axios.all([getPoloItems(querydata),getAllStates()])
+function nstestAsync (id) {
+  return axios.all([nstest(id),getAllStates()])
 }
 
 function getItemsByQueryArr(routerParams){
@@ -118,6 +106,5 @@ export default {
    tags, 
    administrator, 
    nstestAsync,
-   getItemsByQuerydata,
    getItemsByQueryArr
   }

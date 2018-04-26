@@ -50,7 +50,7 @@
             </li>
 
             <li>
-              <router-link :to="`/nstest`">全部商品</router-link>
+              <router-link :to="{name:'nstest',params:{page:1}}">全部商品</router-link>
             </li>
           </ul>
       </div>

@@ -171,15 +171,11 @@ app.get('/api/uploadimagedesc', router.getUploadimagedesc)
 
 app.get('/api/uploadimagedesc2', router.getUploadimagedesc2)
 
-app.get('/api/nstest', router.getNstest)
-
 // tags infomation
 app.get('/api/tags', router.tags)
 
 // get articles by tag http://localhost:8080/api/tag?tag=javascript
 app.get('/api/tag', router.tag)
-
-app.get('/api/getPoloItems', router.getPoloItems)
 
 app.post('/api/getPoloItemsByPost', router.getPoloItemsByPost)
 

@@ -17,6 +17,7 @@ export default {
   NS_TEST ({ commit, state }) {
     let routerName = state.route.name
     let routerParams = state.route.params
+    const id = state.route.params.page
 
     if(routerName == 'brouter'){
       // debugger
@@ -34,7 +35,7 @@ export default {
       }))
     }else{
       // debugger
-      return api.nstestAsync()
+      return api.nstestAsync(id)
       .then(axios.spread(function (nstest,allstates) {
         commit('NS_TEST', {
           nstest: nstest,

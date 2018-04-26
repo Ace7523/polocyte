@@ -91,25 +91,6 @@ exports.getArticle = function(req, res, next) {
   })
 }
 
-exports.getNstest = function(req, res, next) {
- 
-  db.find('images', { "query": {} }, function(err, result) {
-    if (err) {
-      console.log(err)
-      return res.json({
-        "code": 404,
-        "message": "数据获取失败",
-        "result": []
-      })
-    }
-    return res.json({
-      "code": 200,
-      "message": "数据获取成功",
-      "result": result
-    })
-  })
-}
-
 exports.tags = function(req, res, next) {
   db.find('infos', { "query": { "state": "publish" } }, function(err, result) {
     if (err) {
@@ -427,7 +408,7 @@ exports.article = function(req, res, next) {
     })
   })
 }
-
+// 上传首页第一部分图片和描述 
 exports.uploadimagedesc = function(req, res, next) {
     // 获取内容
     let form = new formidable.IncomingForm()
@@ -515,7 +496,7 @@ exports.uploadimagedesc = function(req, res, next) {
       // })
     })
 }
-
+// 上传首页第二部分图片和描述 
 exports.uploadimagedesc2 = function(req, res, next) {
   // 获取内容
   let form = new formidable.IncomingForm()
@@ -603,7 +584,7 @@ exports.uploadimagedesc2 = function(req, res, next) {
     // })
   })
 }
-
+// 获取首页第一部分图片和描述 
 exports.getUploadimagedesc = function(req, res, next) {
 
   db.find('imagedesc', { "query": {} }, function(err, result) {
@@ -623,26 +604,25 @@ exports.getUploadimagedesc = function(req, res, next) {
     })
   })
 }
-
+// 获取首页第一部分图片和描述 
 exports.getUploadimagedesc2 = function(req, res, next) {
-  
-    db.find('imagedesc2', { "query": {} }, function(err, result) {
-      if (err) {
-        console.log(err)
-        return res.json({
-          "code": 404,
-          "message": "数据获取失败",
-          "result": []
-        })
-      }
-      
+  db.find('imagedesc2', { "query": {} }, function(err, result) {
+    if (err) {
+      console.log(err)
       return res.json({
-        "code": 200,
-        "message": "数据获取成功",
-        "result": result
+        "code": 404,
+        "message": "数据获取失败",
+        "result": []
       })
+    }
+    
+    return res.json({
+      "code": 200,
+      "message": "数据获取成功",
+      "result": result
     })
-  }
+  })
+}
 
 exports.login = function(req, res, next) {
   let form = new formidable.IncomingForm()
@@ -774,6 +754,7 @@ exports.avatar = function(req, res, next) {
     })
 }
 
+// 原本的上传博客接口
 exports.upload = function(req, res, next) {
   let username = req.cookies.username
   let form = new formidable.IncomingForm()
@@ -804,7 +785,7 @@ exports.upload = function(req, res, next) {
     })
   })
 }
-
+// 上传首页图片接口
 exports.uploadimage = function(req, res, next) {
   let username = req.cookies.username
   let form = new formidable.IncomingForm()
@@ -861,7 +842,7 @@ exports.uploadimage = function(req, res, next) {
     })
   }) 
 }
-
+// 上传具体一个商品的图片接口
 exports.uploaditemimage = function(req, res, next) {
   let username = req.cookies.username
   let form = new formidable.IncomingForm()
@@ -968,7 +949,7 @@ exports.uploaditemimage = function(req, res, next) {
     })
   }
 }
-
+// 上传和修改 具体一个商品接口
 exports.upPoloItem = function(req, res, next) {
   // 获取内容
   let form = new formidable.IncomingForm()
@@ -1127,7 +1108,11 @@ exports.upPoloItem = function(req, res, next) {
 }
 // 获取全部数据
 exports.getPoloItem = function(req, res, next) {
-  db.find('poloitems', { "query": {} }, function(err, result) {
+  let limit = Number(req.query.limit)
+  let page = Number(req.query.page)
+  let sortInfo = Number(req.query.sort) || -1
+  let sort = { "date": sortInfo }
+  db.find('poloitems', { "query": {}, "limit": limit, "page": page, "sort": sort}, function(err, result) {
     if (err) {
       console.log(err)
       return res.json({
@@ -1144,28 +1129,6 @@ exports.getPoloItem = function(req, res, next) {
   })
 }
 
-exports.getPoloItems = function(req, res, next) {
-  let querydata = ''
-  if(req.query && req.query.querydata){
-    querydata = req.query.querydata
-  }
-  db.find('poloitems', { "query": {'status':querydata} }, function(err, result) {
-    if (err) {
-      console.log(err)
-      return res.json({
-        "code": 404,
-        "message": "数据获取失败",
-        "result": []
-      })
-    }
-    
-    return res.json({
-      "code": 200,
-      "message": "数据获取成功",
-      "result": result
-    })
-  })
-}
 
 exports.getPoloItemsByPost = function(req, res, next) {
 
@@ -1174,12 +1137,11 @@ exports.getPoloItemsByPost = function(req, res, next) {
 
     let querydata = fields.querydata
     let queryarr = fields.queryarr
-    let rp = fields.rp
-    console.log("rp",rp)
-    console.log("queryarr",queryarr)
-    //todo 测试分页 
-    // db.find('poloitems', { "query": queryarr ,"limit": 2,"page": 2,}, function(err, result) {
-    db.find('poloitems', { "query": queryarr }, function(err, result) {  
+    let page = fields.page
+    let limit = fields.limit
+    let sort = { "date": -1 }
+
+    db.find('poloitems', { "query": queryarr ,"limit": limit, "page": page, "sort": sort}, function(err, result) {  
       if (err) {
         console.log(err)
         return res.json({
@@ -1188,7 +1150,6 @@ exports.getPoloItemsByPost = function(req, res, next) {
           "result": []
         })
       }
-      console.log(result)
       return res.json({
         "code": 200,
         "message": "数据获取成功",
@@ -1277,6 +1238,8 @@ exports.getAllStates = function(req, res, next) {
     arrRestlt.statuses = arr2;
     arrRestlt.klasses = arr4;
     arrRestlt.series = arr6;
+
+    arrRestlt.total = result.length
 
     return res.json({
       "code": 200,

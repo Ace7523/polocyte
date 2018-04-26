@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { Article, List, Admin , Classify,Nstest} from '../views/CreateListView'
+import { Article, List, Admin , Classify , Nstest} from '../views/CreateListView'
 const Login = () =>
   import('../views/Login.vue')
 
@@ -63,7 +63,7 @@ export function createRouter () {
       name: 'classify',
       component: Classify('article')
     }, {
-      path: '/nstest',
+      path: '/nstest/:page?',
       name: 'nstest',
       component: Nstest('nstest')
     }, {

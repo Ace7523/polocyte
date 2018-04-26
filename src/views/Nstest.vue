@@ -8,21 +8,21 @@
         <div class="all-items">
           <!-- 左侧导航分类 -->
           <div class="polo-category">
-            <div class="content-stytle">
+            <div class="content-stytle" @click="resetPageParam">
 
               <div class="title">系列</div>
               <div class="item" v-for="(item,index) in allstates.series" :key="index" @click="collectRightClickItem('series',item.tag)">
-                  <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'series':item.tag} }}">{{item.tag}} ({{item.count}})</router-link>
+                  <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'series':item.tag},limit:9 }}">{{item.tag}} ({{item.count}})</router-link>
               </div>
 
               <div class="title">适用空间</div> 
               <div class="item" v-for="(item,index) in allstates.statuses" :key="index" @click="collectRightClickItem('status',item.tag)">
-                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'status':item.tag} }}">{{item.tag}} ({{item.count}})</router-link>
+                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'status':item.tag},limit:9  }}">{{item.tag}} ({{item.count}})</router-link>
               </div>
 
               <div class="title">分类</div>
-              <div class="item" v-for="(item,index) in allstates.klasses" :key="index" @click="collectRightClickItem('klasses',item.tag)">
-                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'klass':item.tag} }}">{{item.tag}} ({{item.count}})</router-link>
+              <div class="item" v-for="(item,index) in allstates.klasses" :key="index" @click="collectRightClickItem('klass',item.tag)">
+                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'klass':item.tag},limit:9  }}">{{item.tag}} ({{item.count}})</router-link>
               </div>
 
             </div>
@@ -86,7 +86,7 @@
               <div v-for="(resultItem,index) in nstest.result" :key="index" class="each-item" @click="jumpItemDetail(resultItem)">
                
                 <!-- <div v-for="(item,index2) in resultItem.imageList" :key="index2" class="each-image"> -->
-                <div :key="index2" class="each-image">  
+                <div class="each-image">  
                   <img :src="resultItem.imageList[0]" alt="">
                   <!-- <div class="for-image" style="background: url(item)"> -->
                 </div>
@@ -100,8 +100,20 @@
               </div>
             </div>
 
-              <!-- <div>nstest:{{nstest}}</div>
-              <div>allstates:{{allstates}}</div>  -->
+               <!-- <div>nstest:{{nstest}}</div> -->
+               <!-- <div>allstates:{{allstates}}</div>  -->
+              <div class="page" v-show="maxPage > 1 && routerName == 'nstest'">
+                <router-link v-if="page > 1" :to="{name:'nstest',params:{page:page - 1}}" class="prev">《上一页</router-link>
+                <a v-else class="disabled prev">《上一页</a>
+                <router-link v-if="hasMore" :to="{name:'nstest',params:{page:page + 1}}" class="next">下一页》</router-link>
+                <a v-else class="disabled next">下一页》</a>
+              </div>
+
+              <div class="page" v-show="routerName == 'brouter'">
+                <span class="prev" @click="fenye(-1)">上一页</span>
+                <span class="next" @click="fenye(1)">下一页</span>
+              </div>
+
           </div>
           <!-- polo-items -->
             
@@ -127,8 +139,9 @@ export default {
   },
   data(){
     return{
-      searchParams:{},
-      goodsIntro:[
+      searchParams: {},
+      pageParam: 1,
+      goodsIntro: [
         '设计师说：路尽隐香处，影摇月明间',
         '设计师说：诗意不在远方，在身边',
         '设计师说：内敛，大气，就像你！',
@@ -142,7 +155,6 @@ export default {
   // beforeMount () {
   created () {
     if (this.$root._isMounted) {
-      // debugger
       this.listPage()
     }
     this.initData(this.$store.state.nstest);
@@ -173,6 +185,9 @@ export default {
     routerParams(){
       return this.$route.params
     },
+    routerName(){
+      return this.$route.name
+    },
     rightNow(){
       let resultArr = [];
       let str = "";
@@ -194,13 +209,27 @@ export default {
       }
       
       
+    },
+    number () {
+      return this.$store.state.allstates.total
+    },
+    maxPage () {
+      return Math.ceil(Number(this.number) / 9)
+    },
+    page () {
+      return Number(this.$route.params.page) || 1
+    },
+    hasMore () {
+      return this.page < this.maxPage
     }
     
   },
   watch: {
     $route (to, from) {
-      // debugger
       this.listPage()
+    },
+    nstest (){
+      this.initData(this.$store.state.nstest);
     }
   },
   methods: {
@@ -214,11 +243,20 @@ export default {
     },
     search () {
       let pp = this.searchParams
+      let page = this.pageParam
+      let limit = 9
       let tt = Date.now()
       this.$router.push({
         name:'brouter',
-        params:{ querydata:tt,queryarr:pp }
+        params:{ querydata:tt,queryarr:pp,limit:limit,page:page }
       })
+    },
+    fenye (num){
+      this.pageParam = this.pageParam + num
+      this.search ()
+    },
+    resetPageParam (){
+      this.pageParam = 1;
     },
     jumpItemDetail(data){
         let itemData = JSON.stringify(data)
@@ -294,13 +332,10 @@ export default {
       this.filterList = tempFilterList;
     },
     collectRightClickItem(type,content,e){
-      // debugger
       let that = this
-      
-      console.log(e)
       // 点击右侧选项时，如果是系列 适用空间 类别 则，先会清空 searchParams 的这三项，再加具体值
-      if(type == 'klasses'|| type == 'status'|| type == 'series'){
-        delete this.searchParams.klasses;
+      if(type == 'klass'|| type == 'status'|| type == 'series'){
+        delete this.searchParams.klass;
         delete this.searchParams.status;
         delete this.searchParams.series;
 
