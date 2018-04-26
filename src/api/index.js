@@ -52,6 +52,10 @@ function getAllStates () {
   return axios.get(`/getAllStates`)
 }
 
+function getAllItems() {
+  return axios.get(`/getPoloItem`)
+}
+
 function getPoloItemsByPost(routerParams){
   return axios.post(`/getPoloItemsByPost`,{
     'querydata':routerParams.querydata,
@@ -62,11 +66,11 @@ function getPoloItemsByPost(routerParams){
 }
 
 function nstestAsync (id) {
-  return axios.all([nstest(id),getAllStates()])
+  return axios.all([nstest(id),getAllStates(),getAllItems()])
 }
 
 function getItemsByQueryArr(routerParams){
-  return axios.all([getPoloItemsByPost(routerParams),getAllStates()])
+  return axios.all([getPoloItemsByPost(routerParams),getAllStates(),getAllItems()])
 }
 
 /* ============================= */

@@ -365,6 +365,12 @@ button {
 .page {
   position: relative;
   width: 100%;
+  span{
+    color:#337AB7;
+  }
+  span:hover{
+    cursor:pointer;
+  }
   .prev,
   .next {
     width: 50%;
@@ -1081,6 +1087,10 @@ button {
               p{
                 display: inline-block;
                 padding-left: 11px;
+              }
+              i{
+                font-style: normal;
+                color: #adadad;
               }
             }
             .search-buttons{

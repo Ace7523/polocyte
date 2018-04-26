@@ -27,19 +27,21 @@ export default {
         querydata = encodeURI(querydata)
       }
       return api.getItemsByQueryArr(routerParams)
-      .then(axios.spread(function (nstest,allstates) {
+      .then(axios.spread(function (nstest,allstates,allitems) {
         commit('NS_TEST', {
           nstest: nstest,
-          allstates:allstates
+          allstates:allstates,
+          allitems:allitems
         })
       }))
     }else{
       // debugger
       return api.nstestAsync(id)
-      .then(axios.spread(function (nstest,allstates) {
+      .then(axios.spread(function (nstest,allstates,allitems) {
         commit('NS_TEST', {
           nstest: nstest,
-          allstates:allstates
+          allstates:allstates,
+          allitems:allitems
         })
       }))
     }

@@ -65,11 +65,16 @@
                     <label>当前选择 :</label>
                     <p>{{rightNow}}</p>
                 </div>
+
+                <div class="right-now" v-show="searchTotal!=-1">
+                    <label>共为您找到 :</label>
+                    <p style="color:#474747">{{searchTotal}} <i> 件宝贝</i></p>                
+                </div>
                 <!-- <div class="right-now">
                     <label>searchParams :</label>
                     <p>{{searchParams}}</p>
                 </div> -->
-
+                
                 <div class="search-buttons">
                     <div class="right-button" @click="search">搜索
                         <!-- <router-link :to="{name:'brouter',params:{ querydata:nowTime,queryarr:searchParams }}">搜索</router-link> -->
@@ -110,8 +115,8 @@
               </div>
 
               <div class="page" v-show="routerName == 'brouter'">
-                <span class="prev" @click="fenye(-1)">上一页</span>
-                <span class="next" @click="fenye(1)">下一页</span>
+                <span class="prev" @click="fenye(-1)">《上一页</span>
+                <span class="next" @click="fenye(1)">下一页》</span>
               </div>
 
           </div>
@@ -141,6 +146,7 @@ export default {
     return{
       searchParams: {},
       pageParam: 1,
+      searchTotal: -1,
       goodsIntro: [
         '设计师说：路尽隐香处，影摇月明间',
         '设计师说：诗意不在远方，在身边',
@@ -157,7 +163,7 @@ export default {
     if (this.$root._isMounted) {
       this.listPage()
     }
-    this.initData(this.$store.state.nstest);
+    this.initData(this.$store.state.allitems);
 
     if(localStorage['searchParams']){
       let searchParamsLocal = JSON.parse(localStorage['searchParams']);
@@ -167,6 +173,9 @@ export default {
   computed: {
     nstest () {
       return this.$store.state.nstest
+    },
+    allitems () {
+      return this.$store.state.allitems
     },
     allstates(){
       return this.$store.state.allstates
@@ -228,9 +237,9 @@ export default {
     $route (to, from) {
       this.listPage()
     },
-    nstest (){
-      this.initData(this.$store.state.nstest);
-    }
+    // nstest (){
+    //   this.initData(this.$store.state.nstest);
+    // }
   },
   methods: {
     // todo 这里其实不是很懂
@@ -249,6 +258,14 @@ export default {
       this.$router.push({
         name:'brouter',
         params:{ querydata:tt,queryarr:pp,limit:limit,page:page }
+      })
+      // todo 点击搜索时候 获取这个搜索条件下的商品总数
+       this.axios.post(`/getPoloItemsByPost`,{
+        'queryarr':pp
+      }).then((res)=>{
+        if(res && res.data.code == 200){
+          this.searchTotal = res.data.result.length
+        }
       })
     },
     fenye (num){
