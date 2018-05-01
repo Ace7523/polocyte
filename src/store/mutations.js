@@ -18,6 +18,7 @@ export default {
   NS_TEST (state, data) {
     state.nstest = data.nstest.data
     state.allstates = data.allstates.data.result
+    state.allitems = data.allitems.data
   },
 
   ARTICLES_BY_TAG (state, data) {

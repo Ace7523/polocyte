@@ -6,7 +6,7 @@
         <div class="form">
           <div class="up-button">
             <button class="upbutton" type="button" @click="clearCache">清空缓存值</button>
-            <button class="upbutton" type="button" @click="upitems">上传Item</button>
+            <button class="upbutton" type="button" @click="updateitem">修改Item</button>
           </div>
           <div class="title">
             <label for="itemNo">货号：</label>
@@ -107,7 +107,7 @@
           
 
           <div class="uppic-plug">
-            <span>&nbsp;&nbsp;提示：请使用插件上传图片,点击插件中的图片按钮</span>
+            <span>&nbsp;&nbsp; 提示：请使用插件上传图片,点击插件中的图片按钮,如要保存修改,则此item图片需要重新上传</span>
             <top-editor v-model="imgUrls" :upload="upItemImgUrl" :options="options"></top-editor>
           </div>
           
@@ -124,6 +124,7 @@ export default {
   name: 'Publish',
   data () {
     return {
+      dateid: this.$route.params.dateid,
       //货号
       itemNo:''||localStorage.getItem('itemNo'),
       //名称
@@ -197,12 +198,49 @@ export default {
     }
   },
 
-  mounted () {
-    
+//   mounted () {
+    created () {
+    if (this.dateid) {
+        let obj = {}
+        obj.date = this.dateid
+        this.axios.post(`/getPoloItemsByPost`,{
+            'queryarr':obj
+        }).then((res)=>{
+            if(res && res.data.code == 200){
+                this.itemDetail = res.data.result[0]
+
+                this.itemNo = this.itemDetail.itemNo
+                this.itemName = this.itemDetail.itemName
+                this.brand = this.itemDetail.brand
+                this.series = this.itemDetail.series
+                this.material = this.itemDetail.material
+                this.standard = this.itemDetail.standard
+                this.status = this.itemDetail.status
+                this.functions = this.itemDetail.functions
+                this.styles = this.itemDetail.styles
+                this.color = this.itemDetail.color
+                this.productLoc = this.itemDetail.productLoc
+                this.shape = this.itemDetail.shape
+                this.klass = this.itemDetail.klass
+                this.specific = this.itemDetail.specific
+
+                this.feature1 = this.itemDetail.feature1
+                this.feature2 = this.itemDetail.feature2
+                this.feature3 = this.itemDetail.feature3
+                this.features = this.itemDetail.features
+                this.paint = this.itemDetail.paint
+                this.isCanPersonal = this.itemDetail.isCanPersonal
+                this.featuredesc = this.itemDetail.featuredesc
+                this.reserve1 = this.itemDetail.reserve1
+                this.reserve2 = this.itemDetail.reserve2
+                this.itemPrice = this.itemDetail.itemPrice
+                //todo 多图片的处理
+            }
+        })
+    }
   },
   watch: {
     imaUrlArr(newVal, oldVal){
-        // alert("todo1")
         this.imgUrlsToArr();
         if(newVal) {
             
@@ -276,6 +314,67 @@ export default {
         history.go(0)
       })
     },
+    updateitem(){
+      //进行本地存储，下次再上传新案例时候直接带上上次的值作为默认
+      localStorage.setItem('itemNo',this.itemNo)
+      localStorage.setItem('itemName',this.itemName)
+      localStorage.setItem('brand',this.brand)
+      localStorage.setItem('series',this.series)
+      localStorage.setItem('material',this.material)
+      localStorage.setItem('standard',this.standard)
+      localStorage.setItem('status',this.status)
+      localStorage.setItem('functions',this.functions)
+      localStorage.setItem('styles',this.styles)
+      localStorage.setItem('color',this.color)
+      localStorage.setItem('productLoc',this.productLoc)
+      localStorage.setItem('shape',this.shape)
+      localStorage.setItem('klass',this.klass)
+      localStorage.setItem('specific',this.specific)
+      localStorage.setItem('feature1',this.feature1)
+      localStorage.setItem('feature2',this.feature2)
+      localStorage.setItem('feature3',this.feature3)
+      localStorage.setItem('features',this.features)
+      localStorage.setItem('paint',this.paint)
+      localStorage.setItem('isCanPersonal',this.isCanPersonal)
+      localStorage.setItem('featuredesc',this.featuredesc)
+      localStorage.setItem('reserve1',this.reserve1)
+      localStorage.setItem('reserve2',this.reserve2)
+      localStorage.setItem('itemPrice',this.itemPrice)
+      localStorage.setItem('imageList',this.imageList)
+
+      this.axios.post('/upPoloItem', {
+        'itemNo':this.itemNo,
+        'itemName':this.itemName,
+        'brand':this.brand,
+        'series':this.series,
+        'material':this.material,
+        'standard':this.standard,
+        'status':this.status,
+        'functions':this.functions,
+        'styles':this.styles,
+        'color':this.color,
+        'productLoc':this.productLoc,
+        'shape':this.shape,
+        'klass':this.klass,
+        'specific':this.specific,
+
+        'feature1':this.feature1,
+        'feature2':this.feature2,
+        'feature3':this.feature3,
+        'features':this.features,
+        'paint':this.paint,
+        'isCanPersonal':this.isCanPersonal,
+        'featuredesc':this.featuredesc,
+        'reserve1':this.reserve1,
+        'reserve2':this.reserve2,
+        'itemPrice':this.itemPrice,
+        'imageList':this.imageList,
+        'date': this.$route.params.dateid
+      }).then((result) => {
+        alert("修改成功")
+        history.go(0)
+      })
+    },
     clearCache(){
       localStorage.setItem('itemNo','')
       localStorage.setItem('itemName','')
@@ -311,6 +410,7 @@ export default {
     },
     imgUrlsToArr(){
         let that = this;
+        console.log("文章内容",this.imgUrls);
         let index = -1 ;
         let urlList = [];
         let urlEndList = [];
@@ -318,19 +418,24 @@ export default {
           index = this.imgUrls.indexOf("![](", index + 1); //使用第二个参数index+1，控制每一次查找都是从上一次查找到字符a的下一个索引位置开始
           if (index != -1) { //可以找到字符i
           urlList.push(index);
+          console.log(index); //输出a的位置
           }
         } while (index != -1);
         do {
           index = this.imgUrls.indexOf(")", index + 1); //使用第二个参数index+1，控制每一次查找都是从上一次查找到字符a的下一个索引位置开始
           if (index != -1) { //可以找到字符i
           urlEndList.push(index)
+          console.log(index); //输出a的位置
           }
         } while (index != -1);
 
-        // 复位一下图片列表
-        that.imageList = [];
+        console.log(urlList)
+        console.log(urlEndList)
+
         for(let i =0 ; i<urlList.length; i++){
+          // console.log(this.content.substring(urlList[i]+4,urlEndList[i]))
           that.imageList.push(that.imgUrls.substring(urlList[i]+4,urlEndList[i]))
+          console.log(that.imageList);
         }
     }
 

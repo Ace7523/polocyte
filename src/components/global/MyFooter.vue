@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <div class="footer">
     <div class="container">
       <div class="foot-des">
         <div>
@@ -13,7 +13,6 @@
           <p>如何退换</p>
           <p>购物流程</p>
           <p>如何退换</p>
-          <p>关于发票</p>
           <p>关于发票</p>
         </div>
         <div>
@@ -44,5 +43,5 @@
         <p class="beianhao">粤ICP 11079316号</p>
       </div>
     </div>
-  </footer>
+  </div>
 </template>

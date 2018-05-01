@@ -91,26 +91,6 @@ exports.getArticle = function(req, res, next) {
   })
 }
 
-exports.getNstest = function(req, res, next) {
- 
-  db.find('images', { "query": {} }, function(err, result) {
-    if (err) {
-      console.log(err)
-      return res.json({
-        "code": 404,
-        "message": "数据获取失败",
-        "result": []
-      })
-    }
-    console.log("!!!!!!!!!!!!!",result)
-    return res.json({
-      "code": 200,
-      "message": "数据获取成功",
-      "result": result
-    })
-  })
-}
-
 exports.tags = function(req, res, next) {
   db.find('infos', { "query": { "state": "publish" } }, function(err, result) {
     if (err) {
@@ -428,7 +408,7 @@ exports.article = function(req, res, next) {
     })
   })
 }
-
+// 上传首页第一部分图片和描述 
 exports.uploadimagedesc = function(req, res, next) {
     // 获取内容
     let form = new formidable.IncomingForm()
@@ -516,7 +496,7 @@ exports.uploadimagedesc = function(req, res, next) {
       // })
     })
 }
-
+// 上传首页第二部分图片和描述 
 exports.uploadimagedesc2 = function(req, res, next) {
   // 获取内容
   let form = new formidable.IncomingForm()
@@ -604,7 +584,7 @@ exports.uploadimagedesc2 = function(req, res, next) {
     // })
   })
 }
-
+// 获取首页第一部分图片和描述 
 exports.getUploadimagedesc = function(req, res, next) {
 
   db.find('imagedesc', { "query": {} }, function(err, result) {
@@ -624,26 +604,25 @@ exports.getUploadimagedesc = function(req, res, next) {
     })
   })
 }
-
+// 获取首页第一部分图片和描述 
 exports.getUploadimagedesc2 = function(req, res, next) {
-  
-    db.find('imagedesc2', { "query": {} }, function(err, result) {
-      if (err) {
-        console.log(err)
-        return res.json({
-          "code": 404,
-          "message": "数据获取失败",
-          "result": []
-        })
-      }
-      
+  db.find('imagedesc2', { "query": {} }, function(err, result) {
+    if (err) {
+      console.log(err)
       return res.json({
-        "code": 200,
-        "message": "数据获取成功",
-        "result": result
+        "code": 404,
+        "message": "数据获取失败",
+        "result": []
       })
+    }
+    
+    return res.json({
+      "code": 200,
+      "message": "数据获取成功",
+      "result": result
     })
-  }
+  })
+}
 
 exports.login = function(req, res, next) {
   let form = new formidable.IncomingForm()
@@ -775,6 +754,7 @@ exports.avatar = function(req, res, next) {
     })
 }
 
+// 原本的上传博客接口
 exports.upload = function(req, res, next) {
   let username = req.cookies.username
   let form = new formidable.IncomingForm()
@@ -805,7 +785,7 @@ exports.upload = function(req, res, next) {
     })
   })
 }
-
+// 上传首页图片接口
 exports.uploadimage = function(req, res, next) {
   let username = req.cookies.username
   let form = new formidable.IncomingForm()
@@ -862,7 +842,7 @@ exports.uploadimage = function(req, res, next) {
     })
   }) 
 }
-
+// 上传具体一个商品的图片接口
 exports.uploaditemimage = function(req, res, next) {
   let username = req.cookies.username
   let form = new formidable.IncomingForm()
@@ -969,101 +949,216 @@ exports.uploaditemimage = function(req, res, next) {
     })
   }
 }
-
+// 上传和修改 具体一个商品接口
 exports.upPoloItem = function(req, res, next) {
   // 获取内容
   let form = new formidable.IncomingForm()
   form.parse(req, function(err, fields, files) {
 
+    let itemNo = fields.itemNo;
+    let itemName = fields.itemName;
     let brand = fields.brand;
     let series = fields.series;
+    let material = fields.material;
+    let standard = fields.standard;
     let status = fields.status;
+    let functions = fields.functions;
+    let styles = fields.styles;
+    let color = fields.color;
+    let productLoc = fields.productLoc;
+    let shape = fields.shape;
     let klass = fields.klass;
     let specific = fields.specific;
-    let material = fields.material;
+    
+    let feature1 = fields.feature1;
+    let feature2 = fields.feature2;
+    let feature3 = fields.feature3;
     let features = fields.features;
+    let paint = fields.paint;
+    let isCanPersonal = fields.isCanPersonal;
     let featuredesc = fields.featuredesc;
-    let standard = fields.standard;
-    let itemNo = fields.itemNo;
+    let reserve1 = fields.reserve1;
+    let reserve2 = fields.reserve2;
     let itemPrice = fields.itemPrice;
     let imageList = fields.imageList;
     let date = fields.date;
 
     let newData = {
-      "brand": brand,
-      "series": series,
-      "status": status,
-      "klass": klass,
-      "specific": specific,
-      "material": material,
+      "itemNo": itemNo,//货号
+      "itemName": itemName,//名称
+      "brand": brand,//品牌
+      "series": series,//系列
+      "material": material,//材质
+      "standard": standard,//规格
+      "status": status,//适用空间
+
+      "functions": functions,//功能
+      "styles": styles,//风格
+      "color": color,//颜色
+      "productLoc": productLoc,//产地
+      "shape": shape,//形状
+
+      "klass": klass,//如 床 柜子 衣架
+      "specific": specific,//如单人床  大衣柜 小衣柜 等具体分类
+
+      "feature1": feature1,//甲醛释放量
+      "feature2": feature2,//结构工艺
+      "feature3": feature3,
       "features": features,
-      "featuredesc": featuredesc,
-      "standard": standard,
-      "itemNo": itemNo,
-      "itemPrice": itemPrice,
-      "imageList": imageList,
+      "paint": paint,//油漆
+
+      "isCanPersonal": isCanPersonal,//是否可定制
+      "featuredesc": featuredesc,//产品描述
+      "reserve1": reserve1,//预留字段1
+      "reserve2": reserve2,//预留字段2
+      "itemPrice": itemPrice,//价格
+      "imageList": imageList,//图片列表 
       "date": date
     };
-    // 插入到数据库
-    db.insertOne('poloitems', newData, function(err, result) {
+
+    db.find('poloitems', { "query": { "date": date } }, function(err, result) {
       if (err) {
         console.log(err)
         return res.json({
-          "code": 401,
-          "message": "文章发布失败"
+          "code": 500,
+          "message": "内部服务器错误"
+        })
+      }
+
+      if (result.length === 1) {
+        db.updateMany('poloitems', { "date": date }, newData, function(err, result2) {
+          if (err) {
+            console.log(err)
+            return res.json({
+              "code": 401,
+              "message": "文章更新失败"
+            })
+          }
+          return res.json({
+            "code": 200,
+            "message": "文章更新成功"
+          })
+        })
+      } else {
+        // 插入到数据库
+        db.insertOne('poloitems', newData, function(err, result3) {
+          if (err) {
+            console.log(err)
+            return res.json({
+              "code": 401,
+              "message": "ietm实例存入数据库失败"
+            })
+          }
+          return res.json({
+            "code": 200,
+            "message": "ietm实例存入数据库成功"
+          })
+        })
+      }
+    })
+
+        // let newData = {
+
+        //   "itemNo": itemNo,//货号
+        //   "itemName": itemName,//名称
+        //   "brand": brand,//品牌
+        //   "series": series,//系列
+        //   "material": material,//材质
+        //   "standard": standard,//规格
+        //   "status": status,//适用空间
+
+        //   "functions": functions,//功能
+        //   "styles": styles,//风格
+        //   "color": color,//颜色
+        //   "productLoc": productLoc,//产地
+        //   "shape": shape,//形状
+
+        //   "klass": klass,//如 床 柜子 衣架
+        //   "specific": specific,//如单人床  大衣柜 小衣柜 等具体分类
+
+        //   "feature1": feature1,//甲醛释放量
+        //   "feature2": feature2,//结构工艺
+        //   "feature3": feature3,
+        //   "features": features,
+        //   "paint": paint,//油漆
+
+        //   "isCanPersonal": isCanPersonal,//是否可定制
+        //   "featuredesc": featuredesc,//产品描述
+        //   "reserve1": reserve1,//预留字段1
+        //   "reserve2": reserve2,//预留字段2
+        //   "itemPrice": itemPrice,//价格
+        //   "imageList": imageList,//图片列表 
+        //   "date": date
+        // };
+        // 插入到数据库
+        // db.insertOne('poloitems', newData, function(err, result) {
+        //   if (err) {
+        //     console.log(err)
+        //     return res.json({
+        //       "code": 401,
+        //       "message": "ietm实例存入数据库失败"
+        //     })
+        //   }
+        //   return res.json({
+        //     "code": 200,
+        //     "message": "ietm实例存入数据库成功"
+        //   })
+        // })
+  })
+}
+// 获取全部数据
+exports.getPoloItem = function(req, res, next) {
+  let limit = Number(req.query.limit)
+  let page = Number(req.query.page)
+  let sortInfo = Number(req.query.sort) || -1
+  let sort = { "date": sortInfo }
+  db.find('poloitems', { "query": {}, "limit": limit, "page": page, "sort": sort}, function(err, result) {
+    if (err) {
+      console.log(err)
+      return res.json({
+        "code": 404,
+        "message": "数据获取失败",
+        "result": []
+      })
+    }
+    return res.json({
+      "code": 200,
+      "message": "数据获取成功",
+      "result": result
+    })
+  })
+}
+
+
+exports.getPoloItemsByPost = function(req, res, next) {
+
+  let form = new formidable.IncomingForm()
+  form.parse(req, function(err, fields, files) {
+
+    let querydata = fields.querydata
+    let queryarr = fields.queryarr
+    let page = fields.page
+    let limit = fields.limit
+    let sort = { "date": -1 }
+
+    db.find('poloitems', { "query": queryarr ,"limit": limit, "page": page, "sort": sort}, function(err, result) {  
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 404,
+          "message": "数据获取失败",
+          "result": []
         })
       }
       return res.json({
         "code": 200,
-        "message": "文章发布成功"
+        "message": "数据获取成功",
+        "result": result
       })
     })
   })
-}
-
-exports.getPoloItem = function(req, res, next) {
   
-  db.find('poloitems', { "query": {} }, function(err, result) {
-    if (err) {
-      console.log(err)
-      return res.json({
-        "code": 404,
-        "message": "数据获取失败",
-        "result": []
-      })
-    }
-    
-    return res.json({
-      "code": 200,
-      "message": "数据获取成功",
-      "result": result
-    })
-  })
 }
-
-exports.getPoloItems = function(req, res, next) {
-  let querydata = ''
-  if(req.query && req.query.querydata){
-    querydata = req.query.querydata
-  }
-  db.find('poloitems', { "query": {'status':querydata} }, function(err, result) {
-    if (err) {
-      console.log(err)
-      return res.json({
-        "code": 404,
-        "message": "数据获取失败",
-        "result": []
-      })
-    }
-    
-    return res.json({
-      "code": 200,
-      "message": "数据获取成功",
-      "result": result
-    })
-  })
-}
-
 
 exports.getAllStates = function(req, res, next) {
   db.find('poloitems', { "query": {} }, function(err, result) {
@@ -1080,11 +1175,14 @@ exports.getAllStates = function(req, res, next) {
     let arr2 = []
     let arr3 = []
     let arr4 = [] 
+    let arr5 = [] 
+    let arr6 = [] 
     let arrRestlt = {}
     if(result.length > 0){
       for(let i = 0 ; i< result.length ; i++){
         arr1.push(result[i].status)
         arr3.push(result[i].klass)
+        arr5.push(result[i].series)
       }
     }
     arr1.sort();
@@ -1117,12 +1215,31 @@ exports.getAllStates = function(req, res, next) {
       i += count;
     }
 
+    arr5.sort()
+    for (let i = 0; i < arr5.length;) {
+      let count = 0;
+      for (let j = i; j < arr5.length; j++) {
+        if (arr5[i] === arr5[j]) {
+          count++;
+        }
+      }
+      arr6.push({
+        tag: arr5[i],
+        count: count
+      })
+      i += count;
+    }
+
 
     arr2.reverse()
     arr4.reverse()
+    arr6.reverse()
     
     arrRestlt.statuses = arr2;
     arrRestlt.klasses = arr4;
+    arrRestlt.series = arr6;
+
+    arrRestlt.total = result.length
 
     return res.json({
       "code": 200,

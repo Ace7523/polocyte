@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { Article, List, Admin , Classify,Nstest} from '../views/CreateListView'
+import { Article, List, Admin , Classify , Nstest} from '../views/CreateListView'
 const Login = () =>
   import('../views/Login.vue')
 
@@ -21,6 +21,15 @@ const UpNewProdtct = () =>
 
 const UpItems = () =>
   import('../views/admin/UpItems.vue')  
+
+const AllItems = () =>
+  import('../views/admin/AllItems.vue')   
+
+const OneItem = () =>
+  import('../views/admin/OneItem.vue')     
+
+const ItemDeatil = () =>
+  import('../views/ItemDetail.vue')   
 Vue.use(Router)
 export function createRouter () {
   return new Router({
@@ -54,9 +63,13 @@ export function createRouter () {
       name: 'classify',
       component: Classify('article')
     }, {
-      path: '/nstest',
+      path: '/nstest/:page?',
       name: 'nstest',
       component: Nstest('nstest')
+    }, {
+      path: '/itemdetail',
+      name: 'itemdetail',
+      component: ItemDeatil
     }, {
       path: '/brouter/:querydata',
       name: 'brouter',
@@ -110,6 +123,20 @@ export function createRouter () {
         Auth: true
       },
       component: UpItems
+    }, {
+      path: '/allItems',
+      name: 'allItems',
+      meta: {
+        Auth: true
+      },
+      component: AllItems
+    },{
+      path: '/oneItem/:dateid',
+      name: 'oneItem',
+      meta: {
+        Auth: true
+      },
+      component: OneItem
     },{
       path: '/:page?',
       name: 'index',

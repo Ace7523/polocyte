@@ -1,0 +1,88 @@
+<template>
+  <div class="admin">
+    <admin-aside></admin-aside>
+    <div class="admin-content">
+      <div class="item" v-for="(item ,index) in allItemList" :key="index" @click="getOneItem(item.date)">
+        <span class="span1">{{item.series}} : </span>
+        <span>{{item.itemNo}}--{{item.itemName}}--上传时间:{{item.time}}</span>
+        <span class="span3"> （点击编辑）</span>
+        
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import AdminAside from '../../components/admin/AdminAside.vue'
+
+export default {
+  name: 'AllItems',
+  data () {
+    return {
+      allItemList:[],
+    }
+  },
+
+  mounted () {
+    this.getAllData()
+  },
+  methods: {
+    getAllData(){
+      let that = this
+      this.axios.get(`/getPoloItem`).then((res)=>{
+        if(res && res.data && res.data.result.length>0){
+          this.allItemList = res.data.result
+          this.allItemList.forEach(item => {
+            item.time = that.timestampToTime(item.date)
+          });
+        }
+      })
+    },
+    getOneItem(dateid){
+      let obj = {}
+      obj.date = dateid
+      this.axios.post(`/getPoloItemsByPost`,{
+        'queryarr':obj
+      }).then((res)=>{
+        if(res && res.data.code == 200){
+          this.$router.push({ name: 'oneItem', params: { dateid: dateid } })
+        }
+      })
+    },
+    timestampToTime(timestamp) {
+      var date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      var Y = date.getFullYear() + '-';
+      var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+      var D = date.getDate() + ' ';
+      var h = date.getHours() + ':';
+      var m = date.getMinutes() + ':';
+      var s = date.getSeconds();
+      return Y+M+D+h+m+s;
+    }
+  },
+  components: {
+    AdminAside
+  },
+  computed: {
+    time (timestamp) {
+      return this.timestampToTime(timestamp)
+    },
+  },
+}
+</script>
+<style>
+  .admin-content .item{
+    padding: 10px;
+    /* background: rgb(190, 181, 181); */
+    border-bottom: 1px solid #dcdcdc;
+  }
+  .admin-content .item .span1{
+    display: inline-block;
+    width: 70px;
+  }
+  .span3{
+    color:rgb(83, 157, 218);
+  }
+  .item:hover{
+    background: rgb(232, 235, 69);
+  }
+</style>

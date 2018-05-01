@@ -17,27 +17,31 @@ export default {
   NS_TEST ({ commit, state }) {
     let routerName = state.route.name
     let routerParams = state.route.params
+    const id = state.route.params.page
 
     if(routerName == 'brouter'){
-      console.log("+++++++++++++++++++++++++++++++")
+      // debugger
       let querydata = state.route.params.querydata
       let reg = new RegExp('[\u4E00-\u9FFF]+', 'g') //汉字字符  + 意思是至少有一个
       if (reg.test(querydata)) {
         querydata = encodeURI(querydata)
       }
-      return api.getItemsByQuerydata(querydata)
-      .then(axios.spread(function (nstest,allstates) {
+      return api.getItemsByQueryArr(routerParams)
+      .then(axios.spread(function (nstest,allstates,allitems) {
         commit('NS_TEST', {
           nstest: nstest,
-          allstates:allstates
+          allstates:allstates,
+          allitems:allitems
         })
       }))
     }else{
-      return api.nstestAsync()
-      .then(axios.spread(function (nstest,allstates) {
+      // debugger
+      return api.nstestAsync(id)
+      .then(axios.spread(function (nstest,allstates,allitems) {
         commit('NS_TEST', {
           nstest: nstest,
-          allstates:allstates
+          allstates:allstates,
+          allitems:allitems
         })
       }))
     }
