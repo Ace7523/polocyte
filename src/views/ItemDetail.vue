@@ -11,7 +11,7 @@
         <div class="right-wrap">
           <div class="for-center">
 
-            <p> &nbsp; &nbsp; {{itemData.itemName}}</p>
+            <p class="title">【{{itemData.itemName}}】</p>
             <p>品牌 : {{itemData.brand}}</p>
             <p>系列 : {{itemData.series}}</p>
             <p>货号 : {{itemData.itemNo}}</p>

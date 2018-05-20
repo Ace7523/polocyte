@@ -10,19 +10,19 @@
           <div class="polo-category">
             <div class="content-stytle" @click="resetPageParam">
 
-              <div class="title">系列</div>
+              <div class="title"><span></span>系列</div>
               <div class="item" v-for="(item,index) in allstates.series" :key="index" @click="collectRightClickItem('series',item.tag)">
-                  <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'series':item.tag},limit:9 }}">{{item.tag}} ({{item.count}})</router-link>
+                  <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'series':item.tag},limit:9 }}">{{item.tag}} </router-link>
               </div>
 
-              <div class="title">适用空间</div> 
+              <div class="title"><span></span>适用空间</div> 
               <div class="item" v-for="(item,index) in allstates.statuses" :key="index" @click="collectRightClickItem('status',item.tag)">
-                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'status':item.tag},limit:9  }}">{{item.tag}} ({{item.count}})</router-link>
+                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'status':item.tag},limit:9  }}">{{item.tag}} </router-link>
               </div>
 
-              <div class="title">分类</div>
+              <div class="title"><span></span>分类</div>
               <div class="item" v-for="(item,index) in allstates.klasses" :key="index" @click="collectRightClickItem('klass',item.tag)">
-                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'klass':item.tag},limit:9  }}">{{item.tag}} ({{item.count}})</router-link>
+                <router-link :to="{name:'brouter',params:{querydata:item.tag,queryarr:{'klass':item.tag},limit:9  }}">{{item.tag}} </router-link>
               </div>
 
             </div>
@@ -95,9 +95,10 @@
                   <img :src="resultItem.imageList[0]" alt="">
                   <!-- <div class="for-image" style="background: url(item)"> -->
                 </div>
-                <p class="goods-intro">{{goodsIntro[index%6]}}</p>
+                <!-- <p class="goods-intro"><span></span>&nbsp;{{goodsIntro[index%6]}}</p> -->
+                <p class="goods-intro"><span></span>&nbsp;{{resultItem.featuredesc}}</p>
                 <p class="item-name">{{resultItem.itemName}}</p>
-                <p class="item-status">【{{resultItem.status}}--{{resultItem.klass}}--{{resultItem.itemNo}}】</p>
+                <p class="item-status">{{resultItem.status}}--{{resultItem.klass}}--{{resultItem.itemNo}}</p>
                 
                 
                 <!-- <p class="item-klass">{{resultItem.klass}}</p> -->
@@ -399,3 +400,14 @@ export default {
   }
 }
 </script>
+<style>
+ .goods-intro span{
+     display: inline-block;
+     width: 25px;
+     height: 25px;
+     background: url(../../public/indexPicture/icon-item.png) no-repeat;
+     background-size: 100%;
+     position: relative;
+     top: 4px;
+ }
+</style>
