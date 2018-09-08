@@ -3,30 +3,34 @@
     <div class="container">
       <div class="foot-des">
         <div>
-          <p>新手上路</p>
-          <p>家具挑选</p>
-          <p>关于实木</p>
-          <p>关于家居</p>
-          <p>关于装饰</p>
+          <p @click="jumpComponyIntroduction()">集团简介</p>
+          <p @click="jumpBrandIntroduction()">品牌故事</p>
+          <p @click="jumpHonorIntroduction()">资历荣耀</p>
+          <p>咨询公示</p>
+          <p>活动促销</p>
         </div>
         <div>
-          <p>如何退换</p>
-          <p>购物流程</p>
-          <p>如何退换</p>
-          <p>关于发票</p>
+          <p>分销系统</p>
+          <p>商学院</p>
+          <p>门店查询</p>
+          <p>招商加盟</p>
+          <p>检测报告真伪查询</p>
         </div>
         <div>
-          <p>帮助中心</p>
-          <p>商品退换货政策</p>
-          <p>如何办理退换货</p>
-          <p>客服热线：021-23137709</p>
-          <p>业务热线：021-54811111</p>
+          <p>在线客服</p>
+          <p>常见问题</p>
+          <p>保养贴士</p>
         </div>
         <div>
-          <p>关注官方微信</p>
-          <p>图片</p>
-          <p>关注官方微博</p>
-          <p>图片</p>
+          <p>湛江玛珥湖投资发展有限公司</p>
+          <p>湛江高尔夫职业技术学校</p>
+          <p>蔓陀妮官方网站</p>
+        </div>
+        <div>
+          <p>400-678-4057</p>
+          <p>传真 0759-2673308</p>
+          <p>微信（二维码）</p>
+          <p>微博（二维码）</p>
         </div>
       </div>
       <div class="copy">
@@ -45,3 +49,27 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  name: '',
+  data(){
+    return{
+    }
+  },
+  mounted () {
+  },
+  methods: {
+    jumpComponyIntroduction(){
+      this.$router.push({name:'companyintroduce'})
+    },
+    jumpBrandIntroduction(){
+      this.$router.push({name:'brandintroduce'})
+    },
+    jumpHonorIntroduction(){
+      this.$router.push({name:'honorintroduce'})
+    },
+  },
+  components: {
+  }
+}
+</script>
