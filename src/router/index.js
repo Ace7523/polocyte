@@ -29,7 +29,16 @@ const OneItem = () =>
   import('../views/admin/OneItem.vue')     
 
 const ItemDeatil = () =>
-  import('../views/ItemDetail.vue')   
+  import('../views/ItemDetail.vue') 
+
+const companyIntroduction = () =>
+  import('../views/company-introduction.vue') 
+
+const brandIntroduction = () =>
+  import('../views/brand-introduction.vue')  
+
+const honorIntroduction = () =>
+  import('../views/honor-introduction.vue')    
 Vue.use(Router)
 export function createRouter () {
   return new Router({
@@ -71,6 +80,18 @@ export function createRouter () {
       name: 'itemdetail',
       component: ItemDeatil
     }, {
+      path: '/companyintroduce',
+      name: 'companyintroduce',
+      component: companyIntroduction
+    },{
+      path: '/brandintroduce',
+      name: 'brandintroduce',
+      component: brandIntroduction
+    },{
+      path: '/honorintroduce',
+      name: 'honorintroduce',
+      component: honorIntroduction
+    },{
       path: '/brouter/:querydata',
       name: 'brouter',
       component: Nstest('brouter')
