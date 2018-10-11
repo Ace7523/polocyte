@@ -7,6 +7,10 @@ Vue.use(Vuex)
 export function createStore () {
   return new Vuex.Store({
     state: {
+      newsList: [],
+      newsListLength: '',
+      newsListTagLength: '',
+      newsListTimeLength: '',
       articleList: [],
       administrator: [],
       articleDetail: '',

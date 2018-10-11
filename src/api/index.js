@@ -4,6 +4,19 @@ function posts (id = 1) {
   return axios.get(`/posts?limit=15&page=${id}`)
 }
 
+// 获取新闻列表数据
+function getNewsList (id = 1) {
+  return axios.get(`/getnewslist?limit=15&page=${id}`)
+}
+
+function getNewsByTag (tag = '', id = 1) {
+  return axios.get(`/getnewsbytag?tag=${tag}&limit=15&page=${id}`)
+}
+
+function getNewsByTime (date = '', id = 1) {
+  return axios.get(`/getnewsbytime?date=${date}&limit=15&page=${id}`)
+}
+
 // 通过标签获取文章列表
 function tag (params = '', id = 1) {
   return axios.get(`/tag?tag=${params}&limit=15&page=${id}`)
@@ -44,6 +57,11 @@ function article (id) {
   return axios.get(`/article?id=${id}`)
 }
 
+// 新闻详情
+function getNewsDetail (id) {
+  return axios.get(`/getNewsDetail?id=${id}`)
+}
+
 function nstest (id) {
   return axios.get(`/getPoloItem?limit=9&page=${id}`)
 }
@@ -74,6 +92,23 @@ function getItemsByQueryArr(routerParams){
 }
 
 /* ============================= */
+// 新闻资讯列表页
+function newslistpage (id) {
+  return axios.all([getNewsList(id)])
+}
+
+function newslistByTag (tag, id) {
+  return axios.all([getNewsByTag(tag, id)])
+}
+
+function newslistByTime (date, id) {
+  return axios.all([getNewsByTime(date, id)])
+}
+
+// 新闻资讯页
+function newspage (id) {
+  return axios.all([getNewsDetail(id), administrator(), tags(), archives()])
+}
 
 // 首页 
 function indexPage (id) {
@@ -110,5 +145,9 @@ export default {
    tags, 
    administrator, 
    nstestAsync,
-   getItemsByQueryArr
+   getItemsByQueryArr,
+   newslistpage,
+   newspage,
+   newslistByTag,
+   newslistByTime
   }
