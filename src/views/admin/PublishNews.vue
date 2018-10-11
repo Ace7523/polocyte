@@ -31,6 +31,7 @@
 <script>
 import AdminAside from '../../components/admin/AdminAside.vue'
 import hljs from 'highlight.js'
+import { getApi } from '../../api/apiconfig.js'
 export default {
   name: 'Publish',
   data () {
@@ -42,7 +43,8 @@ export default {
       imageList:[],
       articleID: this.$route.params.id,
       upload: {
-        url: 'http://localhost:8080/api/uploadnewspic'
+        // url: 'http://localhost:8080/api/uploadnewspic'
+        url: getApi().baseURL+"/uploadnewspic"
       },
       options: {
         linkify: true,
