@@ -1,10 +1,8 @@
 <template>
-  <div class="article-list">type：{{type}}
+  <div class="article-list">
     <ul class="items">
       <li v-for="(item,index) in data" class="item" :key="index">
-        <router-link class="title" :to="{name:'article',params:{id:item.date}}">{{item.title}}</router-link>
-        <router-link class="title" :to="{name:'classify', params:{id:item.date}}">--（测试分类汇总页入口）{{item.title}}</router-link>
-        <router-link class="title" :to="{name:'nstest', params:{id:item.date}}">--（nstest）{{item.title}}</router-link>
+        <router-link class="title" :to="{name:'news',params:{id:item.date}}">{{item.title}}</router-link>
         <article class="content">{{item.content | markdownParse | cutString(200)}}</article>
       </li>
     </ul>
@@ -33,19 +31,22 @@ export default {
       this.listPage()
     }
   },
+  mounted () {
+    console.log(this.data)
+  },
   data () {
     return {
-      data:'',
+      //   data:'',
       type:''
     }
   },
   // props: ['type'],
   computed: {
-    // data () {
-    //   return this.$store.state.articleList
-    // },
+    data () {
+      return this.$store.state.newsList
+    },
     maxPage () {
-      return Math.ceil(Number(this.$store.state.total) / 15)
+      return Math.ceil(Number(this.$store.state.newsListLength) / 15)
     },
     change () {
       return this.$route.params.change
@@ -58,10 +59,10 @@ export default {
     }
   },
   mounted() {
-    this.axios.get(`/articles`).then((data) => {
-      this.data = data.data.result
-      console.log(data)
-    })
+    // this.axios.get(`/articles`).then((data) => {
+    //   this.data = data.data.result
+    //   console.log(data)
+    // })
   },
   watch: {
     $route (to, from) {
@@ -72,7 +73,7 @@ export default {
     // 点击分页后，重新获取数据
     listPage () {
       this.$bar.start()
-      this.$store.dispatch('LIST_PAGE').then(() => {
+      this.$store.dispatch('NEWS_LIST_PAGE').then(() => {
         this.$bar.finish()
       })
     }

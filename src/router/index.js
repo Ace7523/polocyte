@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import { Article, List, Admin , Classify , Nstest} from '../views/CreateListView'
+import { NewsList, News } from '../views/BeforeRender'
 const Login = () =>
   import('../views/Login.vue')
 
 const Publish = () =>
   import('../views/admin/Publish.vue')
+
+const PublishNews = () =>
+  import('../views/admin/PublishNews.vue')  
 
 const UpdateAdminInfo = () =>
   import('../views/admin/UpdateAdminInfo.vue')
@@ -38,7 +42,10 @@ const brandIntroduction = () =>
   import('../views/brand-introduction.vue')  
 
 const honorIntroduction = () =>
-  import('../views/honor-introduction.vue')    
+  import('../views/honor-introduction.vue')
+
+const olist = () =>
+  import('../views/olist.vue')    
 Vue.use(Router)
 export function createRouter () {
   return new Router({
@@ -50,6 +57,21 @@ export function createRouter () {
       name: 'login',
       component: Login
     }, 
+    {
+      path: '/newslist/:change?/:page?',
+      name: 'newslist',
+      component: NewsList('typy1')
+    },
+    {
+      path: '/newslistbytime/:change?/:page?',
+      name: 'newslistbytime',
+      component: NewsList('typy1')
+    },
+    {
+      path: '/newslistbytag/:change?/:page?',
+      name: 'newslistbytag',
+      component: NewsList('typy1')
+    },
     {
       path: '/category/:change?/:page?',
       name: 'category',
@@ -68,6 +90,10 @@ export function createRouter () {
       name: 'article',
       component: Article('article')
     },{
+      path: '/news/:id',
+      name: 'news',
+      component: News('article')
+    },{
       path: '/classify/:id',
       name: 'classify',
       component: Classify('article')
@@ -80,6 +106,10 @@ export function createRouter () {
       name: 'itemdetail',
       component: ItemDeatil
     }, {
+      path: '/olist',
+      name: 'olist',
+      component: olist
+    },{
       path: '/companyintroduce',
       name: 'companyintroduce',
       component: companyIntroduction
@@ -109,6 +139,13 @@ export function createRouter () {
         Auth: true
       },
       component: Publish
+    },{
+      path: '/publishNews/:id?',
+      name: 'publishnews',
+      meta: {
+        Auth: true
+      },
+      component: PublishNews
     }, {
       path: '/updateAdminInfo',
       name: 'updateAdminInfo',

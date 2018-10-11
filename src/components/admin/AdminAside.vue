@@ -29,6 +29,9 @@ export default {
         name: '修改密码',
         path: '/updateAdminPassword'
       }, {
+        name: '上传-新闻资讯',
+        path: '/publishnews'
+      }, {
         name: '上传-今日推荐',
         path: '/upTodayRecommend'
       },

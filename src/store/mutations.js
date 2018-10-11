@@ -1,5 +1,27 @@
 export default {
 
+  NEWS_LIST_PAGE (state, data) {
+    state.newsList = data.result1.data.result
+    state.newsListLength = data.result1.data.total
+  },
+
+  NEWS_LIST_BY_TAG (state, data) {
+    state.newsList = data.result1.data.result
+    state.newsListTagLength = data.result1.data.total
+  },
+
+  NEWS_LIST_BY_TIME (state, data) {
+    state.newsList = data.result1.data.result
+    state.newsListTimeLength = data.result1.data.total
+  },
+
+  NEWS_PAGE (state, data) {
+    state.newsDetail = data.news.data.result[0]
+    state.administrator = data.administrator.data.result[0]
+    state.tags = data.tags.data.result
+    state.archives = data.archives.data.result
+  },
+
   INDEX_PAGE (state, data) {
     state.articleList = data.posts.data.result
     state.total = data.posts.data.total

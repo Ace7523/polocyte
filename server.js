@@ -161,11 +161,16 @@ app.get(['/admin', '/admin/*', '/publish', '/publish/*', '/updateAdminPassword',
 // published articles
 app.get('/api/posts', router.posts)
 
+// 获取新闻列表
+app.get('/api/getnewslist', router.getnewslist)
+
 // administrator infomation
 app.get('/api/administrator', router.admin)
 
 // article detail content http://localhost:8080/api/article?id=1496841740682
 app.get('/api/article', router.getArticle)
+
+app.get('/api/getNewsDetail', router.getNewsDetail)
 
 app.get('/api/uploadimagedesc', router.getUploadimagedesc)
 
@@ -174,8 +179,15 @@ app.get('/api/uploadimagedesc2', router.getUploadimagedesc2)
 // tags infomation
 app.get('/api/tags', router.tags)
 
+// 查询所有的标签名称
+app.get('/api/tagnames', router.tagnames)
+
 // get articles by tag http://localhost:8080/api/tag?tag=javascript
 app.get('/api/tag', router.tag)
+
+app.get('/api/getnewsbytag', router.getnewsbytag)
+
+app.get('/api/getnewsbytime', router.getnewsbytime)
 
 app.post('/api/getPoloItemsByPost', router.getPoloItemsByPost)
 
@@ -185,6 +197,9 @@ app.get('/api/search', router.search)
 // archives infomation
 app.get('/api/archives', router.archives)
 
+// 查询所有文章的发表时间 汇总
+app.get('/api/publishdates', router.publishdates)
+
 // get articles by archive http://localhost:8080/api/archive?date=201706
 app.get('/api/archive', router.archive)
 
@@ -193,6 +208,9 @@ app.get('/api/articles', router.articles)
 
 // publish or edit article
 app.post('/api/article', hasToken, router.article)
+
+// 发布一条新闻
+app.post('/api/news', hasToken, router.news)
 
 // administrator login
 app.post('/api/login',router.login)
@@ -206,7 +224,9 @@ app.put('/api/administrator', hasToken, router.updateAdminInfo)
 // update administrator avatar
 app.post('/api/avatar', hasToken, router.avatar)
 
-app.post('/api/upload', hasToken, router.upload)
+app.post('/api/upload', hasToken, router.uploadnewspic)
+
+app.post('/api/uploadnewspic', hasToken, router.upload)
 
 app.post('/api/uploadimage', hasToken, router.uploadimage)
 

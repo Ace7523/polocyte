@@ -52,6 +52,10 @@
             <li>
               <router-link :to="{name:'nstest',params:{page:1}}">全部商品</router-link>
             </li>
+
+            <li>
+              <router-link :to="{name:'newslist',params:{page:1}}">新闻资讯</router-link>
+            </li>
           </ul>
       </div>
     </div>
