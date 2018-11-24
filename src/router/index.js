@@ -27,7 +27,10 @@ const UpItems = () =>
   import('../views/admin/UpItems.vue')  
 
 const AllItems = () =>
-  import('../views/admin/AllItems.vue')   
+  import('../views/admin/AllItems.vue')
+
+const UpMendian = () =>
+  import('../views/admin/UpMendian.vue')       
 
 const OneItem = () =>
   import('../views/admin/OneItem.vue')     
@@ -44,6 +47,17 @@ const brandIntroduction = () =>
 const honorIntroduction = () =>
   import('../views/honor-introduction.vue')
 
+const shangxueyuan = () =>
+  import('../views/shangxueyuan.vue')
+
+const mendianSearch = () =>
+  import('../views/mendian-search.vue')
+
+const allMendian = () =>
+  import('../views/admin/allMendian.vue')  
+
+const allJoinus = () =>
+  import('../views/admin/allJoinus.vue')  
 const olist = () =>
   import('../views/olist.vue')    
 Vue.use(Router)
@@ -113,7 +127,18 @@ export function createRouter () {
       path: '/companyintroduce',
       name: 'companyintroduce',
       component: companyIntroduction
-    },{
+    },
+    {
+      path: '/mendiansearch',
+      name: 'mendiansearch',
+      component: mendianSearch
+    },
+    {
+      path: '/shangxueyuan',
+      name: 'shangxueyuan',
+      component: shangxueyuan
+    },
+    {
       path: '/brandintroduce',
       name: 'brandintroduce',
       component: brandIntroduction
@@ -181,7 +206,32 @@ export function createRouter () {
         Auth: true
       },
       component: UpItems
-    }, {
+    },
+    {
+      path: '/upMendian/:dateid?',
+      name: 'upMendian',
+      meta: {
+        Auth: true
+      },
+      component: UpMendian
+    },
+    {
+      path: '/allMendian',
+      name: 'allMendian',
+      meta: {
+        Auth: true
+      },
+      component: allMendian
+    },
+    {
+      path: '/allJoinus',
+      name: 'allJoinus',
+      meta: {
+        Auth: true
+      },
+      component: allJoinus
+    },
+    {
       path: '/allItems',
       name: 'allItems',
       meta: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="article-list">
+  <div class="article-list1">
     <ul class="items">
       <li v-for="(item,index) in data" class="item" :key="index">
         <router-link class="title" :to="{name:'news',params:{id:item.date}}">{{item.title}}</router-link>
@@ -24,7 +24,7 @@
 export default {
   name: 'ArticleList',
   title () {
-    return 'vueblog'
+    return '保罗赛特'
   },
   beforeMount () {
     if (this.$root._isMounted) {
@@ -80,3 +80,30 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.article-list1 {
+  flex: 1;
+  background-color: #FFF;
+  padding: 15px 18px;
+  .item+.item {
+    border-top: 1px dashed #F1F1F1;
+  }
+  .title {
+    font-size: 20px;
+    margin: 15px auto;
+    color: #3F301B;
+  }
+  .content {
+    margin-bottom: 20px;
+    color: #a5a5a5;
+  }
+  .tips {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 18px;
+    strong {
+      color: red;
+    }
+  }
+}
+</style>

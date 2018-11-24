@@ -44,7 +44,20 @@ export default {
       }, {
         name: '所有-items',
         path: '/allItems'
-      }]
+      },
+      {
+        name: '上传门店',
+        path: '/upMendian'
+      },
+      {
+        name: '所有门店信息',
+        path: '/allMendian'
+      },
+      {
+        name: '所有招商加盟信息',
+        path: '/allJoinus'
+      }
+      ]
     }
   },
   methods: {

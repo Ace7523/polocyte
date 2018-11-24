@@ -238,6 +238,18 @@ app.post('/api/uploadimagedesc2', hasToken, router.uploadimagedesc2)
 
 app.post('/api/upPoloItem', hasToken, router.upPoloItem)
 
+app.post('/api/upMendian', hasToken, router.upMendian)
+
+app.post('/api/upJoinus',  router.upJoinus)
+
+app.post('/api/deleteMendian', hasToken, router.deleteMendian)
+
+app.get('/api/getMendians', router.getMendians)
+
+app.get('/api/getJoinus', router.getJoinus)
+
+app.post('/api/getMendianByPost', router.getMendianByPost)
+
 app.get('/api/getPoloItem', router.getPoloItem)  // todo 这个hastoken 怎么玩
 
 app.get('/api/getAllStates', router.getAllStates)

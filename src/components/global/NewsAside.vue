@@ -5,7 +5,7 @@
       <div class="list">
         <ul>
           <li v-for="(item,index) in tags" :key="index">
-            <router-link :to="{name:'newslistbytag',params:{change:item.tag}}">{{item.tag}} ({{item.count}})</router-link>
+            <router-link :to="{name:'newslistbytag',params:{change:item.tag}}">{{item.tag}} <span class="desc">(共{{item.count}}篇)</span></router-link>
           </li>
         </ul>
       </div>
@@ -15,7 +15,7 @@
       <div class="list">
         <ul>
           <li v-for="(item,index) in archives" :key="index">
-            <router-link :to="{name:'newslistbytime',params:{change:item.date}}">{{item.date | formatArchive }} ({{item.count}})</router-link>
+            <router-link :to="{name:'newslistbytime',params:{change:item.date}}">{{item.date | formatArchive }} <span class="desc">(共{{item.count}}篇)</span></router-link>
           </li>
         </ul>
       </div>
