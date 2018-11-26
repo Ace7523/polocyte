@@ -1118,6 +1118,63 @@ exports.upload = function(req, res, next) {
     })
   })
 }
+// 上传轮播图
+exports.upindexpic = function(req, res, next) {
+  let username = req.cookies.username
+  let form = new formidable.IncomingForm()
+
+  form.parse(req, function(err, fields, files) {
+    if (err) {
+      console.log(err)
+      return res.json({
+        "code": 401,
+        "message": "表单解析错误"
+      })
+    }
+
+    // 获取对象的最后一项
+    let lastItem = files[Object.keys(files)[Object.keys(files).length - 1]]
+    let indexTemp = req.query.index
+    let extname = ''
+    switch(indexTemp){
+      case '1':
+        extname = '01.jpg'
+      break;
+      case '2':
+        extname = '02.jpg'
+      break;
+      case '3':
+        extname = '03.jpg'
+      break;
+      case '4':
+        extname = '04.jpg'
+      break;
+      case '5':
+        extname = '05.jpg'
+      break;
+      case '6':
+        extname = '06.jpg'
+      break;
+      case '7':
+        extname = '07.jpg'
+      break;
+      default:
+        extname = '00.jpg'
+    }
+
+    let oldUrl = lastItem.path
+    let newUrl = './public/indexPicture/' + extname
+    let imgUrl = req.protocol + '://' + req.headers.host + '/public/indexPicture/' + extname
+
+    // 更改名字和路径,实现上传
+    let readStream = fs.createReadStream(oldUrl)
+    let writeStream = fs.createWriteStream(newUrl)
+    readStream.pipe(writeStream)
+    readStream.on('end', function() {
+      return res.send(imgUrl);
+    })
+  }) 
+}
 // 上传首页图片接口
 exports.uploadimage = function(req, res, next) {
   let username = req.cookies.username

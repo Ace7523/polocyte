@@ -33,8 +33,8 @@
   </div>
 </template>
 <script>
-import MyHeader from '../components/global/MyHeader.vue'
-import MyFooter from '../components/global/MyFooter.vue'
+import MyHeader from '../../components/global/MyHeader.vue'
+import MyFooter from '../../components/global/MyFooter.vue'
 export default {
   name: '',
   data(){

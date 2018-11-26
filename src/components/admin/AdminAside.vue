@@ -31,7 +31,12 @@ export default {
       }, {
         name: '上传-新闻资讯',
         path: '/publishnews'
-      }, {
+      }, 
+      {
+        name: '上传-首页轮播图片',
+        path: '/upIndexPic'
+      },
+      {
         name: '上传-今日推荐',
         path: '/upTodayRecommend'
       },

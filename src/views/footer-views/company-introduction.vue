@@ -84,8 +84,8 @@
   </div>
 </template>
 <script>
-import MyHeader from '../components/global/MyHeader.vue'
-import MyFooter from '../components/global/MyFooter.vue'
+import MyHeader from '../../components/global/MyHeader.vue'
+import MyFooter from '../../components/global/MyFooter.vue'
 export default {
   name: '',
   data(){
@@ -101,32 +101,35 @@ export default {
 }
 </script>
 <style>
+.left-text {
+    line-height: 1.5;
+}
 .img1{
     display: inline-block;
     width: 100%;
     height: 400px;
-    background: url(../../public/footerPic/company-intruc-1.jpg) no-repeat;
+    background: url(../../../public/footerPic/company-intruc-1.jpg) no-repeat;
     background-size: 100% 100%;
 }
 .img2{
     display: inline-block;
     width: 100%;
     height: 400px;
-    background: url(../../public/footerPic/company-intruc-2.jpg) no-repeat;
+    background: url(../../../public/footerPic/company-intruc-2.jpg) no-repeat;
     background-size: 100% 100%;
 }
 .img3{
     display: inline-block;
     width: 100%;
     height: 400px;
-    background: url(../../public/footerPic/company-intruc-3.jpg) no-repeat;
+    background: url(../../../public/footerPic/company-intruc-3.jpg) no-repeat;
     background-size: 100% 100%;
 }
 .img4{
     display: inline-block;
     width: 100%;
     height: 400px;
-    background: url(../../public/footerPic/company-intruc-4.jpg) no-repeat;
+    background: url(../../../public/footerPic/company-intruc-4.jpg) no-repeat;
     background-size: 100% 100%;
 }
 </style>

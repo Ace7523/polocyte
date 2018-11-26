@@ -3,7 +3,7 @@
     <my-header></my-header>
     <div class="content-wrap">
         <div class="left-text">
-            <h3>木纹谱写的乐章——“保罗赛特</h3>
+            <h3>木纹谱写的乐章——"保罗赛特"</h3>
             “POLOCYTE”保罗赛特是欧洲实木家具业内的一个知名品牌，在国际家具市场上享有良好的品牌声誉。保罗赛特品牌家具包括卧室、客厅、餐厅、书房家具等，产品品类齐全，能够全面满足目标消费群的需要。
 “POLOCYTE”品牌之父Lille Habsburg（里尔·哈布斯堡）出生于二十世纪初奥地利穆尔河边的哈布斯堡木匠世家，哈布斯堡家族以手工制作纯实木家具的技艺高超而闻名于世，尤其擅长将木材天然的纹理融入到每件家具的设计与制作中。哈布斯堡家族认为：每种树木甚至每块木材都具有与众不同的木纹，好像跳动的音符，而匠师的工作就是要合理的挑选每块木材，并将其巧妙的搭配与制作，从而创造出完美的乐章，这样的作品就具有了特有的灵魂。哈布斯堡家族的每件作品都是那么的完美，成为当时欧洲贵族们最喜爱的收藏。Lille早年在法国求学，受到法国著名哲学家让·保罗·萨特的影响。继承了家族事业后，适逢二战期间，在亲历了由人类无休止的欲望而引发的战争带给人类的痛苦后，Lille更加推崇保罗·萨特的祟尚自然的存在主义哲学理论，并产生灵感，将祟尚自然的思想融入到家族手艺中，提出革命性的Return to nature, Return to leisure life.（回归自然，回归慢生活）设计理念，创造出众多超越时代的艺术家具作品。
 Lille晚年隐居于阿尔卑斯山深处，醉心地享受梦想的慢生活。移居法国巴黎的儿子传承了父亲对保罗·萨特的设计理念的衣钵，并创立了POLOCYTE（保罗赛特）家居品牌，从此将“回归自然，回归慢生活”这深入人心的生活理念，传递至世界的每一处角落。。
@@ -96,8 +96,8 @@ Lille晚年隐居于阿尔卑斯山深处，醉心地享受梦想的慢生活。
   </div>
 </template>
 <script>
-import MyHeader from '../components/global/MyHeader.vue'
-import MyFooter from '../components/global/MyFooter.vue'
+import MyHeader from '../../components/global/MyHeader.vue'
+import MyFooter from '../../components/global/MyFooter.vue'
 export default {
   name: '',
   data(){
@@ -113,32 +113,35 @@ export default {
 }
 </script>
 <style>
+.left-text {
+    line-height: 2; 
+}
 .img1{
     display: inline-block;
     width: 100%;
     height: 400px;
-    background: url(../../public/footerPic/company-intruc-1.jpg) no-repeat;
+    background: url(../../../public/footerPic/company-intruc-1.jpg) no-repeat;
     background-size: 100% 100%;
 }
 .img2{
     display: inline-block;
     width: 100%;
     height: 400px;
-    background: url(../../public/footerPic/company-intruc-2.jpg) no-repeat;
+    background: url(../../../public/footerPic/company-intruc-2.jpg) no-repeat;
     background-size: 100% 100%;
 }
 .img3{
     display: inline-block;
     width: 100%;
     height: 400px;
-    background: url(../../public/footerPic/company-intruc-3.jpg) no-repeat;
+    background: url(../../../public/footerPic/company-intruc-3.jpg) no-repeat;
     background-size: 100% 100%;
 }
 .img4{
     display: inline-block;
     width: 100%;
     height: 400px;
-    background: url(../../public/footerPic/company-intruc-4.jpg) no-repeat;
+    background: url(../../../public/footerPic/company-intruc-4.jpg) no-repeat;
     background-size: 100% 100%;
 }
 </style>

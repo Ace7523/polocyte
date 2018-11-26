@@ -230,6 +230,9 @@ app.post('/api/uploadnewspic', hasToken, router.upload)
 
 app.post('/api/uploadimage', hasToken, router.uploadimage)
 
+// 上传首页轮播图
+app.post('/api/upindexpic', hasToken, router.upindexpic)
+
 app.post('/api/uploaditemimage', hasToken, router.uploaditemimage)
 
 app.post('/api/uploadimagedesc', hasToken, router.uploadimagedesc)

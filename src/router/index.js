@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { Article, List, Admin , Classify , Nstest} from '../views/CreateListView'
+import { Article, List, Admin  , Nstest} from '../views/CreateListView'
 import { NewsList, News } from '../views/BeforeRender'
 const Login = () =>
   import('../views/Login.vue')
@@ -16,6 +16,9 @@ const UpdateAdminInfo = () =>
 
 const UpdateAdminPassword = () =>
   import('../views/admin/UpdateAdminPassword.vue')
+  
+const upIndexPic = () =>
+  import('../views/admin/upIndexPic.vue')
 
 const UpTodayRecommend = () =>
   import('../views/admin/UpTodayRecommend.vue')
@@ -38,28 +41,31 @@ const OneItem = () =>
 const ItemDeatil = () =>
   import('../views/ItemDetail.vue') 
 
+// 页面底部按钮点击后跳转的页面 集团简介
 const companyIntroduction = () =>
-  import('../views/company-introduction.vue') 
-
+  import('../views/footer-views/company-introduction.vue') 
+// 页面底部按钮点击后跳转的页面 品牌故事
 const brandIntroduction = () =>
-  import('../views/brand-introduction.vue')  
-
+  import('../views/footer-views/brand-introduction.vue')  
+// 页面底部按钮点击后跳转的页面 荣耀资历
 const honorIntroduction = () =>
-  import('../views/honor-introduction.vue')
-
+  import('../views/footer-views/honor-introduction.vue')
+// 页面底部按钮点击后跳转的页面 商学院
 const shangxueyuan = () =>
-  import('../views/shangxueyuan.vue')
-
+  import('../views/footer-views/shangxueyuan.vue')
+// 页面底部按钮点击后跳转的页面 门店查询
 const mendianSearch = () =>
-  import('../views/mendian-search.vue')
+  import('../views/footer-views/mendian-search.vue')
 
 const allMendian = () =>
   import('../views/admin/allMendian.vue')  
 
 const allJoinus = () =>
   import('../views/admin/allJoinus.vue')  
+
 const olist = () =>
-  import('../views/olist.vue')    
+  import('../views/olist.vue')
+
 Vue.use(Router)
 export function createRouter () {
   return new Router({
@@ -107,10 +113,6 @@ export function createRouter () {
       path: '/news/:id',
       name: 'news',
       component: News('article')
-    },{
-      path: '/classify/:id',
-      name: 'classify',
-      component: Classify('article')
     }, {
       path: '/nstest/:page?',
       name: 'nstest',
@@ -185,14 +187,24 @@ export function createRouter () {
         Auth: true
       },
       component: UpdateAdminPassword
-    }, {
+    }, 
+    {
+      path: '/upIndexPic',
+      name: 'upIndexPic',
+      meta: {
+        Auth: true
+      },
+      component: upIndexPic
+    }, 
+    {
       path: '/upTodayRecommend',
       name: 'upTodayRecommend',
       meta: {
         Auth: true
       },
       component: UpTodayRecommend
-    },  {
+    }, 
+     {
       path: '/UpNewProdtct',
       name: 'UpNewProdtct',
       meta: {

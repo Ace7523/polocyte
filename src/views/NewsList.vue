@@ -13,8 +13,6 @@
 <script>
 import MyHeader from '../components/global/MyHeader.vue'
 import NewsAside from '../components/global/NewsAside.vue'
-import MyBanner from '../components/global/MyBanner.vue'
-import PhotoList from '../components/global/PhotoList.vue'
 import TodayRecommend from '../components/global/TodayRecommend.vue'
 import NewProducts from '../components/global/NewProducts.vue'
 import ArticleList from '../components/global/ArticleList.vue'
@@ -25,10 +23,8 @@ export default {
   components: {
     MyHeader,
     NewsAside,
-    PhotoList,
     ArticleList,
     MyFooter,
-    MyBanner,
     TodayRecommend,
     NewProducts,
     NewsList
