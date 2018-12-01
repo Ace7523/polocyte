@@ -12,21 +12,21 @@
           <div class="for-center">
 
             <p class="title">【{{itemData.itemName}}】</p>
-            <p>品牌 : {{itemData.brand}}</p>
-            <p>系列 : {{itemData.series}}</p>
-            <p>货号 : {{itemData.itemNo}}</p>
-            <p>适用空间 : {{itemData.status}}</p>
-            <p>类别 : {{itemData.klass}}</p>
-            <p>材质 : {{itemData.material}}</p>
-            <p>规格 : {{itemData.standard}}</p>
-            <p>风格 : {{itemData.styles}}</p>
-            <p>颜色 : {{itemData.color}}</p>
-            <p>油漆性质 : {{itemData.paint}}</p>
-            <p>实木 : {{itemData.feature1}}</p>
-            <p>结构 : {{itemData.feature2}}</p>
-            <p>是否可定制 : {{itemData.isCanPersonal}}</p>
-            <p>甲醛释放量 : {{itemData.feature3}}</p>
-            <p>产地 : {{itemData.productLoc}}</p>
+            <p><span class="title1">品牌 : </span>{{itemData.brand}}</p>
+            <p><span class="title1">系列 : </span>{{itemData.series}}</p>
+            <p><span class="title1">货号 : </span>{{itemData.itemNo}}</p>
+            <p><span class="title1">适用空间 : </span>{{itemData.status}}</p>
+            <p><span class="title1">类别 : </span>{{itemData.klass}}</p>
+            <p><span class="title1">材质 : </span>{{itemData.material}}</p>
+            <p><span class="title1">规格 : </span>{{itemData.standard}}</p>
+            <p><span class="title1">风格 : </span>{{itemData.styles}}</p>
+            <p><span class="title1">颜色 : </span>{{itemData.color}}</p>
+            <p><span class="title1">油漆性质 : </span>{{itemData.paint}}</p>
+            <p><span class="title1">实木 : </span>{{itemData.feature1}}</p>
+            <p><span class="title1">结构 : </span>{{itemData.feature2}}</p>
+            <p><span class="title1">是否可定制 : </span>{{itemData.isCanPersonal}}</p>
+            <p><span class="title1">甲醛释放量 : </span>{{itemData.feature3}}</p>
+            <p><span class="title1">产地 : </span>{{itemData.productLoc}}</p>
             
           </div>
           
@@ -44,10 +44,10 @@
           <div v-for="(item,index) in itemData.imageList" :key="index" class="img-list">
             <img :src="item" alt="">
           </div>
-          <div v-if="itemData.imageList.length == 1" class="img-list">
+          <div v-if="itemData && itemData.imageList && itemData.imageList.length == 1" class="img-list">
             <img :src="imgUrl" alt="">
           </div>
-          <div v-if="itemData.imageList.length == 1" class="img-list">
+          <div v-if="itemData && itemData.imageList && itemData.imageList.length == 1" class="img-list">
             <img :src="imgUrl" alt="">
           </div>
 

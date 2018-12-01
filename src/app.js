@@ -15,9 +15,12 @@ import TopToast from 'top-toast'
 Vue.use(TopEditor)
 Vue.use(TopToast)
 
-import wcSwiper from 'wc-swiper'
-import 'wc-swiper/style.css'
-Vue.use(wcSwiper);
+// If used in nuxt.js/ssr, you should keep it only in browser build environment
+import 'swiper/dist/css/swiper.css'
+if (process.browser) {
+  const VueAwesomeSwiper = require('vue-awesome-swiper/dist/ssr')
+  Vue.use(VueAwesomeSwiper)
+}
 
 Vue.prototype.axios = axios
 Vue.mixin(titleMixin)

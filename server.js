@@ -226,9 +226,14 @@ app.post('/api/avatar', hasToken, router.avatar)
 
 app.post('/api/upload', hasToken, router.uploadnewspic)
 
-app.post('/api/uploadnewspic', hasToken, router.upload)
+app.post('/api/uploadnewspic', hasToken, router.uploadnewspic)
 
 app.post('/api/uploadimage', hasToken, router.uploadimage)
+
+// 上传首页轮播图
+app.post('/api/upindexpic', hasToken, router.upindexpic)
+
+app.post('/api/upcomintrucpic', hasToken, router.upcomintrucpic)
 
 app.post('/api/uploaditemimage', hasToken, router.uploaditemimage)
 
@@ -237,6 +242,22 @@ app.post('/api/uploadimagedesc', hasToken, router.uploadimagedesc)
 app.post('/api/uploadimagedesc2', hasToken, router.uploadimagedesc2)
 
 app.post('/api/upPoloItem', hasToken, router.upPoloItem)
+
+app.post('/api/upMendian', hasToken, router.upMendian)
+
+app.post('/api/upJoinus',  router.upJoinus)
+
+app.post('/api/deleteMendian', hasToken, router.deleteMendian)
+
+app.post('/api/deleteNews', hasToken, router.deleteNews)
+
+app.post('/api/deleteItem', hasToken, router.deleteItem)
+
+app.get('/api/getMendians', router.getMendians)
+
+app.get('/api/getJoinus', router.getJoinus)
+
+app.post('/api/getMendianByPost', router.getMendianByPost)
 
 app.get('/api/getPoloItem', router.getPoloItem)  // todo 这个hastoken 怎么玩
 

@@ -1118,6 +1118,120 @@ exports.upload = function(req, res, next) {
     })
   })
 }
+// 上传轮播图
+exports.upindexpic = function(req, res, next) {
+  let username = req.cookies.username
+  let form = new formidable.IncomingForm()
+
+  form.parse(req, function(err, fields, files) {
+    if (err) {
+      console.log(err)
+      return res.json({
+        "code": 401,
+        "message": "表单解析错误"
+      })
+    }
+
+    // 获取对象的最后一项
+    let lastItem = files[Object.keys(files)[Object.keys(files).length - 1]]
+    let indexTemp = req.query.index
+    let extname = ''
+    switch(indexTemp){
+      case '1':
+        extname = '01.jpg'
+      break;
+      case '2':
+        extname = '02.jpg'
+      break;
+      case '3':
+        extname = '03.jpg'
+      break;
+      case '4':
+        extname = '04.jpg'
+      break;
+      case '5':
+        extname = '05.jpg'
+      break;
+      case '6':
+        extname = '06.jpg'
+      break;
+      case '7':
+        extname = '07.jpg'
+      break;
+      default:
+        extname = '00.jpg'
+    }
+
+    let oldUrl = lastItem.path
+    let newUrl = './public/indexPicture/' + extname
+    let imgUrl = req.protocol + '://' + req.headers.host + '/public/indexPicture/' + extname
+
+    // 更改名字和路径,实现上传
+    let readStream = fs.createReadStream(oldUrl)
+    let writeStream = fs.createWriteStream(newUrl)
+    readStream.pipe(writeStream)
+    readStream.on('end', function() {
+      return res.send(imgUrl);
+    })
+  }) 
+}
+// 上传底部公司简介图片
+exports.upcomintrucpic = function(req, res, next) {
+  let username = req.cookies.username
+  let form = new formidable.IncomingForm()
+
+  form.parse(req, function(err, fields, files) {
+    if (err) {
+      console.log(err)
+      return res.json({
+        "code": 401,
+        "message": "表单解析错误"
+      })
+    }
+
+    // 获取对象的最后一项
+    let lastItem = files[Object.keys(files)[Object.keys(files).length - 1]]
+    let indexTemp = req.query.index
+    let extname = ''
+    switch(indexTemp){
+      case '1':
+        extname = '01.jpg'
+      break;
+      case '2':
+        extname = '02.jpg'
+      break;
+      case '3':
+        extname = '03.jpg'
+      break;
+      case '4':
+        extname = '04.jpg'
+      break;
+      case '5':
+        extname = '05.jpg'
+      break;
+      case '6':
+        extname = '06.jpg'
+      break;
+      case '7':
+        extname = '07.jpg'
+      break;
+      default:
+        extname = '00.jpg'
+    }
+
+    let oldUrl = lastItem.path
+    let newUrl = './public/footerPic/' + extname
+    let imgUrl = req.protocol + '://' + req.headers.host + '/public/footerPic/' + extname
+
+    // 更改名字和路径,实现上传
+    let readStream = fs.createReadStream(oldUrl)
+    let writeStream = fs.createWriteStream(newUrl)
+    readStream.pipe(writeStream)
+    readStream.on('end', function() {
+      return res.send(imgUrl);
+    })
+  }) 
+}
 // 上传首页图片接口
 exports.uploadimage = function(req, res, next) {
   let username = req.cookies.username
@@ -1437,6 +1551,237 @@ exports.upPoloItem = function(req, res, next) {
         //     "message": "ietm实例存入数据库成功"
         //   })
         // })
+  })
+}
+//获取加盟信息 全部
+exports.getJoinus = function(req, res, next) {
+  db.find('joinusinfo', { "query": {} }, function(err, result) {
+    if (err) {
+      console.log(err)
+      return res.json({
+        "code": 404,
+        "message": "数据获取失败",
+        "result": []
+      })
+    }
+    
+    return res.json({
+      "code": 200,
+      "message": "数据获取成功",
+      "result": result
+    })
+  })
+}
+// 上传加盟信息
+exports.upJoinus = function(req, res, next) {
+  // 获取内容
+  let form = new formidable.IncomingForm()
+  form.parse(req, function(err, fields, files) {
+    let name = fields.name;
+    let city = fields.city;
+    let phone = fields.phone;
+    let remark = fields.remark;
+    let date = fields.date;
+
+    let newData = {
+      "name": name,
+      "city": city,
+      "remark": remark,
+      "phone": phone,
+      "date": date
+    };
+    db.insertOne('joinusinfo', newData, function(err, result3) {
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 401,
+          "message": "ietm实例存入数据库失败"
+        })
+      }
+      return res.json({
+        "code": 200,
+        "message": "ietm实例存入数据库成功"
+      })
+    })
+  })
+}
+//上传门店信息接口
+exports.upMendian = function(req, res, next) {
+  // 获取内容
+  let form = new formidable.IncomingForm()
+  form.parse(req, function(err, fields, files) {
+
+    let province = fields.province;
+    let name = fields.name;
+    let city = fields.city;
+    let series = fields.series;
+    let mall = fields.mall;
+    let location = fields.location;
+    let tel = fields.tel;
+    let phone = fields.phone;
+    let date = fields.date;
+
+    let newData = {
+      "province": province,
+      "name": name,
+      "city": city,
+      "series": series,
+      "mall": mall,
+      "location": location,
+      "tel": tel,
+      "phone": phone,
+      "date": date
+    };
+    console.log(newData)
+    db.find('mendianinfo', { "query": { "date": date } }, function(err, result) {
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 500,
+          "message": "内部服务器错误"
+        })
+      }
+
+      if (result.length === 1) {
+        db.updateMany('mendianinfo', { "date": date }, newData, function(err, result2) {
+          if (err) {
+            console.log(err)
+            return res.json({
+              "code": 401,
+              "message": "文章更新失败"
+            })
+          }
+          return res.json({
+            "code": 200,
+            "message": "文章更新成功"
+          })
+        })
+      } else {
+        // 插入到数据库
+        db.insertOne('mendianinfo', newData, function(err, result3) {
+          if (err) {
+            console.log(err)
+            return res.json({
+              "code": 401,
+              "message": "ietm实例存入数据库失败"
+            })
+          }
+          return res.json({
+            "code": 200,
+            "message": "ietm实例存入数据库成功"
+          })
+        })
+      }
+    })
+  })
+}
+//获取门店信息 全部
+exports.getMendians = function(req, res, next) {
+  db.find('mendianinfo', { "query": {} }, function(err, result) {
+    if (err) {
+      console.log(err)
+      return res.json({
+        "code": 404,
+        "message": "数据获取失败",
+        "result": []
+      })
+    }
+    
+    return res.json({
+      "code": 200,
+      "message": "数据获取成功",
+      "result": result
+    })
+  })
+}
+//获取门店信息 筛选
+exports.getMendianByPost = function(req, res, next) {
+  let form = new formidable.IncomingForm()
+  form.parse(req, function(err, fields, files) {
+
+    let queryarr = fields.queryarr
+    let page = fields.page
+    let limit = fields.limit
+    let sort = { "date": -1 }
+    console.log("queryarr", queryarr)
+    db.find('mendianinfo', { "query": queryarr ,"limit": limit, "page": page, "sort": sort}, function(err, result) {  
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 404,
+          "message": "数据获取失败",
+          "result": []
+        })
+      }
+      return res.json({
+        "code": 200,
+        "message": "数据获取成功",
+        "result": result
+      })
+    })
+  })
+}
+// 删除新闻资讯
+exports.deleteNews = function(req, res, next) {
+  let form = new formidable.IncomingForm()
+  form.parse(req, function(err, fields, files) {
+    let queryarr = fields.queryarr
+    db.deleteMany('newslist', { date: queryarr.date }, function(err, result) {
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 401,
+          "message": "删除失败"
+        })
+      }
+  
+      return res.json({
+        "code": 200,
+        "message": "删除成功"
+      })
+    })
+  })
+}
+// 删除门店信息
+exports.deleteMendian = function(req, res, next) {
+  let form = new formidable.IncomingForm()
+  form.parse(req, function(err, fields, files) {
+    let queryarr = fields.queryarr
+    db.deleteMany('mendianinfo', { date: queryarr.date }, function(err, result) {
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 401,
+          "message": "删除失败"
+        })
+      }
+  
+      return res.json({
+        "code": 200,
+        "message": "删除成功"
+      })
+    })
+  })
+}
+// 删除门店信息
+exports.deleteItem = function(req, res, next) {
+  let form = new formidable.IncomingForm()
+  form.parse(req, function(err, fields, files) {
+    let queryarr = fields.queryarr
+    db.deleteMany('poloitems', { date: queryarr.date }, function(err, result) {
+      if (err) {
+        console.log(err)
+        return res.json({
+          "code": 401,
+          "message": "删除失败"
+        })
+      }
+  
+      return res.json({
+        "code": 200,
+        "message": "删除成功"
+      })
+    })
   })
 }
 // 获取全部数据

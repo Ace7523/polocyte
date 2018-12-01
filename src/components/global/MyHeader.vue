@@ -124,7 +124,6 @@ export default {
     },
     showSubtab(val){
       this.showSubtabIndex = val;
-      console.log(val)
     }, 
   }
 }

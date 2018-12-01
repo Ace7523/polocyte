@@ -91,7 +91,7 @@
               <div v-for="(resultItem,index) in nstest.result" :key="index" class="each-item" @click="jumpItemDetail(resultItem)">
                
                 <!-- <div v-for="(item,index2) in resultItem.imageList" :key="index2" class="each-image"> -->
-                <div class="each-image">  
+                <div class="each-image">
                   <img :src="resultItem.imageList[0]" alt="">
                   <!-- <div class="for-image" style="background: url(item)"> -->
                 </div>
@@ -401,13 +401,19 @@ export default {
 }
 </script>
 <style>
+ .goods-intro {
+   position: relative;
+   padding-left: 34px;
+ }
  .goods-intro span{
      display: inline-block;
      width: 25px;
      height: 25px;
+     border-radius: 3px;
      background: url(../../public/indexPicture/icon-item.png) no-repeat;
      background-size: 100%;
-     position: relative;
-     top: 4px;
+     position: absolute;
+     top: 5px;
+     left: 4px;
  }
 </style>

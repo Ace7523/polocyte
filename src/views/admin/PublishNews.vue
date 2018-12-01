@@ -12,17 +12,17 @@
           </div>
           <div class="bottom">
             <div class="tag">
-              <input type="text" v-model="tag" placeholder="多个标签以英文逗号分隔">
+              <input type="text" v-model="tag" placeholder="请输入这篇资讯所属分类">
             </div>
             <div class="btn">
               <button type="button" @click="publish">发布</button>
-              <button type="button" @click="draft">存草稿</button>
+              <!-- <button type="button" @click="draft">存草稿</button> -->
             </div>
           </div>
-          <div class="tags">
+          <!-- <div class="tags">
             <span>选择已有标签: </span>
             <span v-for="(item,index) in tags" :key="index" @click="chooseTag(item)"><a>{{item.tag}}</a></span>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -93,7 +93,7 @@ export default {
         'date': Number(this.date) || Date.now()
       }).then((result) => {
         this.$router.push({
-          name: 'admin'
+          name: 'allNews'
         })
       })
     },
@@ -108,7 +108,7 @@ export default {
         'date': Number(this.date) || Date.now()
       }).then((result) => {
         this.$router.push({
-          name: 'admin'
+          name: 'allNews'
         })
       })
     },
