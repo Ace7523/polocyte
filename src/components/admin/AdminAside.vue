@@ -16,21 +16,28 @@ export default {
   name: 'AdminAside',
   data () {
     return {
-      menu: [{
-        name: '后台首页',
-        path: '/admin'
-      }, {
-        name: '发布文章',
-        path: '/publish'
-      }, {
+      menu: [
+      // {
+      //   name: '后台首页',
+      //   path: '/admin'
+      // }, {
+      //   name: '发布文章',
+      //   path: '/publish'
+      // }, 
+      {
         name: '修改信息',
         path: '/updateAdminInfo'
       }, {
         name: '修改密码',
         path: '/updateAdminPassword'
-      }, {
+      },
+      {
         name: '上传-新闻资讯',
         path: '/publishnews'
+      },
+      {
+        name: '全部-新闻资讯',
+        path: '/allNews'
       }, 
       {
         name: '上传-首页轮播图片',
@@ -61,6 +68,10 @@ export default {
       {
         name: '所有招商加盟信息',
         path: '/allJoinus'
+      },
+      {
+        name: '上传-底部公司简介图片',
+        path: '/upComIntrucPic'
       }
       ]
     }

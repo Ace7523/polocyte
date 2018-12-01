@@ -120,28 +120,28 @@ export default {
     display: inline-block;
     width: 100%;
     height: 400px;
-    background: url(../../../public/footerPic/company-intruc-1.jpg) no-repeat;
+    background: url(../../../public/footerPic/01.jpg) no-repeat;
     background-size: 100% 100%;
 }
 .img2{
     display: inline-block;
     width: 100%;
     height: 400px;
-    background: url(../../../public/footerPic/company-intruc-2.jpg) no-repeat;
+    background: url(../../../public/footerPic/02.jpg) no-repeat;
     background-size: 100% 100%;
 }
 .img3{
     display: inline-block;
     width: 100%;
     height: 400px;
-    background: url(../../../public/footerPic/company-intruc-3.jpg) no-repeat;
+    background: url(../../../public/footerPic/03.jpg) no-repeat;
     background-size: 100% 100%;
 }
 .img4{
     display: inline-block;
     width: 100%;
     height: 400px;
-    background: url(../../../public/footerPic/company-intruc-4.jpg) no-repeat;
+    background: url(../../../public/footerPic/04.jpg) no-repeat;
     background-size: 100% 100%;
 }
 </style>

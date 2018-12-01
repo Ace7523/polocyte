@@ -20,6 +20,9 @@ const UpdateAdminPassword = () =>
 const upIndexPic = () =>
   import('../views/admin/upIndexPic.vue')
 
+const upComIntrucPic = () =>
+  import('../views/admin/upComIntrucPic.vue')  
+
 const UpTodayRecommend = () =>
   import('../views/admin/UpTodayRecommend.vue')
 
@@ -58,7 +61,10 @@ const mendianSearch = () =>
   import('../views/footer-views/mendian-search.vue')
 
 const allMendian = () =>
-  import('../views/admin/allMendian.vue')  
+  import('../views/admin/allMendian.vue')
+
+const allNews = () =>
+  import('../views/admin/allNews.vue')    
 
 const allJoinus = () =>
   import('../views/admin/allJoinus.vue')  
@@ -197,6 +203,14 @@ export function createRouter () {
       component: upIndexPic
     }, 
     {
+      path: '/upComIntrucPic',
+      name: 'upComIntrucPic',
+      meta: {
+        Auth: true
+      },
+      component: upComIntrucPic
+    }, 
+    {
       path: '/upTodayRecommend',
       name: 'upTodayRecommend',
       meta: {
@@ -234,6 +248,14 @@ export function createRouter () {
         Auth: true
       },
       component: allMendian
+    },
+    {
+      path: '/allNews',
+      name: 'allNews',
+      meta: {
+        Auth: true
+      },
+      component: allNews
     },
     {
       path: '/allJoinus',

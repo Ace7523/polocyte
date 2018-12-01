@@ -44,10 +44,10 @@
           <div v-for="(item,index) in itemData.imageList" :key="index" class="img-list">
             <img :src="item" alt="">
           </div>
-          <div v-if="itemData.imageList.length == 1" class="img-list">
+          <div v-if="itemData && itemData.imageList && itemData.imageList.length == 1" class="img-list">
             <img :src="imgUrl" alt="">
           </div>
-          <div v-if="itemData.imageList.length == 1" class="img-list">
+          <div v-if="itemData && itemData.imageList && itemData.imageList.length == 1" class="img-list">
             <img :src="imgUrl" alt="">
           </div>
 

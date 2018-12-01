@@ -27,7 +27,7 @@
           loop : true,
           speed:800,
           autoHeight: true,
-          effect : 'coverflow',
+          effect : 'fade',
           slidesPerView: 3,
           centeredSlides: true,
           coverflowEffect: {
