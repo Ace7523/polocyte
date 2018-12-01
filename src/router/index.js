@@ -61,13 +61,13 @@ const mendianSearch = () =>
   import('../views/footer-views/mendian-search.vue')
 
 const allMendian = () =>
-  import('../views/admin/allMendian.vue')
+  import('../views/admin/allmendian.vue')
 
 const allNews = () =>
   import('../views/admin/allNews.vue')    
 
 const allJoinus = () =>
-  import('../views/admin/allJoinus.vue')  
+  import('../views/admin/alljoinus.vue')  
 
 const olist = () =>
   import('../views/olist.vue')
