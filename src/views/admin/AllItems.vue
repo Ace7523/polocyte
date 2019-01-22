@@ -94,6 +94,7 @@ export default {
   }
   .span3{
     color:rgb(83, 157, 218);
+    cursor:pointer;
   }
   .item:hover{
     background: rgb(232, 235, 69);

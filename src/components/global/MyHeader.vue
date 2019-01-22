@@ -16,7 +16,7 @@
               <router-link :to="`/index`">首页</router-link>
             </li>
             
-            <li v-on:mouseenter="showSubtab(2)">
+            <!-- <li v-on:mouseenter="showSubtab(2)">
               <router-link :to="`1`">系列</router-link>
               <transition name="fold">
               <div class="box" v-show="showSubtabIndex == 2" v-on:mouseleave="showSubtab(-1)"> 
@@ -47,6 +47,10 @@
                   </p>
               </div>
               </transition>
+            </li> -->
+
+            <li>
+              <router-link :to="{name:'brouter',params:{querydata:'全屋定制', queryarr:{'series':'全屋定制'} }}">全屋定制</router-link>
             </li>
 
             <li>
@@ -55,6 +59,10 @@
 
             <li>
               <router-link :to="{name:'newslist',params:{page:1}}">新闻资讯</router-link>
+            </li>
+
+            <li>
+              <router-link :to="{name:'companyintroduce'}">关于我们</router-link>
             </li>
           </ul>
       </div>

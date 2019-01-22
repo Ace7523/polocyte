@@ -68,6 +68,19 @@
             安全观：遵守操作规程，让安全成为一种习惯。
             质量观：追求零缺陷，成就强品牌。
             创新观：创新从改变自己思维开始
+            <h3>三、联系我们</h3>
+            <h4>公司名称 </h4>
+            广东信威家居发展有限公司 
+            <h4>联系地址 </h4>
+            湛江市霞山区百蓬路8号 
+            <h4>联系电话 </h4>
+            400-6784-057(全国服务热线)
+            <h4>传真 </h4>
+            0759-2673308
+            <h4>E-mail </h4>
+            service@sunwin-china.com或polocyte@sunwin-china.com
+            <div style="height: 30px"></div>
+
         </div>
         <div class="right-img">  
             <div class="img img1">

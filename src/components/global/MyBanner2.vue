@@ -26,7 +26,7 @@
         swiperOption: {
           loop : true,
           speed:800,
-          autoHeight: true,
+          // autoHeight: true,
           effect : 'fade',
           slidesPerView: 3,
           centeredSlides: true,
@@ -80,6 +80,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      img {
+        width: 100%;
+      }
     }
     .swiper-pagination {
       > .swiper-pagination-bullet {

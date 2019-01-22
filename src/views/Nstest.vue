@@ -98,7 +98,7 @@
                 <!-- <p class="goods-intro"><span></span>&nbsp;{{goodsIntro[index%6]}}</p> -->
                 <p class="goods-intro"><span></span>&nbsp;{{resultItem.featuredesc}}</p>
                 <p class="item-name">{{resultItem.itemName}}</p>
-                <p class="item-status">{{resultItem.status}}--{{resultItem.klass}}--{{resultItem.itemNo}}</p>
+                <p class="item-status">{{resultItem.status}}<span v-if="resultItem.klass">--{{resultItem.klass}}</span><span v-if="resultItem.itemNo">--{{resultItem.itemNo}}</span></p>
                 
                 
                 <!-- <p class="item-klass">{{resultItem.klass}}</p> -->
