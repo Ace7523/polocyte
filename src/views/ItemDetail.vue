@@ -12,21 +12,21 @@
           <div class="for-center">
 
             <p class="title">【{{itemData.itemName}}】</p>
-            <p><span class="title1">品牌 : </span>{{itemData.brand}}</p>
-            <p><span class="title1">系列 : </span>{{itemData.series}}</p>
-            <p><span class="title1">货号 : </span>{{itemData.itemNo}}</p>
-            <p><span class="title1">适用空间 : </span>{{itemData.status}}</p>
-            <p><span class="title1">类别 : </span>{{itemData.klass}}</p>
-            <p><span class="title1">材质 : </span>{{itemData.material}}</p>
-            <p><span class="title1">规格 : </span>{{itemData.standard}}</p>
-            <p><span class="title1">风格 : </span>{{itemData.styles}}</p>
-            <p><span class="title1">颜色 : </span>{{itemData.color}}</p>
-            <p><span class="title1">油漆性质 : </span>{{itemData.paint}}</p>
-            <p><span class="title1">实木 : </span>{{itemData.feature1}}</p>
-            <p><span class="title1">结构 : </span>{{itemData.feature2}}</p>
-            <p><span class="title1">是否可定制 : </span>{{itemData.isCanPersonal}}</p>
-            <p><span class="title1">甲醛释放量 : </span>{{itemData.feature3}}</p>
-            <p><span class="title1">产地 : </span>{{itemData.productLoc}}</p>
+            <p v-if="itemData.brand"><span class="title1">品牌 : </span>{{itemData.brand}}</p>
+            <p v-if="itemData.series"><span class="title1">系列 : </span>{{itemData.series}}</p>
+            <p v-if="itemData.itemNo"><span class="title1">货号 : </span>{{itemData.itemNo}}</p>
+            <p v-if="itemData.status"><span class="title1">适用空间 : </span>{{itemData.status}}</p>
+            <p v-if="itemData.klass"><span class="title1">类别 : </span>{{itemData.klass}}</p>
+            <p v-if="itemData.material"><span class="title1">材质 : </span>{{itemData.material}}</p>
+            <p v-if="itemData.standard"><span class="title1">规格 : </span>{{itemData.standard}}</p>
+            <p v-if="itemData.styles"><span class="title1">风格 : </span>{{itemData.styles}}</p>
+            <p v-if="itemData.color"><span class="title1">颜色 : </span>{{itemData.color}}</p>
+            <p v-if="itemData.paint"><span class="title1">油漆性质 : </span>{{itemData.paint}}</p>
+            <p v-if="itemData.feature1"><span class="title1">实木 : </span>{{itemData.feature1}}</p>
+            <p v-if="itemData.feature2"><span class="title1">结构 : </span>{{itemData.feature2}}</p>
+            <p v-if="itemData.isCanPersonal"><span class="title1">是否可定制 : </span>{{itemData.isCanPersonal}}</p>
+            <p v-if="itemData.feature3"><span class="title1">甲醛释放量 : </span>{{itemData.feature3}}</p>
+            <p v-if="itemData.productLoc"><span class="title1">产地 : </span>{{itemData.productLoc}}</p>
             
           </div>
           

@@ -43,6 +43,7 @@
       <div class="for-copyright">
         <p class="banquansuoyou">Copyright©2012 - All Right Reserved - 保罗赛特 ; &nbsp;&nbsp;实木选择,100%正品保证 ; &nbsp;&nbsp;官网所有者 : 广东信威绿色家居产业集团有限公司</p>
         <p class="beianhao">粤ICP 11079316号</p>
+        <iframe src="http://wljg.gdgs.gov.cn/lz.ashx?vie=41BEF320E537FBF5AF4B33C338D85F06DAC5E7E55E66F6C3048BE2CE769324252F7F46CC5CDF24E1392CCA6D906BC53C" scrolling="no" style="overflow:hidden;padding-left:180px" frameborder="0" allowtransparency="true"></iframe>        
       </div>
     </div>
     <div class="mask" v-if="showMask">

@@ -31,7 +31,7 @@ export default {
     }
   },
   title () {
-    return this.article.title + ' | vueblog'
+    return '保罗赛特'
   },
   computed: {
     title () {

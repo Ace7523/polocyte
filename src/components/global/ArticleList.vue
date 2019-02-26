@@ -26,7 +26,7 @@
 export default {
   name: 'ArticleList',
   title () {
-    return 'vueblog'
+    return '保罗赛特'
   },
   beforeMount () {
     if (this.$root._isMounted) {

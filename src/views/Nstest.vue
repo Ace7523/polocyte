@@ -166,6 +166,12 @@ export default {
     }
     this.initData(this.$store.state.allitems);
 
+    // if(localStorage['searchParams']){
+    //   let searchParamsLocal = JSON.parse(localStorage['searchParams']);
+    //   this.searchParams = searchParamsLocal;
+    // }
+  },
+  mounted() {
     if(localStorage['searchParams']){
       let searchParamsLocal = JSON.parse(localStorage['searchParams']);
       this.searchParams = searchParamsLocal;

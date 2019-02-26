@@ -6,7 +6,7 @@
       <!-- <div class="intro">{{ administrator.intro }}</div> -->
       <!-- <div class="intro">回归自然 回归慢生活</div>  -->
       <div class="for-logo"></div>
-      <div class="intro">回归自然 回归慢生活</div>
+      <!-- <div class="intro">回归自然 回归慢生活</div> -->
     </div>
     
     <div class="tabbar">
@@ -138,10 +138,10 @@ export default {
 </script>
 <style>
   .for-logo{
-    width: 200px;
-    height: 40px;
+    width: 400px;
+    height: 80px;
     margin: 0 auto;
-    background: url(../../../public/indexPicture/indexLogo.jpg) no-repeat;
+    background: url(../../../public/indexPicture/indexlogo.png) no-repeat;
     background-size: 100%;
   }
   .intro{
